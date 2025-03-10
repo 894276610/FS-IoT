@@ -18,10 +18,10 @@ class ReviewBurst
     float score;
 };
 
-class ReviewInstance
-{
-    std::vector<ReviewBurst> reviewList;
-};
+// class ReviewInstance
+// {
+//     std::vector<ReviewBurst> reviewList;
+// };
 
 class Aggregator
 {
@@ -33,6 +33,7 @@ public:
 private:
     std::unordered_map<std::string, float> scoreBoard;
     std::set<std::string> devNameSet;
+    std::vector<ReviewBurst> reviewList;
 
 };
 

@@ -91,492 +91,492 @@
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/3rdParty/hash-library",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/hash-library.dir/md5.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library/md5.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/hash-library.dir/md5.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library/md5.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library/md5.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/3rdParty/LightPcapNg",
-  "command": "/usr/bin/gcc -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_advanced.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_advanced.c",
+  "command": "/usr/bin/gcc -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_advanced.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_advanced.c",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_advanced.c"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/3rdParty/LightPcapNg",
-  "command": "/usr/bin/gcc -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_alloc.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_alloc.c",
+  "command": "/usr/bin/gcc -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_alloc.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_alloc.c",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_alloc.c"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/3rdParty/LightPcapNg",
-  "command": "/usr/bin/gcc -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_compression.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_compression.c",
+  "command": "/usr/bin/gcc -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_compression.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_compression.c",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_compression.c"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/3rdParty/LightPcapNg",
-  "command": "/usr/bin/gcc -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_internal.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_internal.c",
+  "command": "/usr/bin/gcc -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_internal.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_internal.c",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_internal.c"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/3rdParty/LightPcapNg",
-  "command": "/usr/bin/gcc -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_io.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_io.c",
+  "command": "/usr/bin/gcc -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_io.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_io.c",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_io.c"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/3rdParty/LightPcapNg",
-  "command": "/usr/bin/gcc -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_manipulate.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_manipulate.c",
+  "command": "/usr/bin/gcc -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_manipulate.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_manipulate.c",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_manipulate.c"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/3rdParty/LightPcapNg",
-  "command": "/usr/bin/gcc -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_null_compression.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_null_compression.c",
+  "command": "/usr/bin/gcc -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_null_compression.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_null_compression.c",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_null_compression.c"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/3rdParty/LightPcapNg",
-  "command": "/usr/bin/gcc -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_option.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_option.c",
+  "command": "/usr/bin/gcc -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_option.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_option.c",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_option.c"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/3rdParty/LightPcapNg",
-  "command": "/usr/bin/gcc -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_pcapng_cont.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_pcapng_cont.c",
+  "command": "/usr/bin/gcc -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_pcapng_cont.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_pcapng_cont.c",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_pcapng_cont.c"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/3rdParty/LightPcapNg",
-  "command": "/usr/bin/gcc -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_pcapng_ext.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_pcapng_ext.c",
+  "command": "/usr/bin/gcc -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_pcapng_ext.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_pcapng_ext.c",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_pcapng_ext.c"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/3rdParty/LightPcapNg",
-  "command": "/usr/bin/gcc -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_pcapng.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_pcapng.c",
+  "command": "/usr/bin/gcc -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_pcapng.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_pcapng.c",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_pcapng.c"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/3rdParty/LightPcapNg",
-  "command": "/usr/bin/gcc -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_platform.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_platform.c",
+  "command": "/usr/bin/gcc -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_platform.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_platform.c",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_platform.c"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/3rdParty/LightPcapNg",
-  "command": "/usr/bin/gcc -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_zstd_compression.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_zstd_compression.c",
+  "command": "/usr/bin/gcc -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -DUNIVERSAL -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -g -fPIC -Wall -o CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_zstd_compression.c.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_zstd_compression.c",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/src/light_zstd_compression.c"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/3rdParty/MemPlumber/MemPlumber",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/MemPlumber/MemPlumber -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/memplumber.dir/memplumber.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/MemPlumber/MemPlumber/memplumber.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/MemPlumber/MemPlumber -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/memplumber.dir/memplumber.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/MemPlumber/MemPlumber/memplumber.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/MemPlumber/MemPlumber/memplumber.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/ArpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/ArpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/ArpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/ArpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/ArpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/Asn1Codec.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/Asn1Codec.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/Asn1Codec.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/Asn1Codec.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/Asn1Codec.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/BgpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/BgpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/BgpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/BgpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/BgpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/CotpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/CotpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/CotpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/CotpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/CotpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/DhcpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/DhcpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/DhcpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/DhcpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/DhcpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/DhcpV6Layer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/DhcpV6Layer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/DhcpV6Layer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/DhcpV6Layer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/DhcpV6Layer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/DnsLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/DnsLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/DnsLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/DnsLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/DnsLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/DnsResource.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/DnsResource.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/DnsResource.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/DnsResource.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/DnsResource.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/DnsResourceData.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/DnsResourceData.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/DnsResourceData.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/DnsResourceData.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/DnsResourceData.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/EthDot3Layer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/EthDot3Layer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/EthDot3Layer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/EthDot3Layer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/EthDot3Layer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/EthLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/EthLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/EthLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/EthLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/EthLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/FtpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/FtpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/FtpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/FtpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/FtpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/GreLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/GreLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/GreLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/GreLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/GreLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/GtpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/GtpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/GtpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/GtpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/GtpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/HttpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/HttpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/HttpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/HttpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/HttpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/IcmpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IcmpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/IcmpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IcmpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IcmpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/IcmpV6Layer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IcmpV6Layer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/IcmpV6Layer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IcmpV6Layer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IcmpV6Layer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/IgmpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IgmpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/IgmpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IgmpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IgmpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/IPReassembly.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IPReassembly.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/IPReassembly.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IPReassembly.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IPReassembly.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/IPSecLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IPSecLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/IPSecLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IPSecLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IPSecLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/IPv4Layer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IPv4Layer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/IPv4Layer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IPv4Layer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IPv4Layer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/IPv6Extensions.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IPv6Extensions.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/IPv6Extensions.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IPv6Extensions.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IPv6Extensions.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/IPv6Layer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IPv6Layer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/IPv6Layer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IPv6Layer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/IPv6Layer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/Layer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/Layer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/Layer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/Layer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/Layer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/LdapLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/LdapLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/LdapLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/LdapLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/LdapLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/LLCLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/LLCLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/LLCLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/LLCLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/LLCLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/MplsLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/MplsLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/MplsLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/MplsLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/MplsLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/NdpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/NdpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/NdpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/NdpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/NdpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/NflogLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/NflogLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/NflogLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/NflogLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/NflogLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/NtpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/NtpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/NtpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/NtpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/NtpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/NullLoopbackLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/NullLoopbackLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/NullLoopbackLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/NullLoopbackLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/NullLoopbackLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/Packet.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/Packet.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/Packet.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/Packet.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/Packet.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/PacketTrailerLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/PacketTrailerLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/PacketTrailerLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/PacketTrailerLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/PacketTrailerLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/PacketUtils.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/PacketUtils.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/PacketUtils.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/PacketUtils.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/PacketUtils.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/PayloadLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/PayloadLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/PayloadLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/PayloadLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/PayloadLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/PPPoELayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/PPPoELayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/PPPoELayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/PPPoELayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/PPPoELayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/RadiusLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/RadiusLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/RadiusLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/RadiusLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/RadiusLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/RawPacket.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/RawPacket.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/RawPacket.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/RawPacket.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/RawPacket.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/S7CommLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/S7CommLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/S7CommLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/S7CommLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/S7CommLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SdpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SdpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SdpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SdpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SdpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SingleCommandTextProtocol.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SingleCommandTextProtocol.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SingleCommandTextProtocol.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SingleCommandTextProtocol.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SingleCommandTextProtocol.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SipLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SipLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SipLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SipLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SipLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/Sll2Layer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/Sll2Layer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/Sll2Layer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/Sll2Layer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/Sll2Layer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SllLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SllLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SllLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SllLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SllLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SmtpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SmtpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SmtpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SmtpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SmtpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SomeIpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SomeIpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SomeIpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SomeIpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SomeIpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SomeIpSdLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SomeIpSdLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SomeIpSdLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SomeIpSdLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SomeIpSdLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SSHLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SSHLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SSHLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SSHLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SSHLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SSLCommon.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SSLCommon.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SSLCommon.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SSLCommon.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SSLCommon.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SSLHandshake.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SSLHandshake.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SSLHandshake.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SSLHandshake.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SSLHandshake.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SSLLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SSLLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/SSLLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SSLLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/SSLLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/StpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/StpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/StpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/StpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/StpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/TcpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TcpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/TcpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TcpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TcpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/TcpReassembly.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TcpReassembly.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/TcpReassembly.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TcpReassembly.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TcpReassembly.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/TelnetLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TelnetLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/TelnetLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TelnetLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TelnetLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/TextBasedProtocol.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TextBasedProtocol.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/TextBasedProtocol.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TextBasedProtocol.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TextBasedProtocol.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/TLVData.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TLVData.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/TLVData.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TLVData.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TLVData.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/TpktLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TpktLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/TpktLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TpktLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/TpktLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/UdpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/UdpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/UdpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/UdpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/UdpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/VlanLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/VlanLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/VlanLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/VlanLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/VlanLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/VrrpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/VrrpLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/VrrpLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/VrrpLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/VrrpLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/VxlanLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/VxlanLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/VxlanLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/VxlanLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/VxlanLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Packet++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/WakeOnLanLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/WakeOnLanLayer.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/hash-library -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Packet++.dir/src/WakeOnLanLayer.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/WakeOnLanLayer.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/src/WakeOnLanLayer.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Pcap++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/DeviceUtils.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/DeviceUtils.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/DeviceUtils.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/DeviceUtils.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/DeviceUtils.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Pcap++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/LinuxNicInformationSocket.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/LinuxNicInformationSocket.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/LinuxNicInformationSocket.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/LinuxNicInformationSocket.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/LinuxNicInformationSocket.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Pcap++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/PcapUtils.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapUtils.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/PcapUtils.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapUtils.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapUtils.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Pcap++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/NetworkUtils.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/NetworkUtils.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/NetworkUtils.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/NetworkUtils.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/NetworkUtils.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Pcap++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/PcapFileDevice.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapFileDevice.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/PcapFileDevice.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapFileDevice.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapFileDevice.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Pcap++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/PcapDevice.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapDevice.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/PcapDevice.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapDevice.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapDevice.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Pcap++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/PcapFilter.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapFilter.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/PcapFilter.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapFilter.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapFilter.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Pcap++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/PcapLiveDevice.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapLiveDevice.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/PcapLiveDevice.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapLiveDevice.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapLiveDevice.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Pcap++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/PcapLiveDeviceList.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapLiveDeviceList.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/PcapLiveDeviceList.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapLiveDeviceList.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/PcapLiveDeviceList.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Pcap++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/RawSocketDevice.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/RawSocketDevice.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Pcap++.dir/src/RawSocketDevice.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/RawSocketDevice.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/src/RawSocketDevice.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Common++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/GeneralUtils.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/GeneralUtils.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/GeneralUtils.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/GeneralUtils.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/GeneralUtils.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Common++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/IpAddress.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/IpAddress.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/IpAddress.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/IpAddress.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/IpAddress.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Common++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/IpAddressUtils.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/IpAddressUtils.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/IpAddressUtils.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/IpAddressUtils.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/IpAddressUtils.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Common++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/IpUtils.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/IpUtils.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/IpUtils.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/IpUtils.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/IpUtils.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Common++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/Logger.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/Logger.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/Logger.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/Logger.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/Logger.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Common++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/MacAddress.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/MacAddress.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/MacAddress.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/MacAddress.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/MacAddress.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Common++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/OUILookup.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/OUILookup.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/OUILookup.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/OUILookup.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/OUILookup.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Common++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/PcapPlusPlusVersion.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/PcapPlusPlusVersion.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/PcapPlusPlusVersion.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/PcapPlusPlusVersion.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/PcapPlusPlusVersion.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Common++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/SystemUtils.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/SystemUtils.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/SystemUtils.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/SystemUtils.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/SystemUtils.cpp"
 },
 {
   "directory": "/home/kunling/BurstIoT/build/third-party/PcapPlusPlus/Common++",
-  "command": "/usr/bin/g++  -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/TablePrinter.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/TablePrinter.cpp",
+  "command": "/usr/bin/g++ -DGIT_BRANCH=\\\"HEAD\\\" -DGIT_COMMIT=\\\"4af4b8b0\\\" -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/json/include -g -fPIC -Wall -std=gnu++11 -o CMakeFiles/Common++.dir/src/TablePrinter.cpp.o -c /home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/TablePrinter.cpp",
   "file": "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/src/TablePrinter.cpp"
 },
 {

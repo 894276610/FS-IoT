@@ -3,13 +3,13 @@
 
 # compile C with /usr/bin/gcc
 # compile CXX with /usr/bin/g++
-C_DEFINES = 
+C_DEFINES = -DGIT_BRANCH=\"HEAD\" -DGIT_COMMIT=\"4af4b8b0\"
 
 C_INCLUDES = -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header
 
 C_FLAGS = -g -fPIC -Wall
 
-CXX_DEFINES = 
+CXX_DEFINES = -DGIT_BRANCH=\"HEAD\" -DGIT_COMMIT=\"4af4b8b0\"
 
 CXX_INCLUDES = -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header -I/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header
 

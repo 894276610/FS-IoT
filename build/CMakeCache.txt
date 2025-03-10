@@ -486,7 +486,7 @@ Catch2_IS_TOP_LEVEL:STATIC=OFF
 Catch2_SOURCE_DIR:STATIC=/home/kunling/BurstIoT/third-party/Catch2-3.8.0
 
 //Git command line client
-GIT_EXECUTABLE:FILEPATH=GIT_EXECUTABLE-NOTFOUND
+GIT_EXECUTABLE:FILEPATH=/usr/bin/git
 
 //Build with ZSTD compression support
 LIGHT_PCAPNG_ZSTD:BOOL=OFF
@@ -907,6 +907,8 @@ Catch2_GUID_CMAKE:INTERNAL=8d538cbe-01bf-4a2e-a98a-6c368fdf13d7
 FIND_PACKAGE_MESSAGE_DETAILS_Backtrace:INTERNAL=[/usr/include][v()]
 //Details about finding Boost
 FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[/usr/local/lib/cmake/Boost-1.83.0/BoostConfig.cmake][cfound components: serialization ][v1.83.0()]
+//Details about finding Git
+FIND_PACKAGE_MESSAGE_DETAILS_Git:INTERNAL=[/usr/bin/git][v2.34.1()]
 //Details about finding PCAP
 FIND_PACKAGE_MESSAGE_DETAILS_PCAP:INTERNAL=[/usr/lib/x86_64-linux-gnu/libpcap.so][/usr/include][v1.10.1 (with TPACKET_V3)()]
 //Details about finding Threads
