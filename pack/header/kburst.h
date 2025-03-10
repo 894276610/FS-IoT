@@ -1,0 +1,158 @@
+
+#ifndef _KBURST_H_
+#define _KBURST_H_
+
+#include "types.h"
+#include "boost-serialize.h"
+
+#include <iostream>
+#include <vector>
+#include <memory>
+
+#include <shared_mutex>
+#include <mutex>
+
+#include <optional>
+
+namespace groundnut{
+
+class KDevice;
+class KPacket;
+
+struct BurstTrh{
+	int uniTrh;
+	timespec inTrh;
+	timespec ouTrh;
+
+	template<class Archive>
+	void serialize(Archive& ar, const unsigned int version) {
+		ar& uniTrh;
+		ar& inTrh;
+		ar& ouTrh;
+	}
+};
+
+class KBurst {
+
+public:
+
+	// constructor
+	KBurst():label(""){}
+	KBurst(const KDevice& device);
+	explicit KBurst(const std::string& label):label(label){}
+	KBurst(std::vector<std::shared_ptr<KBurst>> burstVec);
+	
+	void AddPacket(const KPacket& packet);
+	void ExtendBurst(KBurst& burst);
+
+	// output view
+	std::string ToString() const;
+
+	// flag
+	bool isfUmapUpdate = false;
+	
+	// distance
+	float Distance(KBurst& burst);
+	float Distance(std::shared_ptr<KBurst> burst);
+
+    // operator
+	bool operator <(const KBurst &other) const;
+	bool operator ==(const KBurst& other) const;
+	bool isEqualDistribution(const KBurst&) const;
+
+	// serialize
+    template<class Archive>
+	void serialize(Archive& ar, const unsigned int version) {
+		ar& label;
+		ar& pktNum;
+		ar& uniPktNum;
+		ar& firstPktStamp;
+		ar& lastPktStamp;
+		ar& countMap;
+	}
+
+	// getter
+	std::string GetLabel() const {return this->label;}
+	int GetUniPktNum() const {return this->uniPktNum;}
+	int GetPktNum() const {return this->pktNum;}
+	const timespec& GetFirstPktStamp() const {return firstPktStamp;}
+	const timespec& GetLastPktStamp() const{return lastPktStamp;}
+	const std::map<short, int>& GetCountMap() const{return countMap;}
+	const std::unordered_map<short, int>& GetCountUmap(){return countUmap;}
+
+	// conversion
+	void convert_to_frequency();
+
+private:
+	int uniPktNum = 0;
+	int pktNum = 0;
+	std::string label = "";
+	timespec firstPktStamp = {0,0};
+	timespec lastPktStamp  = {0,0};
+	std::map<short, int> countMap;
+	std::unordered_map<short, int> countUmap;
+	std::unordered_map<short, float> fUmap;
+
+};
+
+
+
+typedef std::vector<std::shared_ptr<KBurst>> BurstVec;
+typedef std::vector<BurstVec> BurstGroups;
+}
+
+template<>
+struct std::hash<groundnut::KBurst>
+{
+	std::size_t operator()(const groundnut::KBurst& p) const {
+
+		std::size_t seed = std::hash<int>{}(p.GetUniPktNum());
+		int sum = 0;
+		for ( auto& [signedLen, times] : p.GetCountMap())
+		{
+			//sum += p.packetDetail[i].first.len;
+			seed ^= std::hash<int>{}(signedLen) << (times%30);
+		}
+
+		seed ^= std::hash<uint32_t>{}(p.GetPktNum());
+		//seed ^= std::hash<int>{}(sum);
+
+		return seed;
+	}
+};
+
+
+namespace groundnut{
+
+struct BurstPrediction
+{
+	float minDistance;
+	BurstVec nearTrainBursts;
+};
+	
+// burst cache
+struct BurstCache {
+
+	BurstCache() = default; 
+
+	std::shared_mutex mutex;
+    std::unordered_map<KBurst, BurstPrediction> cache;
+
+    std::optional<BurstPrediction> Read(const KBurst& key) {
+        std::shared_lock lock(mutex);
+        auto it = cache.find(key);
+        return it != cache.end() ? std::make_optional(it->second) : std::nullopt;
+    }
+
+    void Write(const KBurst& key, BurstPrediction value) {
+        std::unique_lock lock(mutex);
+        cache.insert_or_assign(key, std::move(value));
+    }
+};
+
+
+
+}
+
+
+#endif

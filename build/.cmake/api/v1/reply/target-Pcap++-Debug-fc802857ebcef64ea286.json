@@ -1,0 +1,323 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "third-party/PcapPlusPlus/Pcap++/libPcap++.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_link_libraries",
+			"add_compile_options",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"third-party/PcapPlusPlus/Pcap++/CMakeLists.txt",
+			"third-party/PcapPlusPlus/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 1,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 97,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 260,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 90,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -fPIC"
+				},
+				{
+					"backtrace" : 4,
+					"fragment" : "-Wall"
+				},
+				{
+					"fragment" : "-std=gnu++11"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 5,
+					"path" : "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Pcap++/header"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/EndianPortable/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/kunling/BurstIoT/third-party/PcapPlusPlus/3rdParty/LightPcapNg/LightPcapNg/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Common++/header"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/kunling/BurstIoT/third-party/PcapPlusPlus/Packet++/header"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "11"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"id" : "light_pcapng::@5c41a3d4d374d7979362"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "Packet++::@e8311dd2302f0dc846cc"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "Common++::@74dc177359dfefcc5d9b"
+		}
+	],
+	"id" : "Pcap++::@f4123264fc6b371cf9b0",
+	"name" : "Pcap++",
+	"nameOnDisk" : "libPcap++.a",
+	"paths" : 
+	{
+		"build" : "third-party/PcapPlusPlus/Pcap++",
+		"source" : "third-party/PcapPlusPlus/Pcap++"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9
+			]
+		},
+		{
+			"name" : "Object Libraries",
+			"sourceIndexes" : 
+			[
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "third-party/PcapPlusPlus/Pcap++/src/DeviceUtils.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "third-party/PcapPlusPlus/Pcap++/src/LinuxNicInformationSocket.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "third-party/PcapPlusPlus/Pcap++/src/PcapUtils.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "third-party/PcapPlusPlus/Pcap++/src/NetworkUtils.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "third-party/PcapPlusPlus/Pcap++/src/PcapFileDevice.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "third-party/PcapPlusPlus/Pcap++/src/PcapDevice.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "third-party/PcapPlusPlus/Pcap++/src/PcapFilter.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "third-party/PcapPlusPlus/Pcap++/src/PcapLiveDevice.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "third-party/PcapPlusPlus/Pcap++/src/PcapLiveDeviceList.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "third-party/PcapPlusPlus/Pcap++/src/RawSocketDevice.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "build/third-party/PcapPlusPlus/3rdParty/LightPcapNg/CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_advanced.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "build/third-party/PcapPlusPlus/3rdParty/LightPcapNg/CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_alloc.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "build/third-party/PcapPlusPlus/3rdParty/LightPcapNg/CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_compression.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "build/third-party/PcapPlusPlus/3rdParty/LightPcapNg/CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_internal.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "build/third-party/PcapPlusPlus/3rdParty/LightPcapNg/CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_io.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "build/third-party/PcapPlusPlus/3rdParty/LightPcapNg/CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_manipulate.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "build/third-party/PcapPlusPlus/3rdParty/LightPcapNg/CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_null_compression.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "build/third-party/PcapPlusPlus/3rdParty/LightPcapNg/CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_option.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "build/third-party/PcapPlusPlus/3rdParty/LightPcapNg/CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_pcapng_cont.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "build/third-party/PcapPlusPlus/3rdParty/LightPcapNg/CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_pcapng_ext.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "build/third-party/PcapPlusPlus/3rdParty/LightPcapNg/CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_pcapng.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "build/third-party/PcapPlusPlus/3rdParty/LightPcapNg/CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_platform.c.o",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "build/third-party/PcapPlusPlus/3rdParty/LightPcapNg/CMakeFiles/light_pcapng.dir/LightPcapNg/src/light_zstd_compression.c.o",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

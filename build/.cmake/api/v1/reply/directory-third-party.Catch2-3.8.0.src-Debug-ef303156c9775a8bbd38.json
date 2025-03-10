@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "third-party/Catch2-3.8.0/src",
+		"source" : "third-party/Catch2-3.8.0/src"
+	}
+}

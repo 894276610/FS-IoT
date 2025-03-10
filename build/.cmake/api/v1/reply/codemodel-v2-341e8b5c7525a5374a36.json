@@ -1,0 +1,529 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						14
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "pack",
+					"jsonFile" : "directory-pack-Debug-ec9d54e25117a5395801.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "pack",
+					"targetIndexes" : 
+					[
+						9
+					]
+				},
+				{
+					"build" : "test",
+					"jsonFile" : "directory-test-Debug-451c0598f41488bb20b9.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "test",
+					"targetIndexes" : 
+					[
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18
+					]
+				},
+				{
+					"build" : "third-party/PcapPlusPlus",
+					"childIndexes" : 
+					[
+						4,
+						11,
+						12,
+						13
+					],
+					"jsonFile" : "directory-third-party.PcapPlusPlus-Debug-167116af954107aa69a3.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "third-party/PcapPlusPlus",
+					"targetIndexes" : 
+					[
+						19
+					]
+				},
+				{
+					"build" : "third-party/PcapPlusPlus/3rdParty",
+					"childIndexes" : 
+					[
+						5,
+						6,
+						7,
+						8,
+						9,
+						10
+					],
+					"jsonFile" : "directory-third-party.PcapPlusPlus.3rdParty-Debug-75cd96e8c15dbaa90ace.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 1,
+					"source" : "third-party/PcapPlusPlus/3rdParty"
+				},
+				{
+					"build" : "third-party/PcapPlusPlus/3rdParty/EndianPortable",
+					"jsonFile" : "directory-third-party.PcapPlusPlus.3rdParty.EndianPortable-Debug-448a3f560498e01c951f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 1,
+					"source" : "third-party/PcapPlusPlus/3rdParty/EndianPortable"
+				},
+				{
+					"build" : "third-party/PcapPlusPlus/3rdParty/Getopt-for-Visual-Studio",
+					"jsonFile" : "directory-third-party.PcapPlusPlus.3rdParty.Getopt-for-Visual-Studio-Debug-f9e1709b34c808894e00.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 1,
+					"source" : "third-party/PcapPlusPlus/3rdParty/Getopt-for-Visual-Studio"
+				},
+				{
+					"build" : "third-party/PcapPlusPlus/3rdParty/hash-library",
+					"jsonFile" : "directory-third-party.PcapPlusPlus.3rdParty.hash-library-Debug-8b4355de7ed2308f2650.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 2,
+					"source" : "third-party/PcapPlusPlus/3rdParty/hash-library",
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"build" : "third-party/PcapPlusPlus/3rdParty/json",
+					"jsonFile" : "directory-third-party.PcapPlusPlus.3rdParty.json-Debug-5561ebfc349e308cd85a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 1,
+					"source" : "third-party/PcapPlusPlus/3rdParty/json"
+				},
+				{
+					"build" : "third-party/PcapPlusPlus/3rdParty/LightPcapNg",
+					"jsonFile" : "directory-third-party.PcapPlusPlus.3rdParty.LightPcapNg-Debug-21235e72e7b35d5e7117.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.6"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 3,
+					"source" : "third-party/PcapPlusPlus/3rdParty/LightPcapNg",
+					"targetIndexes" : 
+					[
+						7
+					]
+				},
+				{
+					"build" : "third-party/PcapPlusPlus/3rdParty/MemPlumber/MemPlumber",
+					"jsonFile" : "directory-third-party.PcapPlusPlus.3rdParty.MemPlumber.MemPlumber-Debug-b186b2aa6b61e1750509.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 4,
+					"source" : "third-party/PcapPlusPlus/3rdParty/MemPlumber/MemPlumber",
+					"targetIndexes" : 
+					[
+						8
+					]
+				},
+				{
+					"build" : "third-party/PcapPlusPlus/Packet++",
+					"jsonFile" : "directory-third-party.PcapPlusPlus.Packet++-Debug-94e47b83f269b5817feb.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 1,
+					"source" : "third-party/PcapPlusPlus/Packet++",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "third-party/PcapPlusPlus/Pcap++",
+					"jsonFile" : "directory-third-party.PcapPlusPlus.Pcap++-Debug-9ef3e6a8e72c183ecc3a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 1,
+					"source" : "third-party/PcapPlusPlus/Pcap++",
+					"targetIndexes" : 
+					[
+						5
+					]
+				},
+				{
+					"build" : "third-party/PcapPlusPlus/Common++",
+					"jsonFile" : "directory-third-party.PcapPlusPlus.Common++-Debug-d314601f3ab516b28633.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 1,
+					"source" : "third-party/PcapPlusPlus/Common++",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "third-party/Catch2-3.8.0",
+					"childIndexes" : 
+					[
+						15
+					],
+					"jsonFile" : "directory-third-party.Catch2-3.8.0-Debug-a971336712769621e742.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 5,
+					"source" : "third-party/Catch2-3.8.0"
+				},
+				{
+					"build" : "third-party/Catch2-3.8.0/src",
+					"jsonFile" : "directory-third-party.Catch2-3.8.0.src-Debug-ef303156c9775a8bbd38.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 14,
+					"projectIndex" : 5,
+					"source" : "third-party/Catch2-3.8.0/src",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						5
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"name" : "BurstIoT",
+					"targetIndexes" : 
+					[
+						3,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18
+					]
+				},
+				{
+					"childIndexes" : 
+					[
+						2,
+						3,
+						4
+					],
+					"directoryIndexes" : 
+					[
+						3,
+						4,
+						5,
+						6,
+						8,
+						11,
+						12,
+						13
+					],
+					"name" : "PcapPlusPlus",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2,
+						4,
+						5,
+						19
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						7
+					],
+					"name" : "hash-library",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						9
+					],
+					"name" : "light_pcapng",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						7
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						10
+					],
+					"name" : "memplumber",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						8
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						14,
+						15
+					],
+					"name" : "Catch2",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 15,
+					"id" : "Catch2::@4c6890f86a1465e48e8f",
+					"jsonFile" : "target-Catch2-Debug-27be61b9b379496954ec.json",
+					"name" : "Catch2",
+					"projectIndex" : 5
+				},
+				{
+					"directoryIndex" : 15,
+					"id" : "Catch2WithMain::@4c6890f86a1465e48e8f",
+					"jsonFile" : "target-Catch2WithMain-Debug-23cae8fb56830cf25c1a.json",
+					"name" : "Catch2WithMain",
+					"projectIndex" : 5
+				},
+				{
+					"directoryIndex" : 13,
+					"id" : "Common++::@74dc177359dfefcc5d9b",
+					"jsonFile" : "target-Common++-Debug-7de460f1dd3fc3d9e8e5.json",
+					"name" : "Common++",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "MyExecutable::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-MyExecutable-Debug-563c412509da17c30e83.json",
+					"name" : "MyExecutable",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 11,
+					"id" : "Packet++::@e8311dd2302f0dc846cc",
+					"jsonFile" : "target-Packet++-Debug-ef23dbc227bbc07c0302.json",
+					"name" : "Packet++",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 12,
+					"id" : "Pcap++::@f4123264fc6b371cf9b0",
+					"jsonFile" : "target-Pcap++-Debug-fc802857ebcef64ea286.json",
+					"name" : "Pcap++",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "hash-library::@07e963ca825a46cd1d37",
+					"jsonFile" : "target-hash-library-Debug-d33dd1d57ce0626e8854.json",
+					"name" : "hash-library",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 9,
+					"id" : "light_pcapng::@5c41a3d4d374d7979362",
+					"jsonFile" : "target-light_pcapng-Debug-54856dab3f63cfa7517f.json",
+					"name" : "light_pcapng",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 10,
+					"id" : "memplumber::@b9a9127e310b23424c92",
+					"jsonFile" : "target-memplumber-Debug-14365e6c3943e86c9fbf.json",
+					"name" : "memplumber",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "pack::@48712b2ab2b3b9b6c3cf",
+					"jsonFile" : "target-pack-Debug-6e5c3bad8e6da68ff6b5.json",
+					"name" : "pack",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "test-boClassifier::@36f028580bb02cc8272a",
+					"jsonFile" : "target-test-boClassifier-Debug-fba70a1b6e6b4b10421e.json",
+					"name" : "test-boClassifier",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "test-burstClassifier::@36f028580bb02cc8272a",
+					"jsonFile" : "target-test-burstClassifier-Debug-e93eb108f6b0395e284f.json",
+					"name" : "test-burstClassifier",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "test-burstDataset::@36f028580bb02cc8272a",
+					"jsonFile" : "target-test-burstDataset-Debug-41a962b9a649e1020f3d.json",
+					"name" : "test-burstDataset",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "test-burstMaker::@36f028580bb02cc8272a",
+					"jsonFile" : "target-test-burstMaker-Debug-b1dde6f01b54dd0bfc33.json",
+					"name" : "test-burstMaker",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "test-kburst::@36f028580bb02cc8272a",
+					"jsonFile" : "target-test-kburst-Debug-52ce33ade1193ac1d3ae.json",
+					"name" : "test-kburst",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "test-kdevice::@36f028580bb02cc8272a",
+					"jsonFile" : "target-test-kdevice-Debug-dc51269c8a6dfb5d95cd.json",
+					"name" : "test-kdevice",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "test-kpacket::@36f028580bb02cc8272a",
+					"jsonFile" : "target-test-kpacket-Debug-69293aa21387485a54c6.json",
+					"name" : "test-kpacket",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "test-metric::@36f028580bb02cc8272a",
+					"jsonFile" : "target-test-metric-Debug-7d438f843b786d2845f3.json",
+					"name" : "test-metric",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "test-packetDataset::@36f028580bb02cc8272a",
+					"jsonFile" : "target-test-packetDataset-Debug-2382a4e2af4cd4e9f237.json",
+					"name" : "test-packetDataset",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "uninstall::@0b6f16c15ae22025fd0c",
+					"jsonFile" : "target-uninstall-Debug-8c142e24e9b911f0eca0.json",
+					"name" : "uninstall",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/kunling/BurstIoT/build",
+		"source" : "/home/kunling/BurstIoT"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}
