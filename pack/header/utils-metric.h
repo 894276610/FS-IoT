@@ -192,6 +192,32 @@ inline ClassificationMetrics calculate_metrics(
     }
 }
 
+inline std::string GetConfusionMatrix(const ClassificationMetrics& metrics)
+{
+    std::stringstream ss;
+
+    // with label
+    ss << "Confusion Matrix (rows=true, columns=predicted):\n";
+    
+    // 打印列标签（预测类别）
+    ss << "\t\t";
+    for (const auto& lbl : metrics.classes) {
+        ss << lbl << "\t";
+    }
+    ss << "\n";
+    
+    // 打印每行数据
+    for (size_t i = 0; i < metrics.classes.size(); ++i) {
+        ss << metrics.classes[i] << "\t|\t";
+        for (const auto& count : metrics.confusion_matrix[i]) {
+            ss << count << "\t";
+        }
+        ss << "\n";
+    } 
+
+    return ss.str();
+}
+
 inline std::string ToString(const ClassificationMetrics& metrics) {
 
     std::stringstream ss;
@@ -228,31 +254,4 @@ inline std::string ToString(const ClassificationMetrics& metrics) {
 
     return ss.str();
 }
-
-inline std::string GetConfusionMatrix(const ClassificationMetrics& metrics)
-{
-    std::stringstream ss;
-
-    // with label
-    ss << "Confusion Matrix (rows=true, columns=predicted):\n";
-    
-    // 打印列标签（预测类别）
-    ss << "\t\t";
-    for (const auto& lbl : metrics.classes) {
-        ss << lbl << "\t";
-    }
-    ss << "\n";
-    
-    // 打印每行数据
-    for (size_t i = 0; i < metrics.classes.size(); ++i) {
-        ss << metrics.classes[i] << "\t|\t";
-        for (const auto& count : metrics.confusion_matrix[i]) {
-            ss << count << "\t";
-        }
-        ss << "\n";
-    } 
-
-    return ss.str();
-}
-
 #endif

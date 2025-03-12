@@ -8,6 +8,7 @@
 #include "boClassifier.h"
 #include "kburst.h"
 #include "utils-metric.h"
+#include <fstream>
 
 
 enum class Color { RED = -10, BLUE = 0, GREEN = 10 };
@@ -18,7 +19,7 @@ int main() {
   pktDataset.AddTragetDevices("/home/kunling/BurstIoT/mappings/unsw2016_device_mac_mappings.csv");
   //pktDataset.LoadPcap("/media/kunling/Research/UNSW2016/RAW");
   //pktDataset.Serialize("/media/kunling/Research/UNSW2016/unsw2016.pktDataset");
-  pktDataset.LoadBin("/media/kunling/Research/UNSW2016/unsw2016.pktDataset");
+  pktDataset.LoadBin("/media/kunling/BigE/UNSW2016/unsw2016.pktDataset");
   
   groundnut::BurstDataset burstDataset("unsw2016");
   groundnut::BurstTrh trh{50,{2,0},{15,0}};
@@ -32,7 +33,16 @@ int main() {
   auto& testset = burstDataset.GetTestset();
 
   boclf.Train(&trainset);
-  ClassificationMetrics metric = boclf.Predict(&testset);
+  ClassificationMetrics metric;
 
-  std::cout << ToString(metric);
+  std::cout << "training end" << std::endl;
+  groundnut::ReviewBook reviewBook = boclf.Predict(&testset, metric, true);
+
+  std::ofstream outStream("/media/kunling/BigE/UNSW2016/reviewBook.txt");
+  outStream << reviewBook.ToString();
+  outStream.close();
+
+  std::ofstream outMetric("/media/kunling/BigE/UNSW2016/metrics.txt");
+  outMetric << ToString(metric);
+  outMetric.close();
 }

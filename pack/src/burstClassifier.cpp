@@ -8,6 +8,7 @@ namespace groundnut
 void BurstClassifier::Train(std::unordered_map<uint16_t, BurstGroups>* trainset)
 {   
     std::vector<std::future<void>> tasks;
+    oriTrainset = trainset;
 
 	for (const auto& [deviceId, burstGroups] : *trainset)
 	{   
@@ -154,17 +155,68 @@ std::shared_ptr<KBurst> BurstClassifier::FindKeysEQ(
     return it != map->end() ? it->first : nullptr;
 }
 
-BurstPrediction BurstClassifier::Predict(const std::shared_ptr<KBurst> burst)
+SearchResult BurstClassifier::ReviewSearch(const std::shared_ptr<KBurst> burst)
 {
+    SearchResult result;
+
     float min_distance = 100, distance;
-    std::optional<BurstPrediction> cachedResult = cache.Read(*burst);
+    int uniPktMin = 0;
+    int uniPktMax = 50;
+    int pktMin = 0;
+    int pktMax = 500;
+    BurstGroups targetGroups;
+
+    // find same label target device in the trainset
+    for(auto& [deviceId, burstGroups] : *oriTrainset)
+    {
+        if(burstGroups.size() == 0 && burstGroups[0].size() == 0)
+        {
+            continue;
+        }
+
+        if(burstGroups[0][0]->GetLabel() == burst->GetLabel())
+        {
+            targetGroups.insert(targetGroups.begin(), burstGroups.begin(), burstGroups.end());
+        }
+    }
+    
+    for(auto& targetGroup : targetGroups)
+    {
+        for(auto& targetBurst : targetGroup)
+        {
+            distance = burst->Distance(targetBurst);
+
+            if (distance < min_distance)
+            {
+                result.nearTrainBursts.clear();
+                result.nearTrainBursts.push_back(targetBurst);
+                result.minDistance = distance;
+                min_distance = distance;
+            }
+            else if (distance == min_distance)
+            {
+                result.nearTrainBursts.push_back(targetBurst);
+            }
+        }
+    }
+
+    return result;
+}
+
+
+SearchResult BurstClassifier::Predict(const std::shared_ptr<KBurst> burst)
+{
+    std::cout << "enter predict burst area" << std::endl;
+
+    float min_distance = 100, distance;
+    std::optional<SearchResult> cachedResult = cache.Read(*burst);
 	
   	if (cachedResult.has_value())
 	{
 		return cachedResult.value();
 	}
 
-    BurstPrediction result;
+    SearchResult result;
 
     int uniPktTolr = 10;
     int pktTolr = 100;
@@ -176,13 +228,21 @@ BurstPrediction BurstClassifier::Predict(const std::shared_ptr<KBurst> burst)
     int pktMin = std::max(0, std::min(burst->GetPktNum() - pktTolr, maxPktIndex));
     int pktMax = std::min(burst->GetPktNum() + pktTolr, maxPktIndex);
 
+    std::cout << "before calculate distance" << std::endl;
+
 	for (int i = uniPktMin; i < uniPktMax; i++)
 	{
 		for (int j = pktMin; j < pktMax; j++)
 		{
 			for (const auto trainBurst : train[i][j])
 			{
+                //std::cout << "before calculate distance1" << std::endl;
+
+
  				distance = burst->Distance(trainBurst);
+
+                //std::cout << "after calculate distance" << std::endl;
+
 
 				if (distance < min_distance)
 				{
@@ -200,6 +260,8 @@ BurstPrediction BurstClassifier::Predict(const std::shared_ptr<KBurst> burst)
 	}
 
     cache.Write(*burst, result);
+
+    std::cout << "after burst level prediction" << std::endl;
 
 	return result;
 }

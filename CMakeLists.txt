@@ -30,6 +30,10 @@ include_directories(${Pcappp_INCLUDE_DIR})
 
 add_executable(MyExecutable ${CMAKE_SOURCE_DIR}/src/main.cpp)
 
+
+# target_compile_options(MyExecutable PRIVATE -fsanitize=address -fno-omit-frame-pointer)
+# target_link_options(MyExecutable PRIVATE -fsanitize=address)
+
 target_link_libraries(MyExecutable pack Boost::serialization Packet++ Pcap++ Common++)
 
 ## 添加外部库

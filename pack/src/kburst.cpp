@@ -8,14 +8,19 @@
 
 namespace groundnut{
 
-KBurst::KBurst(const KDevice& device): KBurst(device.GetLabel()){}
+KBurst::KBurst(const KDevice& device): KBurst(device.GetLabel()){pfUmapMutex = new std::mutex;}
 
 void KBurst::convert_to_frequency()
 {   
     if (this->pktNum == 0) {return; }
-    
+
+	std::unique_lock<std::mutex> lock(*pfUmapMutex);
+
+	fUmap.reserve(countMap.size());
+
     for (const auto& [sig, cnt] : countUmap) {
-        fUmap[sig] = static_cast<float>(cnt) / pktNum;
+
+		fUmap.try_emplace(sig, static_cast<float>(cnt) / pktNum);
     }
 
 	isfUmapUpdate = true;
@@ -26,7 +31,7 @@ float KBurst::Distance(std::shared_ptr<KBurst> burst)
 	float distance = 0;
 
 	if (pktNum == 0 || burst->pktNum == 0) { return 1.0f; }
-	if (std::abs(burst->pktNum - pktNum) > 120)	{return 1;}
+	if (std::abs(burst->pktNum - pktNum) > 120)	{return 1.0f;}
 
 	if(!isfUmapUpdate)
 	{
@@ -57,6 +62,8 @@ float KBurst::Distance(KBurst& burst)
 	{
 		burst.convert_to_frequency();
 	}
+
+	std::cout << "fumap.size" << fUmap.size() << "burst.fumap.size" << burst.fUmap.size() << std::endl;
 
 	return hellinger(fUmap, burst.fUmap);
 }
@@ -94,6 +101,8 @@ void KBurst::ExtendBurst(KBurst& burst)
 
 KBurst::KBurst(std::vector<std::shared_ptr<KBurst>> burstVec)
 {
+	pfUmapMutex = new std::mutex;
+
 	if (!burstVec.size()){return;}
 	
 	label = burstVec[0]->label;

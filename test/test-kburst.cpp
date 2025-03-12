@@ -302,7 +302,7 @@ TEST_CASE("Basic Read/Write", "[cache][single-thread]") {
     
     SECTION("Write then Read") {
         cache.Write(burst1, {0.3, {p_burst1, p_burst2, p_burst3}});
-        std::optional<BurstPrediction> result = cache.Read(burst1);
+        std::optional<SearchResult> result = cache.Read(burst1);
         REQUIRE(result.has_value());
         REQUIRE(result.value().minDistance == Catch::Approx(0.3).epsilon(0.01));
     }

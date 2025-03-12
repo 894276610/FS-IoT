@@ -63,7 +63,7 @@ TEST_CASE("burstClassifier init", "[single-file]")
         {
             for(auto& pBurst : bgroup)
             {
-                const BurstPrediction& prediction = clf.Predict(pBurst);
+                const SearchResult& prediction = clf.Predict(pBurst);
                 std::cout << prediction.minDistance << " ";
                 std::cout << "prediction:" << prediction.nearTrainBursts[0]->GetLabel()<< "\n";
                 std::cout << "actual:" << pBurst->GetLabel()<< "\n";

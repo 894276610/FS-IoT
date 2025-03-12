@@ -37,9 +37,9 @@ TEST_CASE("bo classifier", "[single-file]")
     {
         for(auto& bgroup : bgroups)
         {
-            
-            std::string prediction = boclf.Predict(bgroup);
-            std::cout << "prediction:" << prediction << "\n";
+            std::string result;
+            boclf.Predict(bgroup, result, false);
+            std::cout << "prediction:" << result << "\n";
             std::cout << "actual:" << bgroup[0]->GetLabel()<< "\n";
             
         }

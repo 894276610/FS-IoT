@@ -22,7 +22,9 @@ BurstClassifier(int maxUniPkt)
 }
 
 void Train(std::unordered_map<uint16_t, BurstGroups>* trainset);
-BurstPrediction Predict(const std::shared_ptr<KBurst> burst);
+SearchResult Predict(const std::shared_ptr<KBurst> burst);
+SearchResult ReviewSearch(const std::shared_ptr<KBurst> burst);
+
 
 private:
 
@@ -43,6 +45,7 @@ private:
 BurstCache cache;
 std::vector<BurstGroups> train;
 std::vector<std::unique_ptr<std::mutex>> uniPktMutex;
+std::unordered_map<uint16_t, BurstGroups>* oriTrainset;
 
 };
     

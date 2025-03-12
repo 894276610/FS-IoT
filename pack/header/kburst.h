@@ -37,9 +37,9 @@ class KBurst {
 public:
 
 	// constructor
-	KBurst():label(""){}
+	KBurst():label(""){pfUmapMutex = new std::mutex;}
 	KBurst(const KDevice& device);
-	explicit KBurst(const std::string& label):label(label){}
+	explicit KBurst(const std::string& label):label(label){ pfUmapMutex = new std::mutex;}
 	KBurst(std::vector<std::shared_ptr<KBurst>> burstVec);
 	
 	void AddPacket(const KPacket& packet);
@@ -93,6 +93,7 @@ private:
 	std::unordered_map<short, int> countUmap;
 	std::unordered_map<short, float> fUmap;
 
+	std::mutex* pfUmapMutex = nullptr;
 };
 
 
@@ -124,10 +125,23 @@ struct std::hash<groundnut::KBurst>
 
 namespace groundnut{
 
-struct BurstPrediction
+struct SearchResult
 {
 	float minDistance;
 	BurstVec nearTrainBursts;
+
+	std::string ToString()
+	{
+		std::stringstream ss;
+		ss << "search result: ";
+		ss << "min distance:" << minDistance << "\n";
+		ss << "nearest bursts:" << "\n";
+		for(auto& burst: nearTrainBursts)
+		{
+			ss << burst->ToString() << "\n";
+		}
+		return ss.str();
+	}
 };
 	
 // burst cache
@@ -136,15 +150,15 @@ struct BurstCache {
 	BurstCache() = default; 
 
 	std::shared_mutex mutex;
-    std::unordered_map<KBurst, BurstPrediction> cache;
+    std::unordered_map<KBurst, SearchResult> cache;
 
-    std::optional<BurstPrediction> Read(const KBurst& key) {
+    std::optional<SearchResult> Read(const KBurst& key) {
         std::shared_lock lock(mutex);
         auto it = cache.find(key);
         return it != cache.end() ? std::make_optional(it->second) : std::nullopt;
     }
 
-    void Write(const KBurst& key, BurstPrediction value) {
+    void Write(const KBurst& key, SearchResult value) {
         std::unique_lock lock(mutex);
         cache.insert_or_assign(key, std::move(value));
     }
