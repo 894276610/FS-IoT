@@ -7,24 +7,33 @@
 
 namespace groundnut{
 
+struct ConfigBurstClf
+{
+    int uniPktTolr = 10;
+    int pktTolr = 100;
+    int maxUniPkt = 50;
+    int maxPktIndex = 500;
+    float distanceTrh = 0.5;
+    float penalty = 0.01;
+};
+
 class BurstClassifier{
 
 public:
-BurstClassifier(int maxUniPkt)
+BurstClassifier(const ConfigBurstClf& config):config(config)
 {
-    for (int i = 0; i < maxUniPkt; ++i) {
+    for (int i = 0; i < config.maxUniPkt; ++i) {
         uniPktMutex.emplace_back(std::make_unique<std::mutex>());
     }
 
-    std::vector<BurstVec> temp(500);
-	train.resize(maxUniPkt, temp);
+    std::vector<BurstVec> temp(config.maxPktIndex);
+	train.resize(config.maxUniPkt, temp);
 
 }
 
 void Train(std::unordered_map<uint16_t, BurstGroups>* trainset);
 SearchResult Predict(const std::shared_ptr<KBurst> burst);
 SearchResult ReviewSearch(const std::shared_ptr<KBurst> burst);
-
 
 private:
 
@@ -42,6 +51,7 @@ std::shared_ptr<KBurst> FindKeysEQ(
 
 private:
 
+ConfigBurstClf config;
 BurstCache cache;
 std::vector<BurstGroups> train;
 std::vector<std::unique_ptr<std::mutex>> uniPktMutex;

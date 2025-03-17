@@ -62,7 +62,7 @@ TEST_CASE(" packetDataset init test", "[single-file]")
     REQUIRE(burstDataset2.GetRawMap()[0][1][0]->GetPktNum() == 10); //first one contains 10 pkts
     REQUIRE(burstDataset2.GetRawMap()[0][1][1]->GetPktNum() == 1);  //second one contains 1 pkt
 
-    burstDataset2.TrainTestSplit(0.5);
+    burstDataset2.TrainTestSplit();
 
     REQUIRE(burstDataset2.GetTrainset()[0].size() ==1);
     REQUIRE(burstDataset2.GetTestset()[0].size() == 1);

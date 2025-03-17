@@ -11,37 +11,52 @@
 
 namespace groundnut{
 
+struct ConfigBurstDataset
+{
+	int slotDuration = 1800;
+	float trainRate = 0.5;
+	BurstTrh burstTrh;
+
+	template<class Archive>
+	void serialize(Archive& ar, const unsigned int version) {
+		ar& slotDuration;
+		ar& trainRate;
+		ar& burstTrh;
+	}
+};
+
 class BurstDataset
 {
 public:
 
-	BurstDataset() {}
+	BurstDataset() = default;
+	BurstDataset(const ConfigBurstDataset& configBurstDataset):
+	configBurstDataset(configBurstDataset) {}
 	BurstDataset(const std::string& datasetName) : seed(0), name(datasetName){}
 
 	void Load(PacketDataset&, const BurstTrh& trh);
 	
 	// split operation
-	void TrainTestSplit(float trainRate = 0.5);
+	void TrainTestSplit();
 
 	// getter and setter
 	std::string & GetName(){return name;}
-	int GetSlotDuration(){return slotDuration;}
-	BurstTrh& GetBurstTrh(){return trh;}
+	int GetSlotDuration(){return configBurstDataset.slotDuration;}
+	BurstTrh& GetBurstTrh(){return configBurstDataset.burstTrh;}
 	std::vector<KDevice>& GetDevicesVec(){return devicesVec;}
 	std::unordered_map<uint16_t, BurstGroups>& GetRawMap(){return rawMap;}
 	std::unordered_map<uint16_t, BurstGroups>& GetTrainset(){return trainset;}
 	std::unordered_map<uint16_t, BurstGroups>& GetTestset(){return testset;}
 	std::set<size_t>& GetTimeSlots(){return timeSlots;}
 
-	void SetSlotDuration(int duration){slotDuration = duration;}
-	void SetBurstTrh(const BurstTrh& trh){this->trh = trh;}
+	void SetSlotDuration(int duration){configBurstDataset.slotDuration = duration;}
+	void SetBurstTrh(const BurstTrh& trh){this->configBurstDataset.burstTrh = trh;}
 	void SetName(const std::string name){this->name = name;}
 	
 	template<class Archive>
 	void serialize(Archive& ar, const unsigned int version) {
 		ar& name;
-		ar& slotDuration;
-		ar& trh;
+		ar& configBurstDataset;
 		ar& devicesVec;
 		ar& timeSlots;
 		ar& rawMap;
@@ -54,8 +69,7 @@ private:
 private:
 	unsigned seed;
 	std::string name;
-	int slotDuration = 1800;
-	BurstTrh trh;
+	ConfigBurstDataset configBurstDataset;
     std::vector<groundnut::KDevice> devicesVec; // should Add constructor !
 
 	std::unordered_map<uint16_t, BurstGroups> rawMap;

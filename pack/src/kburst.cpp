@@ -63,8 +63,6 @@ float KBurst::Distance(KBurst& burst)
 		burst.convert_to_frequency();
 	}
 
-	std::cout << "fumap.size" << fUmap.size() << "burst.fumap.size" << burst.fUmap.size() << std::endl;
-
 	return hellinger(fUmap, burst.fUmap);
 }
 

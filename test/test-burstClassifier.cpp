@@ -28,7 +28,7 @@ TEST_CASE("burstClassifier init", "[single-file]")
     BurstTrh trh{50, {2,0}, {15,0}};
 
     burstDataset.Load(packetDataset, trh);
-    burstDataset.TrainTestSplit(0.5);
+    burstDataset.TrainTestSplit();
 
     REQUIRE(burstDataset.GetTrainset().size() == 2);
     REQUIRE(burstDataset.GetTestset().size() == 2);
@@ -51,7 +51,8 @@ TEST_CASE("burstClassifier init", "[single-file]")
     // ednet train instance contains 2 bursts;
     REQUIRE(burstDataset.GetTestset()[1][0].size() == 2);
     
-    BurstClassifier clf(50);
+    ConfigBurstClf cfg;
+    BurstClassifier clf(cfg);
     auto& trainset = burstDataset.GetTrainset();
     clf.Train(&trainset);
 

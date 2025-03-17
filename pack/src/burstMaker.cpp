@@ -3,15 +3,11 @@
 #include <utility>
 #include "kdevice.h"
 
-constexpr int EXPECTED_BURST_SIZE = 64;
-constexpr int EXPECTED_FLOWS = 1024;
-
 namespace groundnut{
 
 void BurstMaker::LongShortSplit() 
 {
     PacketVector rawBurst;
-    rawBurst.reserve(EXPECTED_BURST_SIZE);
 
     for (auto* packet : *m_pktVec) {
         if (!packet) continue;

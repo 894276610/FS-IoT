@@ -74,6 +74,10 @@
         "variant": "cpp",
         "filesystem": "cpp",
         "shared_mutex": "cpp",
-        "source_location": "cpp"
+        "source_location": "cpp",
+        "executor": "cpp",
+        "io_context": "cpp",
+        "netfwd": "cpp",
+        "timer": "cpp"
     }
 }

@@ -24,9 +24,10 @@ TEST_CASE("bo classifier", "[single-file]")
     BurstTrh trh{50, {2,0}, {15,0}};
 
     burstDataset.Load(packetDataset, trh);
-    burstDataset.TrainTestSplit(0.5);
+    burstDataset.TrainTestSplit();
 
-    BoClassifier boclf(50);
+    ConfigBurstClf cfg;
+    BoClassifier boclf(cfg);
 
     auto& trainset = burstDataset.GetTrainset();
     boclf.Train(&trainset);

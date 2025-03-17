@@ -1,48 +1,51 @@
-# 记录调试的过程 
+# 调试
 
-12：55 我发现在 debug 模式下，没有查找设备在训练集突发的情况下，程序会正常运行。
-但是在-o3优化下则会异常终止。 Killed.
+BUG[Closed]: 程序在-o3优化下则会异常终止。 Killed. 或者出现 malloc(): unaligned tcache chunk detected. segment fault.（3.11）
+DEBUG: fUMap加锁
+1. 进入 debug 模式，没有查找设备在训练集突发，程序正常运行。 12：55
+2. Deepseek 建议： 将 num_threads 设为 1，观察是否仍崩溃。若问题消失，则确认是多线程竞争导致.
+3. 确实在 num_threads 设置为1之后，没有崩溃发生。 14:11
+4. 加入Address AddressSanitizer, 但是没出现异常, 出现了几处内存泄漏。发生在 fUmap 结构。
+5. 按照 deepseek 的建议, 使用 try_emplace, reserve 进行修正。(这里是问题发生点，但是修复的方式不正确)
+6. 再试, 仍然存在内存泄露。 尝试使用valgrind，但是太慢遂放弃。
+7. std::cout 排查，发现加入多个 std::cout 问题消失。（std::cout 耗时导致多线程竞争状态消失）
+8. 看到知乎说在多线程抱怨 debug, release 设置的问题，要去加锁！在fUMap加锁，问题解决。
 
-12:57 我发现 UNSW2016 accuracy 已经达到了 99.87. 我觉得很高。仍有以下问题：
+BUG[Pending]: 程序在我进行 reviewBook 查询最近的正确的训练集样本报告 Killed 错误(3.12)
+DEBUG:
+1. 采用MVP理论，使用 UNSW201620 代替 UNSW2016, 发现又没有什么问题了。
 
+
+# 改进
+
+OBSERVATION: 
 * Nest Dropcam	被分到了 Dropcam 当中.
+* 有一些零星的错误.
+* 99.87和我写论文的时候的准确率差不多.
+WANT: 我想要探究为什么会出错
+DECISION: 修改代码，将记录所有错误改为只记录isWrong = 1的条目。
+FURTHER: 查看reviewBook, 观察发生了什么错误。
+我应该详细记录每次运行的配置信息，并且和输出的结果一同记录下来。方便以后查询。
 
-有一些零星的错误。
-我想要探究为什么会出错。
-我需要在-o3的情况下也能正常运行。
+* 应该在训练集就把这些按照一从从一簇簇进行划分。
+* 训练集合的压缩还是不够精准。
+* 目前的压缩是把非常相似的放在了一起，但是有一些是相似但不完全相似的一类呢。
+有很大随机性质的group，可能就需要使用某种规则。
 
-DOING: DEBUG THE PROGRAM TO RUN IN -O3 MODE.
 
-3月11日
-    尝试 review = false 是否能够正常运行。 => 结果是不能正常运行 在训练结束之后killed.
-    => 尝试在各处打上std::cout判断究竟是哪段代码的问题。=> 问题没有出现。
-    => 再一次运行，malloc(): unaligned tcache chunk detected. 
-    => 拷贝到 deepseek 寻求解答。
-    => 将 num_threads 设为 1，观察是否仍崩溃。若问题消失，则确认是多线程竞争导致.
-    => 确实在 num_threads 设置为1之后，没有崩溃发生，再试一次，确认。 14:11
-    => 14:30  确实在 num_threads 设置为1之后，没有崩溃发生
-    => 也就是说，在正常的03下，只需要1分钟多一点就可以完成。
-    => 可以看看究竟代码哪块出了问题。
-    => 加入Address AddressSanitizer, 但是没出现异常, 出现了几处内存泄漏。 
-    => 按照 deepseek 的建议, 使用 try_emplace, reserve 进行修正。
-    => 再试, 仍然存在内存泄露。 移除address sanitizer 并使用valgrind 测试 valgrind --leak-check=full --track-origins=yes ./your_program，但 valgrindu运行2个小时还没好。放弃！
-    => 我想，如果没问题，那就用 -o3直接运行了。
+# ReviewBook 观察
+Triby Speaker 错误分类：
+现象：找到相同的key但是不同的出现次数，距离相差非常少。
+改进方法：相同的key的可以先纳入计算。
 
-    => 发现是没加 reviewBook, 运行很顺利。
-    => 加了 reviewBook, segment fault, 我猜测是UpdateFlags里面出了问题。加了std::cout进行界定。
-    => 我服了，在debug模式没有问题。在-o3模式下std::cout多也没问题。把std::cout判断打印删了就报错。怎么调试啊。
-    => 看到zhihuer的一句话，说在多线程不要说 debug, release的问题，要去加锁！我立即想到，确实。fUMap没加锁。可能导致竞争状态。
-    加上之前 AddressSanitizer 的检查内存泄露也是指向这里。我觉得我悟了。 21：26 （这个问题搞定，今天就值得了）
+HP Printer/ Nest Dropcam 错误分类：
+现象：由于压缩了训练集，导致最终KNN的结果出错。但是这一例中distance > 0.5, 并且突发的报文数量多，在200-300
 
-3月12日
-    => 调整代码，看全错的部分。
-# 改进实验
+LiFx Bulb: 一类的，出现了新的特性，导致和原有的都匹配不上，distance > 0.5
+改进方法：只差0.08以内的都还可以算是挽救一下，distance > 0.5 别救了。
 
-99.87很高，我想看看当时我写论文的时候的准确率。
 
 # 投稿
-ACM WiSec
-
-
-
+ACM WiSec [30%]
+ICCC [?]
 

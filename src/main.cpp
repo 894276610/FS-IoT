@@ -9,40 +9,63 @@
 #include "kburst.h"
 #include "utils-metric.h"
 #include <fstream>
+#include "timer.h"
 
-
-enum class Color { RED = -10, BLUE = 0, GREEN = 10 };
+std::string baseFolder = "/media/kunling/BigE/";
+std::string datasetName = "UNSW201620";
+std::string outFolder = baseFolder + datasetName + "/";
+std::string mappingFolder = "/home/kunling/BurstIoT/mappings/";
+std::string pktDatasetOutName = datasetName + ".pktDataset";
 
 int main() {
+
+  // init packet dataset and add target devices
+  groundnut::PacketDataset pktDataset(datasetName);
+  pktDataset.AddTragetDevices( mappingFolder + datasetName + "_device_mac_mappings.csv");
+
+  // load existing packet dataset or load from raw packets.
+  if(std::filesystem::exists(outFolder + pktDatasetOutName))
+  {
+    pktDataset.LoadBin(outFolder + pktDatasetOutName);
+  }
+  else
+  {
+    pktDataset.LoadPcap(outFolder + "RAW");
+    pktDataset.Serialize(outFolder+ pktDatasetOutName);  
+  }
   
-  groundnut::PacketDataset pktDataset("unsw2016");
-  pktDataset.AddTragetDevices("/home/kunling/BurstIoT/mappings/unsw2016_device_mac_mappings.csv");
-  //pktDataset.LoadPcap("/media/kunling/Research/UNSW2016/RAW");
-  //pktDataset.Serialize("/media/kunling/Research/UNSW2016/unsw2016.pktDataset");
-  pktDataset.LoadBin("/media/kunling/BigE/UNSW2016/unsw2016.pktDataset");
-  
-  groundnut::BurstDataset burstDataset("unsw2016");
+  // init burst dataset
+  groundnut::BurstDataset burstDataset(datasetName);
   groundnut::BurstTrh trh{50,{2,0},{15,0}};
   burstDataset.Load(pktDataset, trh);
 
-  burstDataset.TrainTestSplit(0.5);
+  burstDataset.TrainTestSplit();
+  groundnut::ConfigBurstClf configBurstClf;
+  groundnut::BoClassifier boclf(configBurstClf);
 
-  groundnut::BoClassifier boclf(50);
-
+  // divide
   auto& trainset = burstDataset.GetTrainset();
   auto& testset = burstDataset.GetTestset();
 
+  // train
+  Instrumentor::Get().BeginSession("Train", outFolder + "train-time.json");
   boclf.Train(&trainset);
+  Instrumentor::Get().EndSession();
   ClassificationMetrics metric;
 
-  std::cout << "training end" << std::endl;
+  // predict
+  Instrumentor::Get().BeginSession("Predict", outFolder + "predict-time.json");
   groundnut::ReviewBook reviewBook = boclf.Predict(&testset, metric, true);
+  Instrumentor::Get().EndSession();
 
-  std::ofstream outStream("/media/kunling/BigE/UNSW2016/reviewBook.txt");
+  // review and metric
+  Instrumentor::Get().BeginSession("Review", outFolder + "log-review-metric-time.json");
+  std::ofstream outStream(outFolder + "reviewBook.txt");
   outStream << reviewBook.ToString();
   outStream.close();
 
-  std::ofstream outMetric("/media/kunling/BigE/UNSW2016/metrics.txt");
+  std::ofstream outMetric(outFolder + "metrics.txt");
   outMetric << ToString(metric);
   outMetric.close();
+  Instrumentor::Get().EndSession();
 }

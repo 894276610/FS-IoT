@@ -28,6 +28,7 @@ void PacketDataset::LoadPcap(const std::filesystem::path& inputFolder)
             GarbageCollection(paths.size());
             gcPromise.set_value();
         });
+        
 
         for (int i = 0; i < paths.size(); i++)
         {
@@ -65,13 +66,17 @@ void PacketDataset::LoadPcap(const std::filesystem::path& inputFolder)
                 storePromises[i].set_value();
                 gcNotice.notify_all();
             }
+            else
+            {
+                storeFutures.emplace_back(std::async(std::launch::deferred, [] { }));
+            }
             
             CloseReader(reader);
         }
 
-        // 等待垃圾回收线程
-        gcThread.join();
-        gcFuture.wait();
+        // 等待垃圾回收线程 
+        gcThread.join();    
+        //gcFuture.wait();
     }
 }
 

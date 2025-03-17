@@ -22,12 +22,12 @@ void BurstDataset::Load(PacketDataset& dataset, const BurstTrh& trh)
     // packet migration
     for (const groundnut::KPacket& packet : dataset.GetDataset())
     {
-        time_t slotId = packet.timestamp.tv_sec / slotDuration;
+        time_t slotId = packet.timestamp.tv_sec / configBurstDataset.slotDuration;
 
         AddPacket(packet.deviceId, slotId, &packet);
     }
 
-    this->trh = trh;
+    this->configBurstDataset.burstTrh = trh;
     MakeBursts(trh);
 }
 
@@ -71,8 +71,10 @@ void BurstDataset::MakeBursts(const BurstTrh& trh)
     //mapByDevTime.clear();
 }
 
-void BurstDataset::TrainTestSplit(float trainRate)
+void BurstDataset::TrainTestSplit()
 {
+    float trainRate = configBurstDataset.trainRate;
+
     for (auto& [deviceId, burstGroup] : rawMap)
     {
         {

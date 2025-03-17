@@ -20,9 +20,9 @@ class KDevice;
 class KPacket;
 
 struct BurstTrh{
-	int uniTrh;
-	timespec inTrh;
-	timespec ouTrh;
+	int uniTrh = 50;
+	timespec inTrh{2,0};
+	timespec ouTrh{15,0};
 
 	template<class Archive>
 	void serialize(Archive& ar, const unsigned int version) {
@@ -96,8 +96,6 @@ private:
 	std::mutex* pfUmapMutex = nullptr;
 };
 
-
-
 typedef std::vector<std::shared_ptr<KBurst>> BurstVec;
 typedef std::vector<BurstVec> BurstGroups;
 }
@@ -122,12 +120,11 @@ struct std::hash<groundnut::KBurst>
 	}
 };
 
-
 namespace groundnut{
 
 struct SearchResult
 {
-	float minDistance;
+	float minDistance = 100;
 	BurstVec nearTrainBursts;
 
 	std::string ToString()
@@ -164,9 +161,6 @@ struct BurstCache {
     }
 };
 
-
-
 }
-
 
 #endif

@@ -3,52 +3,38 @@
 #include <cmath>
 #include "utils-metric.h"
 #include <thread>
+#include "timer.h"
 
 namespace groundnut{
 
 void ReviewBurst::UpdateFlags()
-{
-    std::cout << "before update flags" << std::endl;
-    if(prediction.nearTrainBursts.size() == 0)
-    {
-        isWrong = false;
-        isFullyCorrect = false;
-        std::cout << "after update flags" << std::endl;
+{   
+    const auto& bursts = prediction.nearTrainBursts;
 
+    if(bursts.empty())
+    {
+        isWrong = isFullyCorrect = false;
         return;
     }
 
-
-    if(prediction.nearTrainBursts.size() == 1)
+    if(bursts.size() == 1)
     {
-        isFullyCorrect = prediction.nearTrainBursts[0]->GetLabel() == testBurst->GetLabel();
+        isFullyCorrect = bursts.front()->GetLabel() == testBurst->GetLabel();
         isWrong = !isFullyCorrect;
-        std::cout << "after update flags" << std::endl;
         return;
     }
 
     isFullyCorrect = false;
-    for(auto& nearBurst : prediction.nearTrainBursts)
-    {      
-        if(nearBurst->GetLabel() == testBurst->GetLabel())
-        {
-            isWrong = false;
-            std::cout << "after update flags" << std::endl;
+    const auto label_match = [this](const auto& burst)
+    {
+        return burst->GetLabel() == testBurst->GetLabel();
+    };
 
-            return;
-        }
-    }
-
-    isWrong = true;
-    std::cout << "after update flags" << std::endl;
-
-    return;        
+    isWrong = std::none_of(bursts.begin(), bursts.end(), label_match);
 }
 
 float Aggregator::AddBurstPrediction(std::shared_ptr<KBurst> pBurst, SearchResult prediction, bool reviewEnable)
 {
-    ReviewBurst reviewBurst;
-
     this->devNameSet.clear();
     
     // predict names
@@ -60,8 +46,13 @@ float Aggregator::AddBurstPrediction(std::shared_ptr<KBurst> pBurst, SearchResul
     // calculate score
     float score =  log(pBurst->GetUniPktNum() + 1) / (devNameSet.size() * (sqrt(prediction.minDistance) + 1));
 
+    if(prediction.minDistance > distance_threshold)
+    {
+        score*= penalty;
+    }
+
     // add to scoreBoard
-    for(std::string name: devNameSet)
+    for(const auto& name: devNameSet)
     {
         auto [it, inserted] = scoreBoard.try_emplace(name, score);
         
@@ -72,27 +63,18 @@ float Aggregator::AddBurstPrediction(std::shared_ptr<KBurst> pBurst, SearchResul
     }
 
     return score;
-
 }
 
 std::string Aggregator::FetchResult()
 {
-    std::vector<std::pair<std::string, float>> vec(scoreBoard.begin(), scoreBoard.end());
+    const std::vector<std::pair<std::string, float>> vec{scoreBoard.begin(), scoreBoard.end()};
 
-    sort(vec.begin(), vec.end(), [](const auto& a, const auto& b) {
-        if (a.second == b.second)
-            return a.first < b.first; 
-        return a.second > b.second;    
+    const auto max_it = std::max_element(vec.begin(), vec.end(),
+    [](const auto& a, const auto& b) {
+        return a.second > b.second;
     });
 
-    if(vec.size() > 0)
-    {
-        return vec[0].first;
-    }
-    else
-    {
-        return "unknown";
-    }
+    return vec.empty() ? "unknown" : max_it->first;
 }
 
 void BoClassifier::Train(std::unordered_map<uint16_t, BurstGroups>* trainset)
@@ -102,45 +84,46 @@ void BoClassifier::Train(std::unordered_map<uint16_t, BurstGroups>* trainset)
 
 std::vector<ReviewBurst> BoClassifier::Predict(BurstVec instance, std::string& strResult, bool reviewEnable)
 {
-    Aggregator agt;
+    Aggregator agt(config.distanceTrh, config.penalty);
     std::vector<ReviewBurst> reviewList;
-
-    //std::cout << "enter predict instance" <<std::endl;
 
     for(auto& pBurst: instance)
     {
-        SearchResult prediction = bclf.Predict(pBurst);
-        std::cout << "before add burst prediction" << std::endl;
-        float score = agt.AddBurstPrediction(pBurst, prediction);
+        const SearchResult& prediction = bclf.Predict(pBurst);
+        const float score = agt.AddBurstPrediction(pBurst, prediction);
 
-        if(!reviewEnable)
-        {
-            continue;
-        }
+        if(!reviewEnable) continue;
 
-        //std::cout << "review only part" <<std::endl;
         // review logic
-
         ReviewBurst reviewBurst;    
         reviewBurst.testBurst = pBurst;
         reviewBurst.prediction = prediction;
         reviewBurst.score = score;
         reviewBurst.UpdateFlags();
-        //reviewBurst.searchResult = bclf.ReviewSearch(pBurst);   
-        reviewList.push_back(reviewBurst);
+
+        if(reviewBurst.isWrong)
+        {
+            reviewBurst.searchResult = bclf.ReviewSearch(pBurst);   
+            reviewList.emplace_back(std::move(reviewBurst));
+        }
     }
 
     strResult = agt.FetchResult();
+
+    if( !reviewList.empty() && strResult == instance.front()->GetLabel())
+    {
+        reviewList.clear();
+    }
+
     return reviewList;
 }
 
-// multithreadings
 ReviewBook BoClassifier::Predict(std::unordered_map<uint16_t, BurstGroups>* testset, ClassificationMetrics& metric, bool reviewEnable)
 {
+    PROFILE_SCOPE("predict");
     std::mutex reviewMutex;
     ReviewBook rBook;
 
-    //std::cout << "start predict" <<std::endl;
     // Step 1: 数据预处理（不变）
     std::vector<BurstVec*> allBgroups;
     for (auto& [_, bgroups] : *testset) {
@@ -179,20 +162,15 @@ ReviewBook BoClassifier::Predict(std::unordered_map<uint16_t, BurstGroups>* test
         workers.clear();
     };
         
-
     // 并行预测
-    std::cout << "before parallel prediction" <<std::endl;
-
     parallel_process([&](BurstVec* bg) { 
         std::string result;
-        //std::cout << "parallel before prediction of one instance" << std::endl;
         
         std::vector<groundnut::ReviewBurst> reviewList = Predict(*bg, result, reviewEnable); 
         {
             std::unique_lock<std::mutex> lock(reviewMutex);
             rBook.reviewBook.push_back(reviewList);
         }
-        //std::cout << "parallel after prediction of one instance" << std::endl;
         return result;
     }, predictionVec);
 
