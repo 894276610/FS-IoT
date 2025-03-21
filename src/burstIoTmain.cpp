@@ -36,7 +36,7 @@ else
   
 // init burst dataset
 
-for(float trainRate = 0.01; trainRate <= 0.5; trainRate += 0.01)
+for(float trainRate = 0.01; trainRate <= 0.3; trainRate += 0.01)
 {
   const groundnut::ConfigBurstDataset configBurstDataset{1800,trainRate, 0.5, {50, {2,0}, {15,0}}};
   const groundnut::ConfigBurstClf configBurstClf{10,100,50,500,1000,0.5,0.01};
