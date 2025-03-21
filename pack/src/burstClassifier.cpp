@@ -49,7 +49,8 @@ void BurstClassifier::TrainDevice(uint16_t deviceId, BurstGroups burstGroups)
 	int pktIndex, uniPktIndex = 0;
 	for (auto& [burst, num] : trainMap)
 	{
-		pktIndex = std::min(burst->GetPktNum(), 500) -1;
+        
+		pktIndex = std::min(burst->GetPktNum(), config.maxPktIndex) -1;
         uniPktIndex = burst->GetUniPktNum() -1;
 		std::unique_lock<std::mutex> lock(*uniPktMutex[uniPktIndex]);
 		train[uniPktIndex][pktIndex].push_back(burst);
@@ -89,7 +90,7 @@ void BurstClassifier::MergeByKey(std::unordered_map<std::shared_ptr<KBurst>, int
         [](const auto& a, const auto& b) { return a.second > b.second; });
 
     for (const auto& [burst, num] : sorted_vec) {
-        if (map->size() >= 1000) break;
+        if (map->size() >= config.maxTrainItem) break;
 
         // 提前过滤无需合并的情况
         if (burst->GetPktNum() <=6) {

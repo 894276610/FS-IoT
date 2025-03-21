@@ -21,16 +21,18 @@ TEST_CASE(" packetDataset init test", "[single-file]")
     packetDataset.AddTragetDevice("3c:49:37:03:17:db", "ednet-cam1");
 
     packetDataset.LoadPcap(pcapPath);
+    
 
     BurstDataset burstDataset("Aalto-partial");
     BurstTrh trh{50, {2,0}, {15,0}};
 
-    burstDataset.Load(packetDataset, trh);
+    burstDataset.Load(packetDataset);
     REQUIRE(burstDataset.GetBurstTrh().inTrh.tv_nsec == trh.inTrh.tv_nsec);
     REQUIRE(burstDataset.GetDevicesVec()[0].GetLabel() == "iKettle2");
     REQUIRE(burstDataset.GetName() == "Aalto-partial");
 
     // August 17 iKettle
+    
     REQUIRE(burstDataset.GetRawMap()[0][0].size() == 3); //deviceId = 0, slotindex = 0 has 2 bursts
     REQUIRE(burstDataset.GetRawMap()[0][0][0]->GetPktNum() == 10); //first one contains 10 pkts
     REQUIRE(burstDataset.GetRawMap()[0][0][1]->GetPktNum() == 1);  //second one contains 1 pkt

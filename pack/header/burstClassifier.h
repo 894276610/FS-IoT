@@ -13,8 +13,23 @@ struct ConfigBurstClf
     int pktTolr = 100;
     int maxUniPkt = 50;
     int maxPktIndex = 500;
+    int maxTrainItem = 1000;
     float distanceTrh = 0.5;
     float penalty = 0.01;
+
+
+    std::string ToString() const
+    {
+        std::stringstream ss;
+        ss << "(uniPkTolr=" << uniPktTolr << ")";
+        ss << "(pkTolr=" << pktTolr << ")";
+        ss << "(maxUniPkt=" << maxUniPkt << ")";
+        ss << "(maxPktIndex=" << maxPktIndex << ")";
+        ss << "(distanceTrh=" << distanceTrh << ")";
+        ss << "(maxTrainIt=" << maxTrainItem << ")";
+        ss << "(penalty=" << penalty << ")";
+        return ss.str();
+    }
 };
 
 class BurstClassifier{

@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(BurstIoT)
-#set(CMAKE_CXX_FLAGS_RELEASE "-O3") 
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_CXX_FLAGS_RELEASE "-O3") 
+#set(CMAKE_BUILD_TYPE Debug)
 
 find_package(Boost COMPONENTS serialization REQUIRED)
 
@@ -28,13 +28,18 @@ include_directories(${Packetpp_INCLUDE_DIR})
 include_directories(${Commonpp_INCLUDE_DIR})
 include_directories(${Pcappp_INCLUDE_DIR})
 
+add_compile_options(-Wunused-variable)
+
 add_executable(MyExecutable ${CMAKE_SOURCE_DIR}/src/main.cpp)
+add_executable(ByteIoTExe ${CMAKE_SOURCE_DIR}/src/byteIoTmain.cpp)
 
 
 # target_compile_options(MyExecutable PRIVATE -fsanitize=address -fno-omit-frame-pointer)
 # target_link_options(MyExecutable PRIVATE -fsanitize=address)
 
 target_link_libraries(MyExecutable pack Boost::serialization Packet++ Pcap++ Common++)
+target_link_libraries(ByteIoTExe pack Boost::serialization Packet++ Pcap++ Common++)
+
 
 ## 添加外部库
 #add_subdirectory(path_to_external_library)

@@ -19,53 +19,59 @@ std::string pktDatasetOutName = datasetName + ".pktDataset";
 
 int main() {
 
-  // init packet dataset and add target devices
-  groundnut::PacketDataset pktDataset(datasetName);
-  pktDataset.AddTragetDevices( mappingFolder + datasetName + "_device_mac_mappings.csv");
+// init packet dataset and add target devices
+groundnut::PacketDataset pktDataset(datasetName);
+pktDataset.AddTragetDevices( mappingFolder + datasetName + "_device_mac_mappings.csv");
 
-  // load existing packet dataset or load from raw packets.
-  if(std::filesystem::exists(outFolder + pktDatasetOutName))
-  {
-    pktDataset.LoadBin(outFolder + pktDatasetOutName);
-  }
-  else
-  {
-    pktDataset.LoadPcap(outFolder + "RAW");
-    pktDataset.Serialize(outFolder+ pktDatasetOutName);  
-  }
+// load existing packet dataset or load from raw packets.
+if(std::filesystem::exists(outFolder + pktDatasetOutName))
+{
+  pktDataset.LoadBin(outFolder + pktDatasetOutName);
+}
+else
+{
+  pktDataset.LoadPcap(outFolder + "RAW");
+  pktDataset.Serialize(outFolder+ pktDatasetOutName);  
+}
   
-  // init burst dataset
-  groundnut::BurstDataset burstDataset(datasetName);
-  groundnut::BurstTrh trh{50,{2,0},{15,0}};
-  burstDataset.Load(pktDataset, trh);
+// init burst dataset
 
+for(float trainRate = 0.01; trainRate <= 0.5; trainRate += 0.01)
+{
+  const groundnut::ConfigBurstDataset configBurstDataset{1800,trainRate, 0.5, {50, {2,0}, {15,0}}};
+  const groundnut::ConfigBurstClf configBurstClf{10,100,50,500,1000,0.5,0.01};
+  
+  groundnut::BurstDataset burstDataset(datasetName, configBurstDataset);
+  burstDataset.Load(pktDataset);
   burstDataset.TrainTestSplit();
-  groundnut::ConfigBurstClf configBurstClf;
-  groundnut::BoClassifier boclf(configBurstClf);
-
-  // divide
   auto& trainset = burstDataset.GetTrainset();
   auto& testset = burstDataset.GetTestset();
 
-  // train
-  Instrumentor::Get().BeginSession("Train", outFolder + "train-time.json");
-  boclf.Train(&trainset);
-  Instrumentor::Get().EndSession();
-  ClassificationMetrics metric;
+  groundnut::BoClassifier boclf(configBurstClf);
 
+  // train
+  //Instrumentor::Get().BeginSession("Train", outFolder + "train-time.json");
+  boclf.Train(&trainset);
+  //Instrumentor::Get().EndSession();
+  
   // predict
-  Instrumentor::Get().BeginSession("Predict", outFolder + "predict-time.json");
-  groundnut::ReviewBook reviewBook = boclf.Predict(&testset, metric, true);
-  Instrumentor::Get().EndSession();
+  //Instrumentor::Get().BeginSession("Predict", outFolder + "predict-time.json");
+  ClassificationMetrics metric;
+  groundnut::ReviewBook reviewBook = boclf.Predict(&testset, metric, false);
+  //Instrumentor::Get().EndSession();
 
   // review and metric
-  Instrumentor::Get().BeginSession("Review", outFolder + "log-review-metric-time.json");
-  std::ofstream outStream(outFolder + "reviewBook.txt");
-  outStream << reviewBook.ToString();
-  outStream.close();
+  //Instrumentor::Get().BeginSession("Review", outFolder + "log-review-metric-time.json");
+  // std::ofstream outStream(outFolder + configBurstClf.ToString() \
+  // + configBurstDataset.ToString() + "reviewBook.txt");
+  // outStream << reviewBook.ToString();
+  // outStream.close();
 
-  std::ofstream outMetric(outFolder + "metrics.txt");
+  std::ofstream outMetric(outFolder + configBurstClf.ToString() \
+  + configBurstDataset.ToString() + "metrics.txt");
   outMetric << ToString(metric);
   outMetric.close();
   Instrumentor::Get().EndSession();
+}
+ 
 }

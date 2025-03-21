@@ -35,7 +35,7 @@ TEST_CASE(" packetDataset devices load", "[single-file]")
 {
     std::string datasetName = "unsw2016";
     groundnut::PacketDataset dataset(datasetName);
-    dataset.AddTragetDevices(std::filesystem::path("/home/kunling/BurstIoT/mappings/unsw2016_device_mac_mappings.csv"));
+    dataset.AddTragetDevices(std::filesystem::path("/home/kunling/BurstIoT/mappings/UNSW201620_device_mac_mappings.csv"));
 
-    REQUIRE(dataset.GetDevicesMap().size() == 23);
+    REQUIRE(dataset.GetDevicesMap().size() == 22);
 }

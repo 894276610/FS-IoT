@@ -71,7 +71,7 @@ std::string Aggregator::FetchResult()
 
     const auto max_it = std::max_element(vec.begin(), vec.end(),
     [](const auto& a, const auto& b) {
-        return a.second > b.second;
+        return a.second < b.second;
     });
 
     return vec.empty() ? "unknown" : max_it->first;
@@ -79,6 +79,7 @@ std::string Aggregator::FetchResult()
 
 void BoClassifier::Train(std::unordered_map<uint16_t, BurstGroups>* trainset)
 {
+    PROFILE_SCOPE("TRAINING...");
     bclf.Train(trainset);
 }
 

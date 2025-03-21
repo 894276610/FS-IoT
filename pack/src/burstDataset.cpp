@@ -4,8 +4,7 @@
 
 namespace groundnut{
              
-    
-void BurstDataset::Load(PacketDataset& dataset, const BurstTrh& trh)
+void BurstDataset::Load(PacketDataset& dataset)
 {  
     // name 
     this->name = dataset.GetName();
@@ -27,8 +26,7 @@ void BurstDataset::Load(PacketDataset& dataset, const BurstTrh& trh)
         AddPacket(packet.deviceId, slotId, &packet);
     }
 
-    this->configBurstDataset.burstTrh = trh;
-    MakeBursts(trh);
+    MakeBursts();
 }
 
 void BurstDataset::AddPacket(uint16_t deviceId, time_t slotId, const KPacket* packet)
@@ -39,7 +37,7 @@ void BurstDataset::AddPacket(uint16_t deviceId, time_t slotId, const KPacket* pa
     timeSlots.insert(slotId);
 }
 
-void BurstDataset::MakeBursts(const BurstTrh& trh)
+void BurstDataset::MakeBursts()
 {
     for (time_t slotId : timeSlots) {
         for (auto& [deviceId, slotMap] : mapByDevTime) {
@@ -57,7 +55,7 @@ void BurstDataset::MakeBursts(const BurstTrh& trh)
                 slotMap.erase(it);
             } // 释放锁
             
-            BurstMaker maker(&pktVec, devicesVec[deviceId], trh);
+            BurstMaker maker(&pktVec, devicesVec[deviceId], configBurstDataset.burstTrh);
             BurstVec burstBlock = maker.MakeBursts();
 
             { // 临界区：线程安全地添加结果
@@ -84,9 +82,10 @@ void BurstDataset::TrainTestSplit()
         }
         
         size_t trainNum = std::ceil(burstGroup.size() * trainRate);
+        size_t testStart = std::ceil(burstGroup.size() * (1 - configBurstDataset.testRate));
 
         BurstGroups trainGroups(burstGroup.begin(), burstGroup.begin() + trainNum);
-        BurstGroups testGroups(burstGroup.begin() + trainNum, burstGroup.end());
+        BurstGroups testGroups(burstGroup.begin() + testStart, burstGroup.end());
 
         trainset.insert({ deviceId, trainGroups });
         testset.insert({ deviceId, testGroups });

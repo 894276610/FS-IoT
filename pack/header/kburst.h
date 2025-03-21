@@ -30,6 +30,15 @@ struct BurstTrh{
 		ar& inTrh;
 		ar& ouTrh;
 	}
+
+	std::string ToString() const
+	{
+		std::stringstream ss;
+		ss << "(uniTrh=" << uniTrh << ")";
+		ss << "(inTrh=" << "{" << inTrh.tv_sec << "," << inTrh.tv_nsec << "}";
+		ss << "(ouTrh=" << "{" << ouTrh.tv_sec << "," << ouTrh.tv_nsec << "}";
+		return ss.str();
+	}
 };
 
 class KBurst {
@@ -106,15 +115,12 @@ struct std::hash<groundnut::KBurst>
 	std::size_t operator()(const groundnut::KBurst& p) const {
 
 		std::size_t seed = std::hash<int>{}(p.GetUniPktNum());
-		int sum = 0;
 		for ( auto& [signedLen, times] : p.GetCountMap())
 		{
-			//sum += p.packetDetail[i].first.len;
 			seed ^= std::hash<int>{}(signedLen) << (times%30);
 		}
 
 		seed ^= std::hash<uint32_t>{}(p.GetPktNum());
-		//seed ^= std::hash<int>{}(sum);
 
 		return seed;
 	}

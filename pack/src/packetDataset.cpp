@@ -94,7 +94,7 @@ void PacketDataset::StoreKPackets(int index, std::vector<pcpp::RawPacket*> rawVe
 	{	
 		parsedPacket = pcpp::Packet(pRawPacket);
 
-		if ( !parsedPacket.isPacketOfType(pcpp::IPv4) )
+		if ( !parsedPacket.isPacketOfType(pcpp::Ethernet) )
 		{
 			continue;
 		}

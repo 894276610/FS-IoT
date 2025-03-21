@@ -8,6 +8,7 @@
 #include "serialize-utils.h"
 #include "packetDataset.h"
 #include "burstMaker.h"
+#include <sstream>
 
 namespace groundnut{
 
@@ -15,6 +16,7 @@ struct ConfigBurstDataset
 {
 	int slotDuration = 1800;
 	float trainRate = 0.5;
+	float testRate = 0.5;
 	BurstTrh burstTrh;
 
 	template<class Archive>
@@ -23,6 +25,16 @@ struct ConfigBurstDataset
 		ar& trainRate;
 		ar& burstTrh;
 	}
+
+	inline std::string ToString() const
+	{
+		std::stringstream ss;
+		ss << "(slotDur=" << slotDuration << ")";
+		ss << "(trainRate=" << trainRate << ")";
+		ss << "(testRate="<< testRate << ")";
+		ss << burstTrh.ToString();
+		return ss.str();
+	}
 };
 
 class BurstDataset
@@ -30,11 +42,11 @@ class BurstDataset
 public:
 
 	BurstDataset() = default;
-	BurstDataset(const ConfigBurstDataset& configBurstDataset):
-	configBurstDataset(configBurstDataset) {}
+	BurstDataset(const std::string& datasetName, const ConfigBurstDataset configBurstDataset):
+	name(datasetName), configBurstDataset(configBurstDataset) {}
 	BurstDataset(const std::string& datasetName) : seed(0), name(datasetName){}
 
-	void Load(PacketDataset&, const BurstTrh& trh);
+	void Load(PacketDataset&);
 	
 	// split operation
 	void TrainTestSplit();
@@ -64,7 +76,7 @@ public:
 
 private:
 	void AddPacket(uint16_t deviceId, time_t slotId, const KPacket* packet);
-    void MakeBursts(const BurstTrh& trh);	
+    void MakeBursts();	
 
 private:
 	unsigned seed;

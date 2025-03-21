@@ -1,5 +1,5 @@
 #ifndef _GROUNDNUT_BOCLASSIFIER_H_
-#define _GROUNDNUT_BOCALSSIFIER_H_
+#define _GROUNDNUT_BOCLASSIFIER_H_
 
 #include "burstClassifier.h"
 #include "kburst.h"
@@ -18,7 +18,7 @@ struct ReviewBurst
     bool isWrong = false;
     bool isFullyCorrect = false;
 
-    void UpdateFlags();
+    inline void UpdateFlags();
 
     inline std::string ToString()
     {

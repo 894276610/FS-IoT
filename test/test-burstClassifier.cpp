@@ -27,7 +27,7 @@ TEST_CASE("burstClassifier init", "[single-file]")
     BurstDataset burstDataset("Aalto-partial");
     BurstTrh trh{50, {2,0}, {15,0}};
 
-    burstDataset.Load(packetDataset, trh);
+    burstDataset.Load(packetDataset);
     burstDataset.TrainTestSplit();
 
     REQUIRE(burstDataset.GetTrainset().size() == 2);
@@ -71,7 +71,6 @@ TEST_CASE("burstClassifier init", "[single-file]")
             }
         }
     }
-
 }
 
 }

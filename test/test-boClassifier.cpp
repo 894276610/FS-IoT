@@ -23,7 +23,7 @@ TEST_CASE("bo classifier", "[single-file]")
     BurstDataset burstDataset("Aalto-partial");
     BurstTrh trh{50, {2,0}, {15,0}};
 
-    burstDataset.Load(packetDataset, trh);
+    burstDataset.Load(packetDataset);
     burstDataset.TrainTestSplit();
 
     ConfigBurstClf cfg;
