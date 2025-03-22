@@ -11,7 +11,9 @@ public:
 	name(datasetName), config(configBurstDataset){}
 
     void Load(PacketDataset&);
-	void TrainTestSplit();
+	float TrainTestSplit();
+	float TrainTestSplitByTime(int min15x);
+
 
 	std::vector<KDevice>& GetDevicesVec(){return devicesVec;}
     std::string & GetName(){return name;}
@@ -23,7 +25,6 @@ public:
 private:
 	void AddPacket(uint16_t deviceId, time_t slotId, const KPacket* packet);
     void MakeInstances();
-
 
 private:
     std::string name;

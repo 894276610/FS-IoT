@@ -15,39 +15,67 @@
 #include "byteIoTClassifier.h"
 #include "byteIoTDataset.h"
 
-std::string baseFolder = "/media/kunling/BigE/";
-std::string datasetName = "UNSW201620";
-std::string outFolder = baseFolder + datasetName + "/";
-std::string mappingFolder = "/home/kunling/BurstIoT/mappings/";
-std::string pktDatasetOutName = datasetName + ".pktDataset";
+#include "labSetting.h"
+
+void InstancePercentLab(LabSetting settings);
+void HourBudgetLab(LabSetting settings);
 
 int main() {
+    LabSetting settings;
+
+    settings.baseFolder = "/media/kunling/BigE/";
+    settings.datasetName = "UNSW201620";
+    settings.mappingFolder = "/home/kunling/BurstIoT/mappings/";
+    settings.experimentMode = "hbd";
+    settings.config;
+    settings.start = 2;
+    settings.end = 10;
+    settings.step = 2;
+    settings.review = false;
+    
+    if(settings.experimentMode == "ipc")
+    {
+        InstancePercentLab(settings);
+    }
+    else if(settings.experimentMode == "hbd")
+    {
+        HourBudgetLab(settings);
+    }
+}
+
+/*
 
     // init packet dataset and add target devices
     groundnut::PacketDataset pktDataset(datasetName);
     pktDataset.AddTragetDevices( mappingFolder + datasetName + "_device_mac_mappings.csv");
-
+    std::cout << "after adding devices"<<  std::endl;
     // load existing packet dataset or load from raw packets.
     if(std::filesystem::exists(outFolder + pktDatasetOutName))
     {
+        std::cout << "load bin" << std::endl;
         pktDataset.LoadBin(outFolder + pktDatasetOutName);
+        std::cout << "after load bin" << std::endl;
     }
     else
     {
+        std::cout << "load raw"<< std::endl;
         pktDataset.LoadPcap(outFolder + "RAW");
         pktDataset.Serialize(outFolder+ pktDatasetOutName);  
+        std::cout << "after load raw"<< std::endl;
     }
-  
+    
+    std::cout << "after load pcap"<< std::endl;
+
     // init burst dataset
     groundnut::ConfigBurstDataset config;
 
-    for(float rate = 0.01; rate <=0.5; rate+=0.01)
+    for(float rate = 0.01; rate <=0.02; rate+=0.01)
     {
-        config.trainRate= rate;
+        config.trainRate = rate;
         groundnut::ByteIoTDataset byteIoTDataset(datasetName, config);
 
         byteIoTDataset.Load(pktDataset);
-        byteIoTDataset.TrainTestSplit();
+        float avgDeviceInstance = byteIoTDataset.TrainTestSplit();
         auto& trainset = byteIoTDataset.GetTrainset();
         auto& testset = byteIoTDataset.GetTestset();
     
@@ -72,12 +100,10 @@ int main() {
         // outStream.close();
     
         std::ofstream outMetric(outFolder + config.ToString() + "byteiot-metrics.txt");
+        std::cout << "avgDeviceInstance" << avgDeviceInstance*0.5 << "hour" << std::endl;
+        outMetric << "Average Device Time: " << std::to_string(avgDeviceInstance*0.5) << " hour" << std::endl;
         outMetric << ToString(metric);
         outMetric.close();
         Instrumentor::Get().EndSession();
     }
-    
-   
-
- 
-}
+*/

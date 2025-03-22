@@ -12,7 +12,7 @@
 #include "timer.h"
 
 std::string baseFolder = "/media/kunling/BigE/";
-std::string datasetName = "UNSW201620";
+std::string datasetName = "IOTBEHAV2021";
 std::string outFolder = baseFolder + datasetName + "/";
 std::string mappingFolder = "/home/kunling/BurstIoT/mappings/";
 std::string pktDatasetOutName = datasetName + ".pktDataset";
@@ -36,9 +36,9 @@ else
   
 // init burst dataset
 
-for(float trainRate = 0.01; trainRate <= 0.3; trainRate += 0.01)
+for(float trainRate = 0.01; trainRate <= 0.15; trainRate += 0.01)
 {
-  const groundnut::ConfigBurstDataset configBurstDataset{1800,trainRate, 0.5, {50, {2,0}, {15,0}}};
+  const groundnut::ConfigBurstDataset configBurstDataset{1800,trainRate, 0.3, 0.5, {50, {2,0}, {15,0}}};
   const groundnut::ConfigBurstClf configBurstClf{10,100,50,500,1000,0.5,0.01};
   
   groundnut::BurstDataset burstDataset(datasetName, configBurstDataset);
@@ -61,7 +61,8 @@ for(float trainRate = 0.01; trainRate <= 0.3; trainRate += 0.01)
   //Instrumentor::Get().EndSession();
 
   // review and metric
-  //Instrumentor::Get().BeginSession("Review", outFolder + "log-review-metric-time.json");
+  // Instrumentor::Get().BeginSession("Review", outFolder + configBurstClf.ToString() \
+  // + configBurstDataset.ToString() + "log-review-metric-time.json");
   // std::ofstream outStream(outFolder + configBurstClf.ToString() \
   // + configBurstDataset.ToString() + "reviewBook.txt");
   // outStream << reviewBook.ToString();
@@ -71,7 +72,7 @@ for(float trainRate = 0.01; trainRate <= 0.3; trainRate += 0.01)
   + configBurstDataset.ToString() + "metrics.txt");
   outMetric << ToString(metric);
   outMetric.close();
-  Instrumentor::Get().EndSession();
+  // Instrumentor::Get().EndSession();
 }
  
 }

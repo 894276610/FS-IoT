@@ -15,7 +15,8 @@ namespace groundnut{
 struct ConfigBurstDataset
 {
 	int slotDuration = 1800;
-	float trainRate = 0.5;
+	float trainRate = 0.15;
+	float valiRate = 0.3;
 	float testRate = 0.5;
 	BurstTrh burstTrh;
 
@@ -31,6 +32,7 @@ struct ConfigBurstDataset
 		std::stringstream ss;
 		ss << "(slotDur=" << slotDuration << ")";
 		ss << "(trainRate=" << trainRate << ")";
+		ss << "(valiRate=" << valiRate << ")";
 		ss << "(testRate="<< testRate << ")";
 		ss << burstTrh.ToString();
 		return ss.str();
@@ -44,12 +46,13 @@ public:
 	BurstDataset() = default;
 	BurstDataset(const std::string& datasetName, const ConfigBurstDataset configBurstDataset):
 	name(datasetName), configBurstDataset(configBurstDataset) {}
-	BurstDataset(const std::string& datasetName) : seed(0), name(datasetName){}
+	BurstDataset(const std::string& datasetName) : name(datasetName){}
 
 	void Load(PacketDataset&);
 	
 	// split operation
 	void TrainTestSplit();
+	float TrainTestSplitByTime(int min15x);
 
 	// getter and setter
 	std::string & GetName(){return name;}
@@ -58,6 +61,7 @@ public:
 	std::vector<KDevice>& GetDevicesVec(){return devicesVec;}
 	std::unordered_map<uint16_t, BurstGroups>& GetRawMap(){return rawMap;}
 	std::unordered_map<uint16_t, BurstGroups>& GetTrainset(){return trainset;}
+	std::unordered_map<uint16_t, BurstGroups>& GetValiset(){return valiset;}
 	std::unordered_map<uint16_t, BurstGroups>& GetTestset(){return testset;}
 	std::set<size_t>& GetTimeSlots(){return timeSlots;}
 
@@ -79,13 +83,13 @@ private:
     void MakeBursts();	
 
 private:
-	unsigned seed;
 	std::string name;
 	ConfigBurstDataset configBurstDataset;
     std::vector<groundnut::KDevice> devicesVec; // should Add constructor !
 
 	std::unordered_map<uint16_t, BurstGroups> rawMap;
 	std::unordered_map<uint16_t, BurstGroups> trainset;
+	std::unordered_map<uint16_t, BurstGroups> valiset;
 	std::unordered_map<uint16_t, BurstGroups> testset;
 
 	std::set<size_t> timeSlots;

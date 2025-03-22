@@ -8,23 +8,37 @@ def ReadAccMetric(filePath):
     
     return accFloat;
 
-def PlotLineChart(x, y, outPath):
+def PlotLineChart(x, y, z, outPath):
     
     # 创建画布和坐标轴
     plt.figure(figsize=(10, 6))  # 设置画布大小
 
     # 绘制折线图
+    # ByteIoT
     plt.plot(x, y, 
+            marker='s',         # 方形标记
+            linestyle='--',     # 虚线
+            linewidth=2,
+            color='#D95319',    # 橙色
+            markersize=8,
+            markeredgecolor='#D95319',
+            markerfacecolor='white',
+            label='ByteIoT')
+    
+    # BurstIoT
+    plt.plot(x, z, 
             marker='o',         # 数据点标记为圆圈
             linestyle='-',      # 实线连接
             linewidth=2,        # 线宽
             color='#2C6FB3',    # 线条颜色（十六进制码）
             markersize=8,       # 标记大小
             markeredgecolor='red',  # 标记边框颜色
-            markerfacecolor='yellow') # 标记填充色
+            markerfacecolor='yellow',
+            label='BurstIoT') # 标记填充色
 
+
+    
     # 添加标题和标签
-    plt.title("Training Rate vs Accuracy", fontsize=14, pad=20)
     plt.xlabel("Training Rate", fontsize=12)
     plt.ylabel("Accuracy", fontsize=12)
 

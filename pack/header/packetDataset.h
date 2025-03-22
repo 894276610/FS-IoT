@@ -76,6 +76,9 @@ public:
 		
 	}
 
+	// 选择性载入
+	void AutoLoad(const std::string& datasetRootFolder, const std::string& pktDatasetOutName);
+
 	// load
     void LoadPcap(const std::filesystem::path& inputFolder);
 

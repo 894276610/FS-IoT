@@ -69,10 +69,59 @@ void BurstDataset::MakeBursts()
     //mapByDevTime.clear();
 }
 
+float BurstDataset::TrainTestSplitByTime(int min15x)
+{
+    float avgInstance = 0;
+
+    for (auto& [deviceId, burstGroup] : rawMap)
+    {
+        std::sort(burstGroup.begin(), burstGroup.end(), [](const BurstVec& a, const BurstVec& b) {
+            return (*a.front()) < (*b.front());
+        });   
+        
+        size_t totalSize = burstGroup.size();
+        
+        int min15xPreferTrainNum = min15x * 15 * 60 / configBurstDataset.slotDuration;
+        int maxTrainNum = std::ceil(totalSize * configBurstDataset.trainRate);
+        size_t trainNum = std::min(maxTrainNum, min15xPreferTrainNum);
+
+        std::cout << "totalSize:" << totalSize << "trainNum:" << trainNum << std::endl;
+
+        int valiNum = std::floor(totalSize * configBurstDataset.valiRate);
+        size_t testNum = std::ceil(totalSize * configBurstDataset.testRate);
+
+        size_t testStart = totalSize - testNum;
+        size_t valiStart = totalSize - testNum - valiNum;
+
+        if(trainNum + testNum + valiNum > burstGroup.size())
+        {
+            valiNum = burstGroup.size() - trainNum - testNum;
+            throw "overflow ! totalNum:" + std::to_string(burstGroup.size())\
+             + "device: " + GetDevicesVec()[deviceId].GetLabel() + "\n";
+        }
+
+        if( valiNum <=0 )
+        {
+            throw "valiNum < 0, device:" + GetDevicesVec()[deviceId].GetLabel() + "\n";
+        }
+
+        BurstGroups trainGroups(burstGroup.begin(), burstGroup.begin() + trainNum);
+        BurstGroups valiGroups(burstGroup.begin() + valiStart, burstGroup.begin() + valiStart + valiNum);
+        BurstGroups testGroups(burstGroup.begin() + testStart, burstGroup.end());
+
+        trainset.insert({ deviceId, trainGroups });
+        valiset.insert({ deviceId, valiGroups });
+        testset.insert({ deviceId, testGroups });
+        
+        avgInstance += trainNum;
+    }
+
+    avgInstance /= trainset.size();
+    return avgInstance;
+}
+
 void BurstDataset::TrainTestSplit()
 {
-    float trainRate = configBurstDataset.trainRate;
-
     for (auto& [deviceId, burstGroup] : rawMap)
     {
         {
@@ -81,14 +130,33 @@ void BurstDataset::TrainTestSplit()
             });
         }
         
-        size_t trainNum = std::ceil(burstGroup.size() * trainRate);
-        size_t testStart = std::ceil(burstGroup.size() * (1 - configBurstDataset.testRate));
+        size_t trainNum = std::ceil(burstGroup.size() * configBurstDataset.trainRate);
+        size_t testNum = std::ceil(burstGroup.size() * configBurstDataset.testRate);
+        int valiNum = std::floor(burstGroup.size() * configBurstDataset.valiRate);
+        
+        if(trainNum + testNum + valiNum > burstGroup.size())
+        {
+            valiNum = burstGroup.size() - trainNum - testNum;
+            throw "overflow ! totalNum:" + std::to_string(burstGroup.size())\
+             + "device: " + GetDevicesVec()[deviceId].GetLabel() + "\n";
+        }
+
+        if( valiNum <=0 )
+        {
+            throw "valiNum < 0, device:" + GetDevicesVec()[deviceId].GetLabel() + "\n";
+        }
+        
+        size_t testStart = burstGroup.size() - testNum;
+        size_t valiStart = burstGroup.size() - testNum - valiNum;
 
         BurstGroups trainGroups(burstGroup.begin(), burstGroup.begin() + trainNum);
+        BurstGroups valiGroups(burstGroup.begin() + valiStart, burstGroup.begin() + valiStart + valiNum);
         BurstGroups testGroups(burstGroup.begin() + testStart, burstGroup.end());
 
         trainset.insert({ deviceId, trainGroups });
+        valiset.insert({ deviceId, valiGroups });
         testset.insert({ deviceId, testGroups });
     }
 }
+
 }

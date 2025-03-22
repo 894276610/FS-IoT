@@ -89,7 +89,6 @@ void ByteIoTClassifier::Predict(std::unordered_map<uint16_t, BurstVec>* testset,
     }, actualVec);
 
     std::cout << "actual vec size" << actualVec.size() << std::endl;
-    std::cout << "prediction vec size" << predictionVec.size() << std::endl;
 
     metric = calculate_metrics(actualVec, predictionVec);
 }

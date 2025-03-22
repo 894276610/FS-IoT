@@ -17,7 +17,6 @@ struct ConfigBurstClf
     float distanceTrh = 0.5;
     float penalty = 0.01;
 
-
     std::string ToString() const
     {
         std::stringstream ss;

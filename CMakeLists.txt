@@ -31,7 +31,7 @@ include_directories(${Pcappp_INCLUDE_DIR})
 add_compile_options(-Wunused-variable)
 
 add_executable(BurstIoTExe ${CMAKE_SOURCE_DIR}/src/burstIoTmain.cpp)
-add_executable(ByteIoTExe ${CMAKE_SOURCE_DIR}/src/byteIoTmain.cpp)
+add_executable(ByteIoTExe ${CMAKE_SOURCE_DIR}/src/byteIoTmain.cpp ${CMAKE_SOURCE_DIR}/src/byteIoTLabs.cpp)
 
 
 # target_compile_options(MyExecutable PRIVATE -fsanitize=address -fno-omit-frame-pointer)

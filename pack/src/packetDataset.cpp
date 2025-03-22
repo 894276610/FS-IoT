@@ -6,6 +6,20 @@
 
 namespace groundnut{
 
+void PacketDataset::AutoLoad(const std::string& datasetRootFolder, const std::string& pktDatasetOutName)
+{
+    if(std::filesystem::exists(datasetRootFolder + pktDatasetOutName))
+    {
+        LoadBin(datasetRootFolder + pktDatasetOutName);
+    }
+    else
+    {
+        LoadPcap(datasetRootFolder + "RAW");
+        Serialize(datasetRootFolder+ pktDatasetOutName);  
+    }
+}
+
+
 void PacketDataset::LoadPcap(const std::filesystem::path& inputFolder)
 {
     //PROFILE_FUNCTION();
