@@ -51,5 +51,6 @@ private:
 	inline static int devIdCounter = 0;
 };
 
+
 }
 #endif

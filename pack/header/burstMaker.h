@@ -42,7 +42,7 @@ private:
     void SortInOrder();
 
     BurstVec CutoBursts(PacketVector packetVec) const;
-    void HandleRawBurst(PacketVector& rawBurst, bool isLongBurst);
+    void HandleRawBurst(PacketVector& rawBurst, std::set<int>& uniPktSet, bool isLongBurst);
 
     inline static bool BurstTimeComparator(const std::shared_ptr<KBurst>& a,
         const std::shared_ptr<KBurst>& b)

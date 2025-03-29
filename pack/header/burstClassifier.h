@@ -20,13 +20,13 @@ struct ConfigBurstClf
     std::string ToString() const
     {
         std::stringstream ss;
-        ss << "(uniPkTolr=" << uniPktTolr << ")";
-        ss << "(pkTolr=" << pktTolr << ")";
-        ss << "(maxUniPkt=" << maxUniPkt << ")";
-        ss << "(maxPktIndex=" << maxPktIndex << ")";
-        ss << "(distanceTrh=" << distanceTrh << ")";
+        ss << "(Tuni=" << uniPktTolr << ")";
+        ss << "(Tpkt=" << pktTolr << ")";
+        ss << "(mUniPkt=" << maxUniPkt << ")";
+        ss << "(mPktIdx=" << maxPktIndex << ")";
+        ss << "(dTrh=" << distanceTrh << ")";
         ss << "(maxTrainIt=" << maxTrainItem << ")";
-        ss << "(penalty=" << penalty << ")";
+        ss << "(pen=" << penalty << ")";
         return ss.str();
     }
 };

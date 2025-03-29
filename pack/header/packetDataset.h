@@ -73,7 +73,6 @@ class PacketDataset
 public:
 	inline PacketDataset(const std::string& datasetName):name(datasetName)
 	{
-		
 	}
 
 	// 选择性载入

@@ -1,4 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
+#include <catch2/catch_approx.hpp>
 #include "packetDataset.h"
 #include "PcapFileDevice.h"
 #include "byteIoTDataset.h"
@@ -23,8 +24,15 @@ TEST_CASE(" packetDataset init test", "[single-file]")
     packetDataset.LoadPcap(pcapPath);
     
     ConfigBurstDataset config;
-    ByteIoTDataset byteIoTDataset("Aalto-partial", config);
+    config.slotDuration = 1800;
+	config.trainRate = 0.15;
+	config.trainBudget = 10000; // by minute
+	config.valiRate = 0.3;
+	config.testRate = 0.5;
+
     BurstTrh trh{50, {2,0}, {15,0}};
+    config.burstTrh = trh;
+    ByteIoTDataset byteIoTDataset("Aalto-partial", config);
 
     byteIoTDataset.Load(packetDataset);
     REQUIRE(byteIoTDataset.GetDevicesVec()[0].GetLabel() == "iKettle2");
@@ -46,5 +54,24 @@ TEST_CASE(" packetDataset init test", "[single-file]")
 
     REQUIRE(byteIoTDataset.GetTrainset()[0].size() == 1);
     REQUIRE(byteIoTDataset.GetTestset()[0].size() == 1);  
+
+    // test the dataset metric of deviceId = 0, i.e. iKettle2
+    REQUIRE(byteIoTDataset.GetRawMap()[0].size() == 2); //deviceId = 0, ikettle2 has 2 samples
+    DivMetric metric = byteIoTDataset.GenDivMetric("iKettle2", byteIoTDataset.GetRawMap()[0]);
+    
+    // entropy = 0.5log2 + 0.5log2 = log2 = log_{10}^{2} = approx(0.3)
+    REQUIRE(metric.entropy == Catch::Approx(0.3).epsilon(0.01) );
+
+    // ip based? time = 7.3 + 35.6 = 43s packetNum = 12+11 = 23
+    // diversity = 135, 113, 350, 342, 42,46 = size = 6
+    REQUIRE(metric.repeatRate == 0);
+    REQUIRE(metric.diversity== 6);
+    REQUIRE(metric.burstRate == Catch::Approx(0.53).epsilon(0.01));
+
+    std::cout << metric.ToString();
+
+    metric = byteIoTDataset.GenDivMetric("ednet-cam1", byteIoTDataset.GetRawMap()[1]);
+
+    
 }
 }

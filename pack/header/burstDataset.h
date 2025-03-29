@@ -16,6 +16,7 @@ struct ConfigBurstDataset
 {
 	int slotDuration = 1800;
 	float trainRate = 0.15;
+	int trainBudget = 10000; // by minute
 	float valiRate = 0.3;
 	float testRate = 0.5;
 	BurstTrh burstTrh;
@@ -30,10 +31,11 @@ struct ConfigBurstDataset
 	inline std::string ToString() const
 	{
 		std::stringstream ss;
-		ss << "(slotDur=" << slotDuration << ")";
-		ss << "(trainRate=" << trainRate << ")";
-		ss << "(valiRate=" << valiRate << ")";
-		ss << "(testRate="<< testRate << ")";
+		ss << "(slot=" << slotDuration << ")";
+		ss << "(trainR=" << trainRate << "%)";
+		ss << "(trainB=" << trainBudget << "minute)";
+		ss << "(valiR=" << valiRate << "%)";
+		ss << "(testR="<< testRate << "%)";
 		ss << burstTrh.ToString();
 		return ss.str();
 	}
@@ -52,7 +54,7 @@ public:
 	
 	// split operation
 	void TrainTestSplit();
-	float TrainTestSplitByTime(int min15x);
+	float TrainTestSplitByTime(int min);
 
 	// getter and setter
 	std::string & GetName(){return name;}

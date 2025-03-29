@@ -8,6 +8,7 @@ namespace groundnut{
 void BurstMaker::LongShortSplit() 
 {
     PacketVector rawBurst;
+    std::set<int> uniPktSet;
 
     for (auto* packet : *m_pktVec) {
         if (!packet) continue;
@@ -16,24 +17,28 @@ void BurstMaker::LongShortSplit()
             const auto& prevPacket = rawBurst.back();
             const timespec innerDelta = packet->timestamp - prevPacket->timestamp;
             const timespec outerDelta = packet->timestamp - rawBurst.front()->timestamp;
-     
+             
             // Handle time interval condition
             if (m_trh.inTrh < innerDelta) {
-                HandleRawBurst(rawBurst, false);
+                HandleRawBurst(rawBurst, uniPktSet, false);
             }
             else if (m_trh.ouTrh < outerDelta) {
-                HandleRawBurst(rawBurst, true);
+                HandleRawBurst(rawBurst, uniPktSet, (true && m_trh.longShortEnable));
+            }
+            else if((uniPktSet.size() == m_trh.uniTrh) && uniPktSet.find(packet->signedLen) == uniPktSet.end()){
+                HandleRawBurst(rawBurst, uniPktSet, (true && m_trh.longShortEnable));
             }
         }
 
-        rawBurst.emplace_back(packet);
+        rawBurst.emplace_back(packet);  
+        uniPktSet.insert(packet->signedLen);      
     }
 
-    HandleRawBurst(rawBurst, false);
+    HandleRawBurst(rawBurst, uniPktSet, false);
 }
 
 // Helper function implementations
-void BurstMaker::HandleRawBurst(PacketVector& rawBurst, bool isLongBurst)
+void BurstMaker::HandleRawBurst(PacketVector& rawBurst, std::set<int>& uniPktSet, bool isLongBurst)
 {
     if (rawBurst.empty()) return;
     
@@ -43,6 +48,7 @@ void BurstMaker::HandleRawBurst(PacketVector& rawBurst, bool isLongBurst)
         m_shortBurstVec.emplace_back(std::move(rawBurst));
     }
     rawBurst.clear();
+    uniPktSet.clear();
 }
 
 void BurstMaker::LongBurstSplit()

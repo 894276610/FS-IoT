@@ -19,6 +19,7 @@
 
 void InstancePercentLab(LabSetting settings);
 void HourBudgetLab(LabSetting settings);
+void DivisionLab(LabSetting settings);
 
 int main() {
     LabSetting settings;
@@ -26,13 +27,15 @@ int main() {
     settings.baseFolder = "/media/kunling/BigE/";
     settings.datasetName = "UNSW201620";
     settings.mappingFolder = "/home/kunling/BurstIoT/mappings/";
-    settings.experimentMode = "hbd";
+    settings.experimentMode = "division";
     settings.config;
-    settings.start = 2;
-    settings.end = 10;
-    settings.step = 2;
+    settings.config.slotDuration = 30;
+
+    settings.start = 15; // sec slotduration
+    settings.end = 300;
+    settings.step = 15;
     settings.review = false;
-    
+
     if(settings.experimentMode == "ipc")
     {
         InstancePercentLab(settings);
@@ -40,6 +43,10 @@ int main() {
     else if(settings.experimentMode == "hbd")
     {
         HourBudgetLab(settings);
+    }
+    else if(settings.experimentMode == "division")
+    {
+        DivisionLab(settings);
     }
 }
 

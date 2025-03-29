@@ -69,7 +69,7 @@ void BurstDataset::MakeBursts()
     //mapByDevTime.clear();
 }
 
-float BurstDataset::TrainTestSplitByTime(int min15x)
+float BurstDataset::TrainTestSplitByTime(int min)
 {
     float avgInstance = 0;
 
@@ -81,9 +81,9 @@ float BurstDataset::TrainTestSplitByTime(int min15x)
         
         size_t totalSize = burstGroup.size();
         
-        int min15xPreferTrainNum = min15x * 15 * 60 / configBurstDataset.slotDuration;
+        int minBudgetTrainNum = min * 60 / configBurstDataset.slotDuration;
         int maxTrainNum = std::ceil(totalSize * configBurstDataset.trainRate);
-        size_t trainNum = std::min(maxTrainNum, min15xPreferTrainNum);
+        size_t trainNum = std::min(maxTrainNum, minBudgetTrainNum);
 
         std::cout << "totalSize:" << totalSize << "trainNum:" << trainNum << std::endl;
 

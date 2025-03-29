@@ -23,12 +23,14 @@ struct BurstTrh{
 	int uniTrh = 50;
 	timespec inTrh{2,0};
 	timespec ouTrh{15,0};
+	bool longShortEnable = true;
 
 	template<class Archive>
 	void serialize(Archive& ar, const unsigned int version) {
 		ar& uniTrh;
 		ar& inTrh;
 		ar& ouTrh;
+		ar& longShortEnable;
 	}
 
 	std::string ToString() const
@@ -37,6 +39,7 @@ struct BurstTrh{
 		ss << "(uniTrh=" << uniTrh << ")";
 		ss << "(inTrh=" << "{" << inTrh.tv_sec << "," << inTrh.tv_nsec << "}";
 		ss << "(ouTrh=" << "{" << ouTrh.tv_sec << "," << ouTrh.tv_nsec << "}";
+		ss << "(lsenable=" << longShortEnable << ")";
 		return ss.str();
 	}
 };
@@ -107,6 +110,7 @@ private:
 
 typedef std::vector<std::shared_ptr<KBurst>> BurstVec;
 typedef std::vector<BurstVec> BurstGroups;
+typedef std::unordered_map<std::shared_ptr<KBurst>, int> BPCountMap;
 }
 
 template<>
@@ -115,18 +119,45 @@ struct std::hash<groundnut::KBurst>
 	std::size_t operator()(const groundnut::KBurst& p) const {
 
 		std::size_t seed = std::hash<int>{}(p.GetUniPktNum());
+        seed ^= std::hash<uint32_t>{}(p.GetPktNum()) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+
 		for ( auto& [signedLen, times] : p.GetCountMap())
 		{
-			seed ^= std::hash<int>{}(signedLen) << (times%30);
+			std::size_t hash_val = std::hash<int>{}(signedLen);
+            hash_val = hash_val * 0x27d4eb2d + times; // 质数乘法
+            seed ^= hash_val + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 		}
-
-		seed ^= std::hash<uint32_t>{}(p.GetPktNum());
 
 		return seed;
 	}
 };
 
 namespace groundnut{
+
+
+struct DivMetric
+{
+	std::string name = "";
+	
+	// result of burst division rules
+	float repeatRate = 0;  
+	float entropy = 0;
+
+	// intrinstic attributes
+	float burstRate = 0; // pkt/s for 2+ bursts
+	float diversity = 0; // |D|
+
+	std::string ToString()
+	{
+		std::stringstream ss;
+		ss << name << " traffic division metric:" << std::endl;
+		ss << "repeat-rate:" << repeatRate << std::endl;
+		ss << "entropy:" << entropy << std::endl;
+		ss << "burstRate:" << burstRate << std::endl;
+		ss << "diversity:" << diversity << std::endl;
+		return ss.str();
+	}
+};
 
 struct SearchResult
 {

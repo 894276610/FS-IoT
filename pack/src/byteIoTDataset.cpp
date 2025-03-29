@@ -3,6 +3,115 @@
 
 namespace groundnut{
 
+DivMetric ByteIoTDataset::GenDivMetric(std::string name, BurstVec& burstVec)
+{
+    BPCountMap uniBPCountMap = MergeByHash(burstVec);
+    float repeatRate = RepetitionRate(uniBPCountMap);
+    float burstRate = AvgBurstRate(uniBPCountMap);
+    float entropy = ShannonEntropy(uniBPCountMap);
+    float diversity = Diversity(uniBPCountMap);
+
+    return {name, repeatRate, entropy, burstRate, diversity};
+}
+
+int ByteIoTDataset::Diversity(const BPCountMap& uniBPCountMap) const
+{
+    std::set<short> uniPkts;
+    for(auto& bpCount : uniBPCountMap)
+    {
+        for(auto& pktCount: bpCount.first->GetCountMap())
+        {
+            uniPkts.insert(pktCount.first);
+        }
+    }
+
+    return uniPkts.size();
+}
+
+int ByteIoTDataset::Diversity(const BurstVec& burstVec) const
+{
+    std::set<short> uniPkts;
+    for(const auto& burst : burstVec)
+    {
+        for(auto& pktCount: burst->GetCountMap())
+        {
+            uniPkts.insert(pktCount.first);
+        }
+    }
+
+    return uniPkts.size();
+}
+
+
+float ByteIoTDataset::AvgBurstRate(const BPCountMap& uniBPCountMap) const
+{
+    timespec totalDuration{0,0};
+    int nonSinglePkt = 0;
+
+    for(auto& bpCount : uniBPCountMap)
+    {
+        totalDuration = totalDuration + bpCount.first->GetLastPktStamp() - bpCount.first->GetFirstPktStamp();
+        totalDuration > timespec{0,0} ? nonSinglePkt += bpCount.first->GetPktNum() : nonSinglePkt;
+    }
+    std::cout << "totalDuration:" << totalDuration.tv_sec;
+    std::cout << " nonSinglePkt:" << nonSinglePkt << std::endl;
+    std::cout <<"nonSinpkt/totalDuration:" << nonSinglePkt/totalDuration << std::endl;
+    return nonSinglePkt/totalDuration;
+}
+
+float ByteIoTDataset::RepetitionRate(const BPCountMap& uniBPCountMap) const
+{
+    float repetitionRate = 0;
+    float repeatCounter = 0;
+    int sum = 0;
+
+    for(auto&[bp, count]: uniBPCountMap)
+    {
+        count > 1 ? repeatCounter += count : repeatCounter;
+        sum += count;
+    }
+    
+    return repeatCounter / sum;
+}
+
+float ByteIoTDataset::ShannonEntropy(const BPCountMap& uniBPCountMap) const
+{
+    float entropy = 0;
+    int sum = 0;
+
+    for(auto&[bp, count]: uniBPCountMap)
+    {
+        sum += count;
+    }
+
+    for(auto&[bp, count]: uniBPCountMap)
+    {
+        float p = count/(float)sum;
+        entropy += -p * log10(p);
+    }
+
+    return entropy;
+}
+
+BPCountMap ByteIoTDataset::MergeByHash(BurstVec& burstVec)
+{
+	BPCountMap trainMap;
+    std::unordered_map<std::size_t, std::shared_ptr<KBurst>> hashMap;
+
+    for (const auto& burst : burstVec) {
+        const auto hash = std::hash<KBurst>{}(*burst);    
+        auto [it, inserted] = hashMap.try_emplace(hash, burst);
+
+        if (inserted) {
+            trainMap.emplace(burst, 1);
+        } else {
+            trainMap[it->second]++;
+        }
+    }
+
+    return trainMap;
+}
+
 void ByteIoTDataset::Load(PacketDataset& dataset)
 {  
     // name 
@@ -62,9 +171,9 @@ void ByteIoTDataset::MakeInstances()
     }
 }
 
-// should not exceed the bounded training rate(e.g. 30%)
-// should not exceed the bounded instances min15x * 15 * 60/  1800
-float ByteIoTDataset::TrainTestSplitByTime(int min15x)
+// should not exceed the bounded training rate(e.g. 15%)
+// should not exceed the bounded instances min * 60/  1800
+float ByteIoTDataset::TrainTestSplitByTime(int min)
 {
     float averageTrainInstanceSize = 0;
     for (auto& [deviceId, instances] : rawMap)
@@ -83,7 +192,7 @@ float ByteIoTDataset::TrainTestSplitByTime(int min15x)
         std::cout << "totalSize:" << totalSize << "trainRate" << config.trainRate;
         std::cout << "maxTrainNum:" << maxTrainNum << std::endl;
 
-        int min15xPreferTrainNum = min15x * 15 * 60 / config.slotDuration;
+        int min15xPreferTrainNum = min * 60 / config.slotDuration;
         size_t trainNum = std::min(maxTrainNum, min15xPreferTrainNum);
 
         size_t testNum = std::ceil(totalSize * config.testRate);
@@ -100,6 +209,7 @@ float ByteIoTDataset::TrainTestSplitByTime(int min15x)
     averageTrainInstanceSize /= rawMap.size();
     return averageTrainInstanceSize;
 }
+
 // return average train instance size (per device)
 float ByteIoTDataset::TrainTestSplit()
 {
@@ -122,19 +232,24 @@ float ByteIoTDataset::TrainTestSplit()
 
         if(trainNum + valiNum + testNum > instances.size())
         {
-            std::cout <<"overflow ! totalSize:" + std::to_string(totalSize) + "," \
-            + std::to_string(trainNum + valiNum + testNum)\
-            + "device: " + GetDevicesVec()[deviceId].GetLabel() + "\n" << std::endl;
-
-            throw "overflow ! totalSize:" + std::to_string(totalSize) + "," \
+            std::cout << "warning: overflow of "<< GetDevicesVec()[deviceId].GetLabel()<<std::endl;
+            std::cout << "trainNum:" << trainNum << ",valiNum:" << valiNum << ",testNum:" << testNum << std::endl;
+            std::cout << "totalSize:" + std::to_string(totalSize);
+            std::cout << ", trainValiTestSum:" + std::to_string(trainNum + valiNum + testNum) << std::endl << std::endl;
+            
+            //throw "overflow ! totalSize:" + std::to_string(totalSize) + "," \
             + std::to_string(trainNum + valiNum + testNum)\
             + "device: " + GetDevicesVec()[deviceId].GetLabel() + "\n";
         }
 
-        if( valiNum <=0 )
+        if( valiNum <= 0 )
         {
-            std::cout << "valiNum < 0, device:" + GetDevicesVec()[deviceId].GetLabel() << std::endl;
-            throw "valiNum < 0, device:" + GetDevicesVec()[deviceId].GetLabel() + "\n";
+            std::cout << "warning: vali sample of "<< GetDevicesVec()[deviceId].GetLabel()<< " is empty, device:"  << std::endl;
+            std::cout << "trainNum:" << trainNum << ",valiNum:" << valiNum << ",testNum:" << testNum << std::endl;
+            std::cout << "totalSize:" + std::to_string(totalSize);
+            std::cout << ", trainValiTestSum:" + std::to_string(trainNum + valiNum + testNum) << std::endl << std::endl;
+
+            //throw "valiNum < 0, device:" + GetDevicesVec()[deviceId].GetLabel() + "\n";
         }
 
         size_t testStart = instances.size() - testNum;

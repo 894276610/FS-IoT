@@ -3,29 +3,26 @@
 #include "boClassifier.h"
 #include "burstDataset.h"
 
+std::string NameClassifyMetric(LabSetting settings, std::string methodName);
+
 void InstancePercentLab(LabSetting settings)
 { 
     std::string datasetName = settings.datasetName;
     std::string baseFolder = settings.baseFolder;
-    std::string outFolder = baseFolder + datasetName + "/";
+    std::string datasetRootFolder = baseFolder + datasetName + "/";
     std::string mappingFolder = settings.mappingFolder;
-    std::string pktDatasetOutName = datasetName + ".pktDataset";
+    std::string pktDatasetSerialName = datasetName + ".pktDataset";
 
     groundnut::PacketDataset pktDataset(datasetName);
     pktDataset.AddTragetDevices( mappingFolder + datasetName + "_device_mac_mappings.csv");
-
-    if(std::filesystem::exists(outFolder + pktDatasetOutName))
-    {
-        pktDataset.LoadBin(outFolder + pktDatasetOutName);
-    }
-    else
-    {
-        pktDataset.LoadPcap(outFolder + "RAW");
-        pktDataset.Serialize(outFolder+ pktDatasetOutName);  
-    }
+    pktDataset.AutoLoad(datasetRootFolder, pktDatasetSerialName);
     
-    for(float trainRate = settings.start; trainRate <= settings.end; trainRate += settings.step)
+    float& trainRate = settings.config.trainRate;
+    settings.config.trainBudget = 100000000;
+    for(trainRate = settings.start; trainRate <= settings.end; trainRate += settings.step)
     {
+        std::cout << "trainRate: " << trainRate << std::endl;
+
         groundnut::BurstDataset burstDataset(datasetName, settings.config);
         ClassificationMetrics metric;
 
@@ -36,12 +33,11 @@ void InstancePercentLab(LabSetting settings)
 
         groundnut::BoClassifier boclf(settings.clfConfig);
         boclf.Train(&trainset);
-        groundnut::ReviewBook reviewBook = boclf.Predict(&testset, metric, false);
+        groundnut::ReviewBook reviewBook = boclf.Predict(&testset, metric, settings.review);
 
-        std::ofstream outMetric(outFolder + settings.clfConfig.ToString() \
-        + settings.config.ToString() + "metrics.txt");
+        std::ofstream outMetric(NameClassifyMetric(settings,"burstiot"));
         outMetric << ToString(metric);
-        outMetric.close();  
+        outMetric.close(); 
     }
 }
 
@@ -57,16 +53,16 @@ void HourBudgetLab(LabSetting settings)
     pktDataset.AddTragetDevices( mappingFolder + datasetName + "_device_mac_mappings.csv");
     pktDataset.AutoLoad(datasetRootFolder, pktDatasetSerialName);
 
-    for(int budget = settings.start; budget <= settings.end; budget+= settings.step)
+    int& budget = settings.config.trainBudget;
+    for(budget = settings.start; budget <= settings.end; budget+= settings.step)
     {
-        std::cout << "budget: " << budget << "x15min" << std::endl;
+        std::cout << "budget: " << budget << " minute" << std::endl;
 
         ClassificationMetrics metric;
-
         groundnut::BurstDataset burstDataset(datasetName, settings.config);
 
         burstDataset.Load(pktDataset);
-        float avgDeviceInstance = burstDataset.TrainTestSplitByTime(budget);
+        burstDataset.TrainTestSplitByTime(budget);
         auto& trainset = burstDataset.GetTrainset();
         auto& testset = burstDataset.GetTestset();
     
@@ -74,15 +70,7 @@ void HourBudgetLab(LabSetting settings)
         clf.Train(&trainset);
         clf.Predict(&testset, metric, settings.review);
         
-        std::string metricFileName;
-        metricFileName += datasetRootFolder;
-        metricFileName += settings.experimentMode;
-        metricFileName += settings.config.ToString();
-        metricFileName += "burstiot-metrics.txt";
-
-        std::ofstream outMetric(metricFileName);
-        float avgHr = avgDeviceInstance * settings.config.slotDuration/3600;
-        outMetric << "Average Device Time: " << std::to_string(avgHr) << " hour" << std::endl;
+        std::ofstream outMetric(NameClassifyMetric(settings,"burstiot"));
         outMetric << ToString(metric);
         outMetric.close();
     }

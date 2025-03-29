@@ -1,3 +1,7 @@
 build/
 third-party/
 third-party/PcapPlusPlus
+pythonDraw/burstRate
+pythonDraw/diversity
+pythonDraw/entropy
+pythonDraw/repeat-rate
