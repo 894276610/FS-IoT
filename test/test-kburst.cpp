@@ -21,7 +21,7 @@ TEST_CASE("kburst could be constructed empty and add a packet", "[single-file]")
     REQUIRE(burst.GetPktNum() == 0);
     REQUIRE(burst.GetUniPktNum() == 0);
     REQUIRE(burst.GetCountMap().size() ==0);
-    REQUIRE( groundnut::operator==(burst.GetLastPktStamp(),timespec{0,0}));
+    REQUIRE( burst.GetLastPktStamp() == timespec{0,0});
 
     KPacket onePacket{0,-90, 0xcdab, {10,0}};
     
@@ -84,7 +84,7 @@ TEST_CASE("kburst could be constructed using label and packet insert \
     REQUIRE(burst.GetPktNum() == 0);
     REQUIRE(burst.GetUniPktNum() == 0);
     REQUIRE(burst.GetCountMap().size() ==0);
-    REQUIRE(groundnut::operator==(burst.GetLastPktStamp(),timespec{0,0}));
+    REQUIRE(::operator==(burst.GetLastPktStamp(),timespec{0,0}));
 
     KPacket firstPkt{1, 34, 0xcc, timespec{1,1}};
     KPacket secondPkt{2, 35, 0xc1, timespec{3,3}};
@@ -116,7 +116,7 @@ TEST_CASE("kburst could be constructed using device class", "[single-file]")
     REQUIRE(burst.GetPktNum() == 0);
     REQUIRE(burst.GetUniPktNum() == 0);
     REQUIRE(burst.GetCountMap().size() ==0);
-    REQUIRE( groundnut::operator==(burst.GetLastPktStamp(),timespec{0,0}));
+    REQUIRE( ::operator==(burst.GetLastPktStamp(),timespec{0,0}));
 }
 
 TEST_CASE("kburst could be constructed using a list of bursts", "[single-file]")
@@ -134,7 +134,7 @@ TEST_CASE("kburst could be constructed using a list of bursts", "[single-file]")
     REQUIRE(burst.GetPktNum() == 0);
     REQUIRE(burst.GetUniPktNum() == 0);
     REQUIRE(burst.GetCountMap().size() ==0);
-    REQUIRE(groundnut::operator==(burst.GetLastPktStamp(),timespec{0,0}));
+    REQUIRE(::operator==(burst.GetLastPktStamp(),timespec{0,0}));
 
     // prepare some packets
     KPacket firstPkt{0,10, 0xcdab, {1,10}};

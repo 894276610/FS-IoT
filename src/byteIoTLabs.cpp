@@ -4,46 +4,8 @@
 #include "byteIoTDataset.h"
 #include "kburst.h"
 
-std::string NameClassifyMetric(LabSetting settings, std::string methodName)
-{
-    std::stringstream ss;
-    
-    ss << settings.baseFolder + settings.datasetName + "/";
-    ss << methodName << "-metrics";
-
-    if(methodName == "byteiot")
-    {
-        ss << "-" << settings.experimentMode 
-        << settings.config.ToString();
-    }
-    else if(methodName == "burstiot")
-    {
-        ss << settings.ToString();
-    }
-    
-    ss << ".txt";
-    return ss.str();
-}
-
-std::string NameDivMetric(LabSetting settings, std::string mode)
-{
-    std::stringstream ss;
-    
-    ss << settings.baseFolder + settings.datasetName + "/";
-    ss << mode << "-divmetrics";
-
-    if(mode == "fixed")
-    {
-        ss << "-" << settings.config.slotDuration; 
-    }
-    else if(mode == "burst")
-    {
-        ss << settings.config.ToString();
-    }
-
-    ss << ".txt";
-    return ss.str();
-}
+std::string NameClassifyMetric(LabSetting settings, std::string methodName);
+std::string NameDivMetric(LabSetting settings, std::string mode);
 
 void InstancePercentLab(LabSetting settings)
 {   
@@ -102,10 +64,14 @@ void HourBudgetLab(LabSetting settings)
         byteIoTDataset.Load(pktDataset);
         byteIoTDataset.TrainTestSplitByTime(budget);
         auto& trainset = byteIoTDataset.GetTrainset();
-        auto& testset = byteIoTDataset.GetTestset();
+        auto& testset  = byteIoTDataset.GetTestset();
     
         clf.Train(&trainset);
+
+        std::cout << "after training." << std::endl;
+        std::cout << "start prediction." << std::endl;
         clf.Predict(&testset, metric, settings.review);
+        std::cout << "finish prediction." << std::endl;
         
         std::ofstream outMetric(NameClassifyMetric(settings, "byteiot"));
         outMetric << ToString(metric);
@@ -150,5 +116,5 @@ void DivisionLab(LabSetting settings)
         groundnut::DivMetric metric = byteIoTDataset.GenDivMetric("total", totalSamples);
         outMetric << metric.ToString();        
         outMetric.close();
-    }   
+    }
 }

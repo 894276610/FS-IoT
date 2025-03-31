@@ -8,13 +8,13 @@
 
 namespace groundnut{
 
-KBurst::KBurst(const KDevice& device): KBurst(device.GetLabel()){pfUmapMutex = new std::mutex;}
+KBurst::KBurst(const KDevice& device): KBurst(device.GetLabel()){pfUmapMutex = new std::shared_mutex;}
 
 void KBurst::convert_to_frequency()
 {   
     if (this->pktNum == 0) {return; }
 
-	std::unique_lock<std::mutex> lock(*pfUmapMutex);
+	std::unique_lock lock(*pfUmapMutex);
 
 	fUmap.reserve(countMap.size());
 
@@ -43,6 +43,12 @@ float KBurst::Distance(std::shared_ptr<KBurst> burst)
 		burst->convert_to_frequency();
 	}
 
+	std::shared_lock lock1(*pfUmapMutex, std::defer_lock);
+	std::shared_lock lock2(*burst->pfUmapMutex, std::defer_lock);
+	std::lock(lock1, lock2); // 避免死锁
+	
+	//auto tmpMap = burst->fUmap; // 受锁保护的拷贝
+
 	return hellinger(fUmap, burst->fUmap);
 }
 
@@ -62,6 +68,10 @@ float KBurst::Distance(KBurst& burst)
 	{
 		burst.convert_to_frequency();
 	}
+
+	std::shared_lock lock1(*pfUmapMutex, std::defer_lock);
+	std::shared_lock lock2(*burst.pfUmapMutex, std::defer_lock);
+	std::lock(lock1, lock2); // 避免死锁
 
 	return hellinger(fUmap, burst.fUmap);
 }
@@ -99,7 +109,7 @@ void KBurst::ExtendBurst(KBurst& burst)
 
 KBurst::KBurst(std::vector<std::shared_ptr<KBurst>> burstVec)
 {
-	pfUmapMutex = new std::mutex;
+	pfUmapMutex = new std::shared_mutex;
 
 	if (!burstVec.size()){return;}
 	
@@ -169,7 +179,5 @@ std::string KBurst::ToString() const {
     
     return ss.str();
 }
-
-
 
 }

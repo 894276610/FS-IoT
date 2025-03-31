@@ -6,7 +6,7 @@
 
 namespace groundnut
 {
-    float hellinger(std::unordered_map<short,float> umap, std::unordered_map<short,float> oumap)
+    float hellinger( std::unordered_map<short,float> umap,  std::unordered_map<short,float> oumap)
     {
         float distance = 0.0f;
         for (const auto& [sig, pct] : umap) {
@@ -25,7 +25,7 @@ namespace groundnut
                 distance += pct; 
             }
         } 
-
+        
         return sqrt(distance / 2.0);
     }
 }

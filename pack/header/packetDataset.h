@@ -28,8 +28,9 @@ struct DeviceStat
 
 	// 显式定义移动构造函数
 	DeviceStat(DeviceStat&& other) noexcept 
-		: instanceName(other.instanceName), totalRecv(other.totalRecv.load(std::memory_order_relaxed)),
-		  totalSend(other.totalSend.load(std::memory_order_relaxed)) {
+		: instanceName(other.instanceName),
+		  totalSend(other.totalSend.load(std::memory_order_relaxed)),
+		  totalRecv(other.totalRecv.load(std::memory_order_relaxed)) {
 	      // 其他成员的移动操作（如果有）
 	}
 

@@ -2,6 +2,26 @@
 #include <sstream>
 #include "labSetting.h"
 
+std::string NameDivMetric(LabSetting settings, std::string mode)
+{
+    std::stringstream ss;
+    
+    ss << settings.baseFolder + settings.datasetName + "/";
+    ss << mode << "-divmetrics";
+
+    if(mode == "fixed")
+    {
+        ss << "-" << settings.config.slotDuration; 
+    }
+    else if(mode == "burst")
+    {
+        ss << settings.config.burstTrh.ToString();
+    }
+
+    ss << ".txt";
+    return ss.str();
+}
+
 std::string NameClassifyMetric(LabSetting settings, std::string methodName)
 {
     std::stringstream ss;

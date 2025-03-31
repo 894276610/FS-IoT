@@ -4,17 +4,10 @@ import pandas as pd
 import re
 from utils import default_series_config
 import os
+import numpy as np
+from Entity import BurstTrh, LabSettings
 
 # datasetList = ["NEUKI2019", "IOTBEHAV2021", "UNSW201620"]
-
-class LabSettings:
-    datasetList = ["UNSW201620"]
-    methodName = "fixedDiv"
-    attribute = "combined"
-    graphName = "LineChart"
-    start = 15;
-    end = 315;
-    step = 15;
 
 def getDevList(datasetName):
     path = f"/home/kunling/BurstIoT/mappings/{datasetName}_device_mac_mappings.csv" 
@@ -55,40 +48,59 @@ def drawSlotDurationAttrCurve(setting, attribute):
 
             PlotSeriesLineChart(x_axis, config, "Slot Duration", yLabel, outPath)
 
-
-def drawSlotDurationCombinedCurve(setting):
+# byteiot combined
+def PlotCombinedCurve(datasetName, setting, idpVarName):
     
-    for datasetName in setting.datasetList:
-        devList = getDevList(datasetName);
-        for deviceLabel in devList:
-            x_axis =[x for x in range(setting.start, setting.end, setting.step)];
-            y_burstRate = [];
-            y_repeatRate = [];
-            y_entropy = [];
-            
-            for fixedSlot in x_axis:
-                inPath = Path(f"/media/kunling/BigE/{datasetName}").joinpath(f"fixed-divmetrics-{fixedSlot}.txt");
+    devList = getDevList(datasetName);
+    devList.append("total")
+
+    for deviceLabel in devList:
+        x_axis = np.arange(setting.start, setting.end, setting.step).tolist()
+        y_repeatRate, y_burstRate, y_entropy = [], [], [];
+        inPath = None;
+
+        if(setting.methodName == "byte"): 
+            for fixedSlot in x_axis:                
+                inPath = FixedSlotInPath(datasetName, fixedSlot);
                 y_burstRate.append(getDivAttribute(inPath, deviceLabel, "burstRate"))
                 y_repeatRate.append(getDivAttribute(inPath, deviceLabel, "repeat-rate"))
                 y_entropy.append(getDivAttribute(inPath, deviceLabel, "entropy"))
+        
+        elif(setting.methodName == "burst"):
+            for indpvar in x_axis:
+                
+                if(idpVarName == "ouTrh" or idpVarName == "Duration Threshold"):
+                    setting.burstTrh.ouTrh = indpvar;               
+                    idpVarName = "Duration Threshold"
+                
+                inPath = BurstInPath(datasetName, setting.burstTrh);
+                #print(inPath)
+                #y_burstRate.append(getDivAttribute(inPath, deviceLabel, "burstRate"))
+                y_repeatRate.append(getDivAttribute(inPath, deviceLabel, "repeat-rate"))
+                y_entropy.append(getDivAttribute(inPath, deviceLabel, "entropy"))
 
+        default_series_config[0]['data'] = y_repeatRate;
+        default_series_config[0]['label'] = "Repeat Rate";
 
-            default_series_config[0]['data'] = y_burstRate;
-            default_series_config[0]['label'] = "Speed";
+        default_series_config[1]['data'] = y_entropy;
+        default_series_config[1]['label'] = "Entropy";
 
-            default_series_config[1]['data'] = y_repeatRate;
-            default_series_config[1]['label'] = "Repeat Rate";
+        default_series_config[2]['data'] = y_burstRate;
+        default_series_config[2]['label'] = "Speed";
 
-            default_series_config[2]['data'] = y_entropy;
-            default_series_config[2]['label'] = "Entropy";
+        config = default_series_config[:2] 
+        outPath = Path(f"/home/kunling/BurstIoT/pythonDraw/dev-combined/{datasetName}-{deviceLabel}-{setting.methodName}-{idpVarName}-combined-{setting.graphName}.png");
+        if not Path.is_dir(outPath.parent):
+            os.mkdir(outPath.parent)
 
-            config = default_series_config[:3] 
-            outPath = Path(f"/home/kunling/BurstIoT/pythonDraw/dev-combined/{datasetName}-{deviceLabel}-{setting.methodName}-{setting.attribute}-{setting.graphName}.png");
-            if not Path.is_dir(outPath.parent):
-                os.mkdir(outPath.parent)
+        yLabel = ""
+        PlotSeriesLineChart(x_axis, config, idpVarName, yLabel, outPath)
 
-            yLabel = ""
-            PlotSeriesLineChart(x_axis, config, "Slot Duration", yLabel, outPath)
+def FixedSlotInPath(datasetName, fixedSlot):
+    return Path(f"/media/kunling/BigE/{datasetName}").joinpath(f"fixed-divmetrics-{fixedSlot}.txt");
+                
+def BurstInPath(datasetName, burstTrh):
+    return Path(f"/media/kunling/BigE/{datasetName}/burst-divmetrics(uniTrh={burstTrh.uniTrh})(inTrh={burstTrh.inTrh}s)(ouTrh={burstTrh.ouTrh}s)(lsenable={burstTrh.longShortEnable}).txt")
 
 def getDivAttribute(path, deviceLabel, attribute):
     with open(path) as file:
@@ -132,4 +144,4 @@ def getDivAttribute(path, deviceLabel, attribute):
             else:
                 raise "attribute not found!"                   
 
-drawSlotDurationCombinedCurve(LabSettings())
+PlotCombinedCurve("UNSW201620", LabSettings(), "ouTrh")

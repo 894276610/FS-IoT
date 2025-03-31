@@ -27,11 +27,11 @@ int main() {
     settings.baseFolder = "/media/kunling/BigE/";
     settings.datasetName = "UNSW201620";
     settings.mappingFolder = "/home/kunling/BurstIoT/mappings/";
-    settings.experimentMode = "division";
-    settings.config;
-    settings.config.slotDuration = 30;
+    settings.experimentMode = "hbd";
+    //settings.config;
+    settings.config.slotDuration = 15;
 
-    settings.start = 15; // sec slotduration
+    settings.start = 30; // sec slotduration
     settings.end = 300;
     settings.step = 15;
     settings.review = false;

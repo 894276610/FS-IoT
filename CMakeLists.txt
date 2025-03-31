@@ -28,10 +28,10 @@ include_directories(${Packetpp_INCLUDE_DIR})
 include_directories(${Commonpp_INCLUDE_DIR})
 include_directories(${Pcappp_INCLUDE_DIR})
 
-add_compile_options(-Wunused-variable)
+add_compile_options(-Wunused-variable -Wall -Wextra -Werror)
 
 add_executable(BurstIoTExe ${CMAKE_SOURCE_DIR}/src/burstIoTmain.cpp ${CMAKE_SOURCE_DIR}/src/burstIoTLabs.cpp ${CMAKE_SOURCE_DIR}/src/utils.cpp)
-add_executable(ByteIoTExe ${CMAKE_SOURCE_DIR}/src/byteIoTmain.cpp ${CMAKE_SOURCE_DIR}/src/byteIoTLabs.cpp)
+add_executable(ByteIoTExe ${CMAKE_SOURCE_DIR}/src/byteIoTmain.cpp ${CMAKE_SOURCE_DIR}/src/byteIoTLabs.cpp ${CMAKE_SOURCE_DIR}/src/utils.cpp)
 
 
 # target_compile_options(MyExecutable PRIVATE -fsanitize=address -fno-omit-frame-pointer)

@@ -9,10 +9,10 @@ namespace groundnut{
 
 struct ConfigBurstClf
 {
-    int uniPktTolr = 10;
-    int pktTolr = 100;
-    int maxUniPkt = 50;
-    int maxPktIndex = 500;
+    int uniPktTolr = 200; // 200 for lsenable = true. 10 for lsenable = false;
+    int pktTolr = 1000;   // 1000 for lsenable = false; 100 for lsenable = true
+    int maxUniPkt = 1000; // duplicated with configburstdataset
+    int maxPktIndex = 500; 
     int maxTrainItem = 1000;
     float distanceTrh = 0.5;
     float penalty = 0.01;

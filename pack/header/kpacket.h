@@ -11,6 +11,8 @@ namespace boost::serialization {
 	void serialize(Archive& ar, timespec& t, const unsigned int version) {
 		ar& t.tv_sec;
 		ar& t.tv_nsec;
+		if(version >0)
+		{}
 	} 
 } // namespace boost 
 
@@ -29,10 +31,13 @@ struct KPacket
 
 	template <class Archive>
     void serialize(Archive &ar, const unsigned int version){
+
 		ar& deviceId;
 		ar& signedLen;
 		ar& hash5tuple;
 		ar& timestamp;
+		if(version >0)
+		{}
 	}
 };
 }

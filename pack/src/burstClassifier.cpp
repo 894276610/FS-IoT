@@ -17,10 +17,14 @@ void BurstClassifier::Train(std::unordered_map<uint16_t, BurstGroups>* trainset)
         }));                    
 	}
 
+    std::cout << "before wait task size" << tasks.size() << std::endl;
+
     for(auto& task: tasks)
     {
         task.wait();
     }
+    std::cout << "after wait" << std::endl;
+
 }
 
 void BurstClassifier::TrainDevice(uint16_t deviceId, BurstGroups burstGroups)
@@ -43,18 +47,26 @@ void BurstClassifier::TrainDevice(uint16_t deviceId, BurstGroups burstGroups)
 	// 	BurstGroupPolicy::blockLevelDistribution[deviceId].push_back(mergedBurst);
 	// }
 
+    std::cout << "before merge by hash" << std::endl;
 	trainMap = MergeByHash(burstGroups);
+    std::cout << "before merge by key" << std::endl;
     MergeByKey(&trainMap);
 	
 	int pktIndex, uniPktIndex = 0;
 	for (auto& [burst, num] : trainMap)
-	{
-        
+	{       
 		pktIndex = std::min(burst->GetPktNum(), config.maxPktIndex) -1;
         uniPktIndex = burst->GetUniPktNum() -1;
-		std::unique_lock<std::mutex> lock(*uniPktMutex[uniPktIndex]);
-		train[uniPktIndex][pktIndex].push_back(burst);
+
+        assert(uniPktIndex < uniPktMutex.size());
+             
+        {
+            std::unique_lock<std::mutex> lock(*uniPktMutex[uniPktIndex]);         
+            train[uniPktIndex][pktIndex].push_back(burst);
+        }
+        
 	}
+
 }
 
 std::unordered_map<std::shared_ptr<KBurst>, int> BurstClassifier::MergeByHash(BurstGroups& burstGroups)

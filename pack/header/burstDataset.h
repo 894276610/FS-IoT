@@ -51,7 +51,16 @@ public:
 	BurstDataset(const std::string& datasetName) : name(datasetName){}
 
 	void Load(PacketDataset&);
-	
+	DivMetric GenDivMetric(std::string name, BurstGroups& burstGroups);
+
+	// div metrics
+	std::unordered_map<std::shared_ptr<KBurst>, int> MergeByHash(BurstGroups& burstGroups);
+	float RepetitionRate(const BPCountMap& uniBPCountMap) const;
+    float ShannonEntropy(const BPCountMap& uniBPCountMap) const;
+    int Diversity(const BPCountMap& uniBPCountMap) const;
+    int Diversity(const BurstVec& burstVec) const;
+    float AvgBurstRate(const BPCountMap& uniBPCountMap) const;
+
 	// split operation
 	void TrainTestSplit();
 	float TrainTestSplitByTime(int min);

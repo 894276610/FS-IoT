@@ -144,6 +144,14 @@ def PlotSeriesLineChart(x, series_config, x_axisLabel, y_axisLabel, outPath):
                  markeredgecolor=style['markeredgecolor'],
                  markerfacecolor=style['markerfacecolor'],
                  label=style['label'])
+        
+        for xi, yi in zip(x, y):
+            plt.text(xi, yi+0.01, f'{yi:.2f}',  # 格式化显示两位小数
+                color=style['color'],
+                fontsize=10,
+                ha='center',          # 水平居中
+                va='bottom',          # 垂直底部对齐
+                bbox=dict(facecolor='white', alpha=0.7, edgecolor='none', pad=1))
 
     # 统一设置标题、标签、网格等
     plt.xlabel(x_axisLabel, fontsize=12)

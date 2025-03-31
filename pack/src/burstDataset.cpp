@@ -3,7 +3,103 @@
 #include "kburst.h"
 
 namespace groundnut{
-             
+        
+DivMetric BurstDataset::GenDivMetric(std::string name, BurstGroups& burstGroups)
+{
+    BPCountMap uniBPCountMap = MergeByHash(burstGroups);
+    float repeatRate = RepetitionRate(uniBPCountMap);
+    float burstRate = AvgBurstRate(uniBPCountMap);
+    float entropy = ShannonEntropy(uniBPCountMap);
+    float diversity = Diversity(uniBPCountMap);
+
+    return {name, repeatRate, entropy, burstRate, diversity};
+}
+
+BPCountMap BurstDataset::MergeByHash(BurstGroups& burstGroups)
+{
+    BPCountMap trainMap;
+    std::unordered_map<std::size_t, std::shared_ptr<KBurst>> hashMap;
+
+    for (const auto& burstGroup : burstGroups) {
+        for (const auto& burst : burstGroup) {
+            const auto hash = std::hash<KBurst>{}(*burst);    
+            auto [it, inserted] = hashMap.try_emplace(hash, burst);
+
+            if (inserted) {
+                trainMap.emplace(burst, 1);
+            } else {
+                trainMap[it->second]++;
+            }
+        }
+    }
+
+    return trainMap;
+}
+
+int BurstDataset::Diversity(const BPCountMap& uniBPCountMap) const
+{
+    std::set<short> uniPkts;
+    for(auto& bpCount : uniBPCountMap)
+    {
+        for(auto& pktCount: bpCount.first->GetCountMap())
+        {
+            uniPkts.insert(pktCount.first);
+        }
+    }
+
+    return uniPkts.size();
+}
+
+float BurstDataset::AvgBurstRate(const BPCountMap& uniBPCountMap) const
+{
+    timespec totalDuration{0,0};
+    int nonSinglePkt = 0;
+
+    for(auto& bpCount : uniBPCountMap)
+    {
+        totalDuration = totalDuration + bpCount.first->GetLastPktStamp() - bpCount.first->GetFirstPktStamp();
+        totalDuration > timespec{0,0} ? nonSinglePkt += bpCount.first->GetPktNum() : nonSinglePkt;
+    }
+    std::cout << "totalDuration:" << totalDuration.tv_sec;
+    std::cout << " nonSinglePkt:" << nonSinglePkt << std::endl;
+    std::cout <<"nonSinpkt/totalDuration:" << nonSinglePkt/totalDuration << std::endl;
+    return nonSinglePkt/totalDuration;
+}
+
+float BurstDataset::RepetitionRate(const BPCountMap& uniBPCountMap) const
+{
+    float repetitionRate = 0;
+    float repeatCounter = 0;
+    int sum = 0;
+
+    for(auto&[bp, count]: uniBPCountMap)
+    {
+        count > 1 ? repeatCounter += count : repeatCounter;
+        sum += count;
+    }
+    
+    return repeatCounter / sum;
+}
+
+float BurstDataset::ShannonEntropy(const BPCountMap& uniBPCountMap) const
+{
+    float entropy = 0;
+    int sum = 0;
+
+    for(auto&[bp, count]: uniBPCountMap)
+    {
+        sum += count;
+    }
+
+    for(auto&[bp, count]: uniBPCountMap)
+    {
+        float p = count/(float)sum;
+        entropy += -p * log10(p);
+    }
+
+    return entropy;
+}
+
 void BurstDataset::Load(PacketDataset& dataset)
 {  
     // name 
@@ -96,13 +192,13 @@ float BurstDataset::TrainTestSplitByTime(int min)
         if(trainNum + testNum + valiNum > burstGroup.size())
         {
             valiNum = burstGroup.size() - trainNum - testNum;
-            throw "overflow ! totalNum:" + std::to_string(burstGroup.size())\
+            std::cout << "overflow ! totalNum:" + std::to_string(burstGroup.size())\
              + "device: " + GetDevicesVec()[deviceId].GetLabel() + "\n";
         }
 
         if( valiNum <=0 )
         {
-            throw "valiNum < 0, device:" + GetDevicesVec()[deviceId].GetLabel() + "\n";
+            std::cout << "valiNum < 0, device:" + GetDevicesVec()[deviceId].GetLabel() + "\n";
         }
 
         BurstGroups trainGroups(burstGroup.begin(), burstGroup.begin() + trainNum);

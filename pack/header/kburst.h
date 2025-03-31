@@ -4,6 +4,7 @@
 
 #include "types.h"
 #include "boost-serialize.h"
+#include "time-utils.h"
 
 #include <iostream>
 #include <vector>
@@ -20,7 +21,7 @@ class KDevice;
 class KPacket;
 
 struct BurstTrh{
-	int uniTrh = 50;
+	int uniTrh = 1000;
 	timespec inTrh{2,0};
 	timespec ouTrh{15,0};
 	bool longShortEnable = true;
@@ -37,8 +38,8 @@ struct BurstTrh{
 	{
 		std::stringstream ss;
 		ss << "(uniTrh=" << uniTrh << ")";
-		ss << "(inTrh=" << "{" << inTrh.tv_sec << "," << inTrh.tv_nsec << "}";
-		ss << "(ouTrh=" << "{" << ouTrh.tv_sec << "," << ouTrh.tv_nsec << "}";
+		ss << "(inTrh=" << ::ToString(inTrh) << "s)";
+		ss << "(ouTrh=" << ::ToString(ouTrh) << "s)";
 		ss << "(lsenable=" << longShortEnable << ")";
 		return ss.str();
 	}
@@ -49,9 +50,9 @@ class KBurst {
 public:
 
 	// constructor
-	KBurst():label(""){pfUmapMutex = new std::mutex;}
+	KBurst():label(""){pfUmapMutex = new std::shared_mutex;}
 	KBurst(const KDevice& device);
-	explicit KBurst(const std::string& label):label(label){ pfUmapMutex = new std::mutex;}
+	explicit KBurst(const std::string& label):label(label){ pfUmapMutex = new std::shared_mutex;}
 	KBurst(std::vector<std::shared_ptr<KBurst>> burstVec);
 	
 	void AddPacket(const KPacket& packet);
@@ -61,7 +62,7 @@ public:
 	std::string ToString() const;
 
 	// flag
-	bool isfUmapUpdate = false;
+	volatile bool isfUmapUpdate = false;
 	
 	// distance
 	float Distance(KBurst& burst);
@@ -105,7 +106,7 @@ private:
 	std::unordered_map<short, int> countUmap;
 	std::unordered_map<short, float> fUmap;
 
-	std::mutex* pfUmapMutex = nullptr;
+	std::shared_mutex* pfUmapMutex = nullptr;
 };
 
 typedef std::vector<std::shared_ptr<KBurst>> BurstVec;

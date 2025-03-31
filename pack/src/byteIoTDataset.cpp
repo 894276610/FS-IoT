@@ -42,7 +42,6 @@ int ByteIoTDataset::Diversity(const BurstVec& burstVec) const
     return uniPkts.size();
 }
 
-
 float ByteIoTDataset::AvgBurstRate(const BPCountMap& uniBPCountMap) const
 {
     timespec totalDuration{0,0};
