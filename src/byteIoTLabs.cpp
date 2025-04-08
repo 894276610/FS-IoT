@@ -4,7 +4,8 @@
 #include "byteIoTDataset.h"
 #include "kburst.h"
 
-std::string NameClassifyMetric(LabSetting settings, std::string methodName);
+std::string GetMetricPath(LabSetting settings);
+std::string GetPredCsvPath(LabSetting settings);
 std::string NameDivMetric(LabSetting settings, std::string mode);
 
 void InstancePercentLab(LabSetting settings)
@@ -30,11 +31,13 @@ void InstancePercentLab(LabSetting settings)
         byteIoTDataset.TrainTestSplit();
         auto& trainset = byteIoTDataset.GetTrainset();
         auto& testset = byteIoTDataset.GetTestset();
+        std::vector<std::string> y_true, y_pred;
     
         clf.Train(&trainset); 
-        clf.Predict(&testset, metric, false);
-        
-        std::ofstream outMetric(NameClassifyMetric(settings, "byteiot"));
+        clf.Predict(&testset, metric, y_true, y_pred, false);
+
+        SerializePrediction(y_true, y_pred, GetPredCsvPath(settings));
+        std::ofstream outMetric(GetMetricPath(settings));
         outMetric << ToString(metric);
         outMetric.close();
     }
@@ -65,15 +68,17 @@ void HourBudgetLab(LabSetting settings)
         byteIoTDataset.TrainTestSplitByTime(budget);
         auto& trainset = byteIoTDataset.GetTrainset();
         auto& testset  = byteIoTDataset.GetTestset();
+        std::vector<std::string> y_true, y_pred;
     
         clf.Train(&trainset);
 
         std::cout << "after training." << std::endl;
         std::cout << "start prediction." << std::endl;
-        clf.Predict(&testset, metric, settings.review);
+        clf.Predict(&testset, metric, y_true, y_pred, settings.review);
         std::cout << "finish prediction." << std::endl;
         
-        std::ofstream outMetric(NameClassifyMetric(settings, "byteiot"));
+        SerializePrediction(y_true, y_pred, GetPredCsvPath(settings));
+        std::ofstream outMetric(GetMetricPath(settings));
         outMetric << ToString(metric);
         outMetric.close();
     }

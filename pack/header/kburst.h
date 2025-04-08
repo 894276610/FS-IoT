@@ -143,10 +143,14 @@ struct DivMetric
 	// result of burst division rules
 	float repeatRate = 0;  
 	float entropy = 0;
+	float normEntropy = 0;
 
 	// intrinstic attributes
 	float burstRate = 0; // pkt/s for 2+ bursts
 	float diversity = 0; // |D|
+
+	int uniBurstNum = 0;	  // totalBurstNumber
+	int burstNum = 0;	 	  // totalBurstNumber
 
 	std::string ToString()
 	{
@@ -156,6 +160,9 @@ struct DivMetric
 		ss << "entropy:" << entropy << std::endl;
 		ss << "burstRate:" << burstRate << std::endl;
 		ss << "diversity:" << diversity << std::endl;
+		ss << "normEntropy:" << normEntropy << std::endl;
+		ss << "uniBurstNum:" << uniBurstNum << std::endl;
+		ss << "burstNum:" << burstNum << std::endl;
 		return ss.str();
 	}
 };

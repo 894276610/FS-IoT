@@ -119,7 +119,7 @@ std::vector<ReviewBurst> BoClassifier::Predict(BurstVec instance, std::string& s
     return reviewList;
 }
 
-ReviewBook BoClassifier::Predict(std::unordered_map<uint16_t, BurstGroups>* testset, ClassificationMetrics& metric, bool reviewEnable)
+ReviewBook BoClassifier::Predict(std::unordered_map<uint16_t, BurstGroups>* testset,  ClassificationMetrics& metric, std::vector<std::string>& y_true, std::vector<std::string>& y_pred, bool reviewEnable)
 {
     PROFILE_SCOPE("predict");
     std::mutex reviewMutex;
@@ -134,8 +134,8 @@ ReviewBook BoClassifier::Predict(std::unordered_map<uint16_t, BurstGroups>* test
     }
 
     // Step 2: 预分配结果容器
-    std::vector<std::string> predictionVec(allBgroups.size());
-    std::vector<std::string> actualVec(allBgroups.size());
+    y_pred.resize(allBgroups.size());
+    y_true.resize(allBgroups.size());
 
     // Step 3: 并行处理实现
     const size_t num_threads = std::thread::hardware_concurrency();
@@ -173,17 +173,17 @@ ReviewBook BoClassifier::Predict(std::unordered_map<uint16_t, BurstGroups>* test
             rBook.reviewBook.push_back(reviewList);
         }
         return result;
-    }, predictionVec);
+    }, y_pred);
 
     // 并行获取标签
     parallel_process([](BurstVec* bg) { 
         return (*bg)[0]->GetLabel(); 
-    }, actualVec);
+    }, y_true);
 
-    std::cout << "actual vec size" << actualVec.size() << std::endl;
-    std::cout << "prediction vec size" << predictionVec.size() << std::endl;
+    std::cout << "actual vec size" << y_true.size() << std::endl;
+    std::cout << "prediction vec size" << y_pred.size() << std::endl;
 
-    metric = calculate_metrics(actualVec, predictionVec);
+    metric = calculate_metrics(y_true, y_pred);
     return rBook;
 }
 

@@ -76,7 +76,7 @@ public:
     BoClassifier(const ConfigBurstClf& config): bclf(config){}
     void Train(std::unordered_map<uint16_t, BurstGroups>* trainset);
     std::vector<ReviewBurst> Predict(BurstVec instance, std::string& strResult, bool reviewEnable = true);
-    ReviewBook Predict(std::unordered_map<uint16_t, BurstGroups>* testset, ClassificationMetrics& metric, bool reviewEnable = true);
+    ReviewBook Predict(std::unordered_map<uint16_t, BurstGroups>* testset, ClassificationMetrics& metric, std::vector<std::string>& y_true, std::vector<std::string>& y_pred, bool reviewEnable = true);
 
 private:
     BurstClassifier bclf;

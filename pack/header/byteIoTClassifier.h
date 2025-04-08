@@ -14,7 +14,7 @@ ByteIoTClassifier() = default;
 
 void Train(std::unordered_map<uint16_t, BurstVec>* trainset);
 std::string Predict(const std::shared_ptr<KBurst> instance);
-void Predict(std::unordered_map<uint16_t, BurstVec>* testset, ClassificationMetrics& metric, bool reviewEnable);
+void Predict(std::unordered_map<uint16_t, BurstVec>* testset, ClassificationMetrics& metric, std::vector<std::string>& y_true, std::vector<std::string>& y_pred,  bool reviewEnable);
 
 
 private:

@@ -1,5 +1,89 @@
 import matplotlib.pyplot as plt
 
+outputBaseFolder = "/home/kunling/BurstIoT/pythonDraw/classification/"
+
+class BurstTrh:
+    inTrh = 2.0;
+    ouTrh = 4.0;
+    uniTrh = 1000;
+    longShortEnable = 1;
+
+    def ToString(self):
+        return f"(uniTrh={self.uniTrh})(inTrh={self.inTrh}s)(ouTrh={self.ouTrh}s)(lsenable={self.longShortEnable})";
+
+
+class ConfigBurstDataset:
+    slotDuration = 1800;
+    trainRate = 0.15;
+    trainBudget = 300;
+    valiRate = 0.3;
+    testRate = 0.5;
+    burstTrh = BurstTrh()
+    
+
+    def ToString(self):
+        return f"(slot={self.slotDuration})(trainR={self.trainRate}%)(trainB={self.trainBudget}minute)(valiR={self.valiRate}%)(testR={self.testRate}%)" + self.burstTrh.ToString();
+
+    def ToStringWoBurstTrh(self):
+        return f"(slot={self.slotDuration})(trainR={self.trainRate}%)(trainB={self.trainBudget}minute)(valiR={self.valiRate}%)(testR={self.testRate}%)";
+
+class ConfigBurstClf:
+    def __init__(self, lsenable=True):
+        # Initialize with default values based on lsenable
+        self.uniPktTolr = 200
+        self.pktTolr = 1000
+        self.maxUniPkt = 1000  # duplicated with configburstdataset
+        self.maxPktIndex = 500
+        self.maxTrainItem = 1000
+        self.distanceTrh = 0.5
+        self.penalty = 0.01
+    
+    def __str__(self):
+        return (f"(Tuni={self.uniPktTolr})"
+                f"(Tpkt={self.pktTolr})"
+                f"(mUniPkt={self.maxUniPkt})"
+                f"(mPktIdx={self.maxPktIndex})"
+                f"(dTrh={self.distanceTrh})"
+                f"(maxTrainIt={self.maxTrainItem})"
+                f"(pen={self.penalty})")
+
+    # Alternative ToString() method if you prefer the original name
+    def ToString(self):
+        return str(self)
+    
+class LabSetting:
+    baseFolder = "/media/kunling/BigE/";
+    datasetName = "UNSW201620";
+    mappingFolder = "/home/kunling/BurstIoT/mappings/";
+    methodName = "burstiot" # byte
+    experimentMode = "hbd"
+    scenario = "lsEnable"  
+    graphName = "LineChart"
+
+    xLabel = "Slot Duration"
+    yLabel = "Accuracy"
+    
+    configDataset = ConfigBurstDataset()
+    configBurstClf = ConfigBurstClf()
+    
+    start = 4.0;
+    end = 60.0;
+    step = 3;
+
+    def ResultTxtPath(self):
+        return self.baseFolder + self.datasetName + "/" + self.ToString() + ".txt";
+
+    def ResultCsvPath(self):
+        return self.baseFolder + self.datasetName + "/" + self.ToString() + ".csv";   
+       
+    def ToString(self):
+        if self.methodName == "burstiot":
+            return f"{self.methodName}-metrics-{self.experimentMode}-{self.scenario}{self.configDataset.ToString()}{self.configBurstClf.ToString()}";     
+        elif self.methodName == "byteiot":
+            return f"{self.methodName}-metrics-{self.experimentMode}-{self.scenario}{self.configDataset.ToStringWoBurstTrh()}";
+
+methodNameList = ["burst", "byte"]
+
 # 6条线的配置
 default_series_config = [
     {   # 系列1
@@ -51,14 +135,6 @@ default_series_config = [
     }
 ]
 
-def ReadAccMetric(filePath):
-    with open(filePath, "r+") as file:
-        firstLine = file.readline().strip();
-        resultList = firstLine.split(" ");
-        accFloat = float(resultList[1]);
-    
-    return accFloat;
-
 def PlotLineChart(x, y, z, outPath):
     
     # 创建画布和坐标轴
@@ -86,8 +162,6 @@ def PlotLineChart(x, y, z, outPath):
             markeredgecolor='red',  # 标记边框颜色
             markerfacecolor='yellow',
             label='BurstIoT') # 标记填充色
-
-
     
     # 添加标题和标签
     plt.xlabel("Training Rate", fontsize=12)
@@ -104,66 +178,6 @@ def PlotLineChart(x, y, z, outPath):
     bbox_inches="tight",   
     facecolor="white")
     plt.show()
-
-def PlotSeriesLineChart(x, series_config, x_axisLabel, y_axisLabel, outPath):
-    """
-    绘制多数据系列的折线图
-
-    参数:
-    - x: 共享的横坐标数据（列表或数组）
-    - series_config: 包含多个数据系列配置的列表，每个配置是字典，例如:
-      [{'data': y1, 'label': 'Series1', 'color': 'red', 'marker': 'o'},
-       {'data': y2, 'linestyle': '--', 'linewidth': 3}]
-    - outPath: 输出图片路径
-    """
-    plt.figure(figsize=(10, 6))
-
-    # 遍历所有数据系列并绘制
-    for config in series_config:
-        # 合并默认样式与用户自定义样式
-        style = {
-            'marker': 'o',          # 默认圆形标记
-            'linestyle': '-',       # 默认实线
-            'linewidth': 2,
-            'color': '#2C6FB3',     # 默认蓝色
-            'markersize': 8,
-            'markeredgecolor': 'black',
-            'markerfacecolor': 'white',
-            'label': 'Unnamed Series'
-        }
-        style.update(config)  # 用用户配置覆盖默认值
-
-        # 提取数据并绘制
-        y = config['data']
-        plt.plot(x, y, 
-                 marker=style['marker'],
-                 linestyle=style['linestyle'],
-                 linewidth=style['linewidth'],
-                 color=style['color'],
-                 markersize=style['markersize'],
-                 markeredgecolor=style['markeredgecolor'],
-                 markerfacecolor=style['markerfacecolor'],
-                 label=style['label'])
-        
-        for xi, yi in zip(x, y):
-            plt.text(xi, yi+0.01, f'{yi:.2f}',  # 格式化显示两位小数
-                color=style['color'],
-                fontsize=10,
-                ha='center',          # 水平居中
-                va='bottom',          # 垂直底部对齐
-                bbox=dict(facecolor='white', alpha=0.7, edgecolor='none', pad=1))
-
-    # 统一设置标题、标签、网格等
-    plt.xlabel(x_axisLabel, fontsize=12)
-    plt.ylabel(y_axisLabel, fontsize=12)
-    plt.grid(True, linestyle='--', alpha=0.7)
-    plt.xticks(x, rotation=45)
-    plt.legend()  # 显示图例
-
-    plt.tight_layout()
-    plt.savefig(outPath, dpi=300, bbox_inches="tight", facecolor="white")
-    plt.close()
-
 
 from pathlib import Path
 

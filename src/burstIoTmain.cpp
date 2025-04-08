@@ -4,21 +4,47 @@ void InstancePercentLab(LabSetting settings);
 void HourBudgetLab(LabSetting settings);
 void DivisionLab(LabSetting settings);
 
+
+LabSetting GetDivisionSettings()
+{
+    LabSetting settings;
+
+    settings.methodName = "burstiot";
+    settings.baseFolder = "/media/kunling/BigE/";
+    settings.datasetName = "UNSW201620";
+    settings.mappingFolder = "/home/kunling/BurstIoT/mappings/";
+    settings.experimentMode = "division";
+    //settings.config;
+    settings.scenario = "inTrh";
+    settings.config.burstTrh.inTrh = {2,0};
+    settings.start = 0.5; // sec slotduration
+    settings.end = 5;
+    settings.step = 0.1;
+    settings.review = false;
+    return settings;
+}
+
+LabSetting GetHourBudgetSettings()
+{
+    LabSetting settings;
+
+    settings.methodName = "burstiot";
+    settings.baseFolder = "/media/kunling/BigE/";
+    settings.datasetName = "UNSW201620";
+    settings.mappingFolder = "/home/kunling/BurstIoT/mappings/";
+    settings.experimentMode = "hbd";
+    settings.scenario = "hbd";
+    settings.config.burstTrh.inTrh = {2,0};
+    settings.start = 30; // sec slotduration
+    settings.end = 60;
+    settings.step = 30;
+    settings.review = false;
+    return settings;
+}
+
 int main() {
-  LabSetting settings;
-  // division: change ouTrh
- 
-  settings.baseFolder = "/media/kunling/BigE/";
-  settings.datasetName = "UNSW201620";
-  settings.mappingFolder = "/home/kunling/BurstIoT/mappings/";
-  settings.experimentMode = "hbd";
-  settings.config.burstTrh.ouTrh = {60,0};
-  settings.config.burstTrh.longShortEnable = false;
-  settings.start = 30; 
-  settings.end = 600;
-  settings.step = 30;
-  settings.review = false;
-  
+  LabSetting settings = GetHourBudgetSettings();
+
   if(settings.experimentMode == "ipc")
   {
       InstancePercentLab(settings);

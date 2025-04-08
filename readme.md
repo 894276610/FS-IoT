@@ -49,3 +49,5 @@ LiFx Bulb: 一类的，出现了新的特性，导致和原有的都匹配不上
 ACM WiSec [30%]
 ICCC [?]
 
+# mlpack isntallation
+sudo apt-get install libarmadillo-dev libensmallen-dev libcereal-dev libstb-dev g++ cmake

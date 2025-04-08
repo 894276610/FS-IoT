@@ -6,6 +6,8 @@
 #include <unordered_map>
 #include <cmath> 
 #include <sstream>
+#include <filesystem>
+#include <fstream>
 
 // 标签编码器（将字符串映射为唯一整数）
 class LabelEncoder {
@@ -70,7 +72,10 @@ struct ClassificationMetrics {
     std::vector<double> class_recall;    // 每个类别的召回率
     std::vector<double> class_f1;        // 每个类别的F1值
     std::vector<std::vector<int>> confusion_matrix;
+
 };
+
+
 
 inline ClassificationMetrics calculate_metrics(
     const std::vector<int>& true_labels,
@@ -254,4 +259,21 @@ inline std::string ToString(const ClassificationMetrics& metrics) {
 
     return ss.str();
 }
+
+inline void SerializePrediction(
+    const std::vector<std::string>& true_labels,
+    const std::vector<std::string>& pred_labels,
+    std::filesystem::path outPath)
+{
+    std::ofstream ofs(outPath);
+    ofs << "y_true,y_pred" << std::endl;
+    
+    for(size_t i = 0; i < true_labels.size(); i ++)
+    {
+        ofs << true_labels[i] << "," << pred_labels[i] << std::endl;
+    }
+
+    ofs.close();
+}
+
 #endif

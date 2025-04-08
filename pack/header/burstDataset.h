@@ -39,6 +39,17 @@ struct ConfigBurstDataset
 		ss << burstTrh.ToString();
 		return ss.str();
 	}
+
+	inline std::string ToStringWoBurstTrh() const
+	{
+		std::stringstream ss;
+		ss << "(slot=" << slotDuration << ")";
+		ss << "(trainR=" << trainRate << "%)";
+		ss << "(trainB=" << trainBudget << "minute)";
+		ss << "(valiR=" << valiRate << "%)";
+		ss << "(testR="<< testRate << "%)";
+		return ss.str();
+	}
 };
 
 class BurstDataset
@@ -55,6 +66,7 @@ public:
 
 	// div metrics
 	std::unordered_map<std::shared_ptr<KBurst>, int> MergeByHash(BurstGroups& burstGroups);
+	int GetBurstSize(const BurstGroups& burstGroup)const;
 	float RepetitionRate(const BPCountMap& uniBPCountMap) const;
     float ShannonEntropy(const BPCountMap& uniBPCountMap) const;
     int Diversity(const BPCountMap& uniBPCountMap) const;

@@ -22,23 +22,39 @@ std::string NameDivMetric(LabSetting settings, std::string mode)
     return ss.str();
 }
 
-std::string NameClassifyMetric(LabSetting settings, std::string methodName)
+std::string GetResultFileName(LabSetting settings)
 {
     std::stringstream ss;
-    
-    ss << settings.baseFolder + settings.datasetName + "/";
-    ss << methodName << "-metrics";
+    ss << settings.methodName << "-metrics";
 
-    if(methodName == "byteiot")
+    if(settings.methodName == "byteiot")
     {
-        ss << "-" << settings.experimentMode 
-        << settings.config.ToString();
+        ss << "-" << settings.experimentMode << "-" << settings.scenario\
+        << settings.config.ToStringWoBurstTrh();
     }
-    else if(methodName == "burstiot")
+    else if(settings.methodName == "burstiot")
     {
         ss << settings.ToString();
     }
+    return ss.str();
+}
+
+std::string GetMetricPath(LabSetting settings)
+{
+    std::stringstream ss;
     
-    ss << ".txt";
+    ss << settings.baseFolder + settings.datasetName + "/" \
+    << GetResultFileName(settings) << ".txt";
+
+    return ss.str();
+}
+
+std::string GetPredCsvPath(LabSetting setting)
+{
+    std::stringstream ss;
+    
+    ss << setting.baseFolder + setting.datasetName + "/" \
+    << GetResultFileName(setting) << ".csv";
+
     return ss.str();
 }

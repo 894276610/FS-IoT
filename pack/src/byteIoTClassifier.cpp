@@ -37,7 +37,7 @@ std::string ByteIoTClassifier::Predict(const std::shared_ptr<KBurst> preInstnace
     return result.nearTrainBursts.front()->GetLabel();
 }
 
-void ByteIoTClassifier::Predict(std::unordered_map<uint16_t, BurstVec>* testset, ClassificationMetrics& metric, bool reviewEnable)
+void ByteIoTClassifier::Predict(std::unordered_map<uint16_t, BurstVec>* testset, ClassificationMetrics& metric, std::vector<std::string>& y_true, std::vector<std::string>& y_pred, bool reviewEnable)
 {
     PROFILE_SCOPE("predict");
     std::mutex reviewMutex;
@@ -49,8 +49,8 @@ void ByteIoTClassifier::Predict(std::unordered_map<uint16_t, BurstVec>* testset,
     }
 
     // Step 2: 预分配结果容器
-    std::vector<std::string> predictionVec(allInstances.size());
-    std::vector<std::string> actualVec(allInstances.size());
+    y_pred.resize(allInstances.size());
+    y_true.resize(allInstances.size());
 
     // Step 3: 并行处理实现
     const size_t num_threads = std::thread::hardware_concurrency();
@@ -81,16 +81,16 @@ void ByteIoTClassifier::Predict(std::unordered_map<uint16_t, BurstVec>* testset,
     // 并行预测
     parallel_process([&](std::shared_ptr<KBurst> instance) {      
         return Predict(instance); 
-    }, predictionVec);
+    }, y_pred);
 
     // 并行获取标签
     parallel_process([](std::shared_ptr<KBurst> instance) { 
         return instance->GetLabel(); 
-    }, actualVec);
+    }, y_true);
 
-    std::cout << "actual vec size" << actualVec.size() << std::endl;
+    std::cout << "actual vec size" << y_true.size() << std::endl;
 
-    metric = calculate_metrics(actualVec, predictionVec);
+    metric = calculate_metrics(y_true, y_pred);
 }
 
 }

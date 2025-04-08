@@ -11,7 +11,21 @@ DivMetric ByteIoTDataset::GenDivMetric(std::string name, BurstVec& burstVec)
     float entropy = ShannonEntropy(uniBPCountMap);
     float diversity = Diversity(uniBPCountMap);
 
-    return {name, repeatRate, entropy, burstRate, diversity};
+	int totalUniBurstNum = uniBPCountMap.size();	  // totalBurstNumber
+	int totalBurstNum = burstVec.size();	  // totalBurstNumber
+    float normEntropy = entropy / (log10(totalUniBurstNum));
+
+    DivMetric metric;
+    metric.burstRate = burstRate;
+    metric.diversity = diversity;
+    metric.entropy = entropy;
+    metric.normEntropy = normEntropy;
+    metric.repeatRate = repeatRate;
+    metric.burstNum = totalBurstNum;
+    metric.uniBurstNum = totalUniBurstNum;
+    metric.name = name;
+
+    return metric;
 }
 
 int ByteIoTDataset::Diversity(const BPCountMap& uniBPCountMap) const

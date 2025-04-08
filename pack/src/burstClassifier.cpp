@@ -17,13 +17,11 @@ void BurstClassifier::Train(std::unordered_map<uint16_t, BurstGroups>* trainset)
         }));                    
 	}
 
-    std::cout << "before wait task size" << tasks.size() << std::endl;
 
     for(auto& task: tasks)
     {
         task.wait();
     }
-    std::cout << "after wait" << std::endl;
 
 }
 
@@ -31,25 +29,7 @@ void BurstClassifier::TrainDevice(uint16_t deviceId, BurstGroups burstGroups)
 {
 	std::unordered_map<std::shared_ptr<KBurst>, int> trainMap;
 
-    // block level big burst
-	// {
-	// 	float middlePktNum = BlockAvgPktNum(burstGroups);
-	// 	std::unique_lock<std::mutex> lock(BurstGroupPolicy::numAvgMutex);
-	// 	BurstGroupPolicy::addrAvgPktMap.insert({ deviceId, middlePktNum });
-	// }
-
-    // block level big burst
-	// for (const auto& burstGroup : burstGroups)
-	// {
-	// 	std::shared_ptr<KBurst> mergedBurst = std::make_shared<KBurst>(burstGroup);
-
-	// 	std::unique_lock<std::mutex> lock(BurstGroupPolicy::levelMutex);
-	// 	BurstGroupPolicy::blockLevelDistribution[deviceId].push_back(mergedBurst);
-	// }
-
-    std::cout << "before merge by hash" << std::endl;
 	trainMap = MergeByHash(burstGroups);
-    std::cout << "before merge by key" << std::endl;
     MergeByKey(&trainMap);
 	
 	int pktIndex, uniPktIndex = 0;

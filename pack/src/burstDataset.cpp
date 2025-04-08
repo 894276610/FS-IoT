@@ -3,7 +3,7 @@
 #include "kburst.h"
 
 namespace groundnut{
-        
+
 DivMetric BurstDataset::GenDivMetric(std::string name, BurstGroups& burstGroups)
 {
     BPCountMap uniBPCountMap = MergeByHash(burstGroups);
@@ -12,8 +12,34 @@ DivMetric BurstDataset::GenDivMetric(std::string name, BurstGroups& burstGroups)
     float entropy = ShannonEntropy(uniBPCountMap);
     float diversity = Diversity(uniBPCountMap);
 
-    return {name, repeatRate, entropy, burstRate, diversity};
+    int totalUniBurstNum = uniBPCountMap.size();	  // totalBurstNumber
+	int totalBurstNum = GetBurstSize(burstGroups);	  // totalBurstNumber
+    float normEntropy = entropy / (log10(totalUniBurstNum));
+
+    DivMetric metric;
+    metric.burstRate = burstRate;
+    metric.diversity = diversity;
+    metric.entropy = entropy;
+    metric.normEntropy = normEntropy;
+    metric.repeatRate = repeatRate;
+    metric.burstNum = totalBurstNum;
+    metric.uniBurstNum = totalUniBurstNum;
+    metric.name = name;
+
+    return metric;
 }
+
+int BurstDataset::GetBurstSize(const BurstGroups& burstGroup)const
+{
+    int size = 0;
+    for(auto& burstVec : burstGroup)
+    {
+        size += burstVec.size();
+    }
+
+    return size;
+}
+
 
 BPCountMap BurstDataset::MergeByHash(BurstGroups& burstGroups)
 {
@@ -181,7 +207,7 @@ float BurstDataset::TrainTestSplitByTime(int min)
         int maxTrainNum = std::ceil(totalSize * configBurstDataset.trainRate);
         size_t trainNum = std::min(maxTrainNum, minBudgetTrainNum);
 
-        std::cout << "totalSize:" << totalSize << "trainNum:" << trainNum << std::endl;
+        std::cout << "device: " << GetDevicesVec()[deviceId].GetLabel() << "totalSize:" << totalSize << "trainNum:" << trainNum << std::endl;
 
         int valiNum = std::floor(totalSize * configBurstDataset.valiRate);
         size_t testNum = std::ceil(totalSize * configBurstDataset.testRate);

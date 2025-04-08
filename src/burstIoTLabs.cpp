@@ -4,7 +4,8 @@
 #include "burstDataset.h"
 #include "time-utils.h"
 
-std::string NameClassifyMetric(LabSetting settings, std::string methodName);
+std::string GetMetricPath(LabSetting settings);
+std::string GetPredCsvPath(LabSetting settings);
 std::string NameDivMetric(LabSetting settings, std::string mode);
 timespec Float2time(float ftime);
 
@@ -33,12 +34,14 @@ void InstancePercentLab(LabSetting settings)
         burstDataset.TrainTestSplit();
         auto& trainset = burstDataset.GetTrainset();
         auto& testset = burstDataset.GetTestset();
+        std::vector<std::string> y_true, y_pred;
 
         groundnut::BoClassifier boclf(settings.clfConfig);
         boclf.Train(&trainset);
-        groundnut::ReviewBook reviewBook = boclf.Predict(&testset, metric, settings.review);
+        groundnut::ReviewBook reviewBook = boclf.Predict(&testset, metric, y_true, y_pred, settings.review);
 
-        std::ofstream outMetric(NameClassifyMetric(settings,"burstiot"));
+        SerializePrediction(y_true, y_pred, GetPredCsvPath(settings));
+        std::ofstream outMetric(GetMetricPath(settings));
         outMetric << ToString(metric);
         outMetric.close(); 
     }
@@ -70,14 +73,16 @@ void HourBudgetLab(LabSetting settings)
         std::cout << "before get train and test set" << std::endl;
         auto& trainset = burstDataset.GetTrainset();
         auto& testset = burstDataset.GetTestset();
+        std::vector<std::string> y_true, y_pred;
         
         std::cout << "before clf" << std::endl;
         groundnut::BoClassifier clf(settings.clfConfig);
         std::cout << "before train" << std::endl;
         clf.Train(&trainset);
-        clf.Predict(&testset, metric, settings.review);
+        clf.Predict(&testset, metric, y_true, y_pred, settings.review);
         
-        std::ofstream outMetric(NameClassifyMetric(settings,"burstiot"));
+        SerializePrediction(y_true, y_pred, GetPredCsvPath(settings));
+        std::ofstream outMetric(GetMetricPath(settings));
         outMetric << ToString(metric);
         outMetric.close();
     }
@@ -95,8 +100,17 @@ void DivisionLab(LabSetting settings)
     pktDataset.AddTragetDevices( mappingFolder + datasetName + "_device_mac_mappings.csv");
     pktDataset.AutoLoad(outFolder,pktDatasetOutName);
 
-    timespec& ouTrh =  settings.config.burstTrh.ouTrh;
-    for(ouTrh = Float2time(settings.start); ouTrh < Float2time(settings.end); ouTrh += settings.step)
+    timespec* pVar = nullptr;
+    if(settings.scenario == "ouTrh")
+    {
+        pVar =  &settings.config.burstTrh.ouTrh;
+    }
+    else if(settings.scenario == "inTrh")
+    {
+        pVar = &settings.config.burstTrh.inTrh;
+    }
+
+    for(*pVar = Float2time(settings.start); *pVar < Float2time(settings.end); *pVar += settings.step)
     {
         groundnut::BurstDataset burstDataset(datasetName, settings.config);
         std::ofstream outMetric(NameDivMetric(settings, "burst"));
