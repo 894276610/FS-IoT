@@ -79,6 +79,12 @@
         "io_context": "cpp",
         "netfwd": "cpp",
         "timer": "cpp",
-        "version": "cpp"
+        "version": "cpp",
+        "strstream": "cpp",
+        "cfenv": "cpp",
+        "charconv": "cpp",
+        "complex": "cpp",
+        "csetjmp": "cpp",
+        "typeindex": "cpp"
     }
 }

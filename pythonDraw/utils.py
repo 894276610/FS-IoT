@@ -2,6 +2,13 @@ import matplotlib.pyplot as plt
 
 outputBaseFolder = "/home/kunling/BurstIoT/pythonDraw/classification/"
 
+class ConfigShahid:
+    configN = 6;
+    timeout = 600;
+
+    def ToString(self):
+        return f"(configN={self.configN})(timeout={self.timeout})";
+    
 class BurstTrh:
     inTrh = 2.0;
     ouTrh = 4.0;
@@ -65,6 +72,7 @@ class LabSetting:
     
     configDataset = ConfigBurstDataset()
     configBurstClf = ConfigBurstClf()
+    configShahid = ConfigShahid()
     
     start = 4.0;
     end = 60.0;
@@ -81,7 +89,9 @@ class LabSetting:
             return f"{self.methodName}-metrics-{self.experimentMode}-{self.scenario}{self.configDataset.ToString()}{self.configBurstClf.ToString()}";     
         elif self.methodName == "byteiot":
             return f"{self.methodName}-metrics-{self.experimentMode}-{self.scenario}{self.configDataset.ToStringWoBurstTrh()}";
-
+        elif self.methodName == "shahid":
+            return f"{self.methodName}-metrics-{self.experimentMode}-{self.scenario}{self.configDataset.ToStringWoBurstTrh()}{self.configShahid.ToString()}";     
+            
 methodNameList = ["burst", "byte"]
 
 # 6条线的配置

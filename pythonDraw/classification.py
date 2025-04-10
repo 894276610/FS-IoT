@@ -11,6 +11,7 @@ def PlotBudgetPerformance(labSettings:LabSetting):
     
     byteIoTAccList =  [];
     burstIoTAccList = [];
+    shahidAccList = [];
 
     for trainBudget in trainBudgetList:
         labSettings.configDataset.trainBudget = trainBudget;
@@ -23,7 +24,14 @@ def PlotBudgetPerformance(labSettings:LabSetting):
         resultPath = labSettings.ResultTxtPath();
         byteIoTAccList.append(ReadAccMetric(resultPath));
     
+        labSettings.methodName = "shahid"
+        resultPath = labSettings.ResultCsvPath();
+        shahidAccList.append(GetMetric(resultPath)[0]);
+    
 
     print(trainBudgetList)
-    print(byteIoTAccList)
+    print("burstIoT",burstIoTAccList)
+    print("byteIoT", byteIoTAccList)
+    print("shahid:", shahidAccList)
+    return
     PlotLineChart(trainBudgetList, byteIoTAccList, burstIoTAccList, outputBaseFolder +  f"{labSettings.datasetName}" + labSettings.ToString() + ".png")

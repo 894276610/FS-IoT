@@ -36,6 +36,11 @@ std::string GetResultFileName(LabSetting settings)
     {
         ss << settings.ToString();
     }
+    else if(settings.methodName == "shahid")
+    {
+        ss << "-" << settings.experimentMode << "-" << settings.scenario\
+        << settings.config.ToStringWoBurstTrh() << settings.configShahid.ToString();
+    }
     return ss.str();
 }
 

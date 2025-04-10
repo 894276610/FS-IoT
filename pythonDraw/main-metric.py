@@ -24,11 +24,11 @@ def GetHourBudgetSettings():
     settings.xLabel = "Max Training Time (minute)"
     settings.yLabel = "Accuracy"
     settings.start = 30;
-    settings.end = 330;
+    settings.end = 180;
     settings.step = 30;
 
     return settings;
 
 settings = GetHourBudgetSettings();
-PlotConfusionMatrix(settings.ResultCsvPath(), outputBaseFolder + settings.ToString() + ".png")
-# PlotBudgetPerformance(settings);
+# PlotConfusionMatrix(settings.ResultCsvPath(), outputBaseFolder + settings.ToString() + ".png")
+PlotBudgetPerformance(settings);

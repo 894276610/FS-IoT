@@ -48,9 +48,9 @@ LabSetting GetHourBudgetSettings()
     settings.experimentMode = "hbd";
     settings.scenario = "hbd";
     settings.config.burstTrh.inTrh = {2,0};
-    settings.start = 600; // sec slotduration
-    settings.end = 1800;
-    settings.step = 120;
+    settings.start = 60; // sec slotduration
+    settings.end = 60;
+    settings.step = 30;
     settings.review = false;
     return settings;
 }

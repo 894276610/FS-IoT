@@ -5,6 +5,7 @@
 #include <sstream>
 #include "burstDataset.h"
 #include "burstClassifier.h"
+#include "shahidDataset.h"
 
 struct LabSetting
 {
@@ -17,6 +18,8 @@ struct LabSetting
 
     groundnut::ConfigBurstDataset config;
     groundnut::ConfigBurstClf clfConfig;
+    groundnut::ConfigShahid configShahid;
+
     float start = 0.01;
     float end = 0.15;
     float step = 0.01;

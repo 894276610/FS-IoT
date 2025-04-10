@@ -4,6 +4,11 @@
 #include <tuple>
 #include <sstream>
 
+inline float Time2Float(const timespec& time)
+{
+    return static_cast<float>(time.tv_sec) + static_cast<float>(time.tv_nsec) / 1e9f;
+}
+
 inline timespec Float2time(float ftime)
 {
     long int sec = int(ftime);
