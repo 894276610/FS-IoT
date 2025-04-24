@@ -33,6 +33,9 @@ void BurstClassifier::TrainDevice(uint16_t deviceId, BurstGroups burstGroups)
     MergeByKey(&trainMap);
 	
 	int pktIndex, uniPktIndex = 0;
+    std::cout << "deviceName:" << trainMap.begin()->first->GetLabel();
+    std::cout << ", size:" << trainMap.size() << std::endl;
+
 	for (auto& [burst, num] : trainMap)
 	{       
 		pktIndex = std::min(burst->GetPktNum(), config.maxPktIndex) -1;
@@ -204,8 +207,11 @@ SearchResult BurstClassifier::Predict(const std::shared_ptr<KBurst> burst)
 
     int uniPktMin = std::max(0, burst->GetUniPktNum() - config.uniPktTolr);
     int uniPktMax = std::min(config.maxUniPkt, burst->GetUniPktNum() + config.uniPktTolr);
-    int pktMin = std::max(0, std::min(burst->GetPktNum() - config.pktTolr, config.maxPktIndex));
-    int pktMax = std::min(burst->GetPktNum() + config.pktTolr, config.maxPktIndex);
+    // int pktMin = std::max(0, std::min(burst->GetPktNum() - config.pktTolr, config.maxPktIndex));
+    // int pktMax = std::min(burst->GetPktNum() + config.pktTolr, config.maxPktIndex);
+
+    int pktMin = std::max(0, burst->GetPktNum()/2 - 10);
+    int pktMax = std::min(burst->GetPktNum()*2 + 10, config.maxPktIndex);
 
 	for (int i = uniPktMin; i < uniPktMax; i++)
 	{

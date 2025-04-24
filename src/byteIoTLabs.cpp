@@ -3,6 +3,7 @@
 #include "byteIoTClassifier.h"
 #include "byteIoTDataset.h"
 #include "kburst.h"
+#include "timer.h"
 
 std::string GetMetricPath(LabSetting settings);
 std::string GetPredCsvPath(LabSetting settings);
@@ -58,8 +59,11 @@ void HourBudgetLab(LabSetting settings)
     int& budget = settings.config.trainBudget;
     for( budget = settings.start; budget <= settings.end; budget+= settings.step)
     {
+        
         std::cout << "budget: " << budget << "min" << std::endl;
-
+        Instrumentor::Get().BeginSession("Train", outFolder + settings.methodName + "load-split-train-identification.json");
+        
+      
         ClassificationMetrics metric;
         groundnut::ByteIoTClassifier clf;
         groundnut::ByteIoTDataset byteIoTDataset(datasetName, settings.config);
@@ -76,6 +80,7 @@ void HourBudgetLab(LabSetting settings)
         std::cout << "start prediction." << std::endl;
         clf.Predict(&testset, metric, y_true, y_pred, settings.review);
         std::cout << "finish prediction." << std::endl;
+        Instrumentor::Get().EndSession();
         
         SerializePrediction(y_true, y_pred, GetPredCsvPath(settings));
         std::ofstream outMetric(GetMetricPath(settings));

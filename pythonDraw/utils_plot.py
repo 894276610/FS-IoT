@@ -12,7 +12,7 @@ def format_value(val):
         else:
             return f"{val:.3f}".rstrip('0').rstrip('.')  # 0.900→"0.9", 0.123→"0.123"
         
-def PlotConfusionMatrix(csv_path, output_image='confusion_matrix.png'):
+def PlotConfusionMatrix( csv_path, output_image='confusion_matrix.png', width = 15, len=10):
     """
     读取CSV文件，绘制混淆矩阵，并保存为图片
     
@@ -33,7 +33,7 @@ def PlotConfusionMatrix(csv_path, output_image='confusion_matrix.png'):
     #cm = confusion_matrix(y_true, y_pred)
 
        # 4. 创建画布（可自定义大小，非正方形）
-    plt.figure(figsize=(11, 8))  # 宽度>高度，适应长标签
+    plt.figure(figsize=(width, len))  # 宽度>高度，适应长标签
     
     annot = np.array([[format_value(val) for val in row] for row in cm])
 
@@ -51,8 +51,8 @@ def PlotConfusionMatrix(csv_path, output_image='confusion_matrix.png'):
     )
     
     # 6. 旋转x轴标签（避免重叠）
-    ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right')
-    ax.set_yticklabels(ax.get_yticklabels(), rotation=0)
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=15)
+    ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontsize=15)
     
     # 7. 添加标签和标题
     plt.xlabel('Predicted Labels', fontsize=20)
@@ -63,7 +63,7 @@ def PlotConfusionMatrix(csv_path, output_image='confusion_matrix.png'):
     plt.savefig(output_image, dpi=300, bbox_inches='tight')
     plt.close()
 
-def PlotSeriesLineChart(x, series_config, x_axisLabel, y_axisLabel, outPath):
+def PlotSeriesLineChart(x, series_config, x_axisLabel, y_axisLabel,  outPath, rotation=0, showText = True):
     """
     绘制多数据系列的折线图
 
@@ -94,6 +94,8 @@ def PlotSeriesLineChart(x, series_config, x_axisLabel, y_axisLabel, outPath):
 
         # 提取数据并绘制
         y = config['data']
+        print(x)
+        print(y)
         plt.plot(x, y, 
                  marker=style['marker'],
                  linestyle=style['linestyle'],
@@ -104,21 +106,25 @@ def PlotSeriesLineChart(x, series_config, x_axisLabel, y_axisLabel, outPath):
                  markerfacecolor=style['markerfacecolor'],
                  label=style['label'])
         
-        for xi, yi in zip(x, y):
-            plt.text(xi, yi+0.01, f'{yi:.2f}',  # 格式化显示两位小数
-                color=style['color'],
-                fontsize=10,
-                ha='center',          # 水平居中
-                va='bottom',          # 垂直底部对齐
-                bbox=dict(facecolor='white', alpha=0.7, edgecolor='none', pad=1))
+        if showText:
+            for xi, yi in zip(x, y):
+                plt.text(xi, yi+0.01, f'{yi:.2f}',  # 格式化显示两位小数
+                    color=style['color'],
+                    fontsize=10,
+                    ha='center',          # 水平居中
+                    va='bottom',          # 垂直底部对齐
+                    bbox=dict(facecolor='white', alpha=0.7, edgecolor='none', pad=1))
 
     # 统一设置标题、标签、网格等
-    plt.xlabel(x_axisLabel, fontsize=12)
-    plt.ylabel(y_axisLabel, fontsize=12)
+    plt.xlabel(x_axisLabel, fontsize=22)
+    plt.ylabel(y_axisLabel, fontsize=22)
     plt.grid(True, linestyle='--', alpha=0.7)
-    plt.xticks(x, rotation=45)
-    plt.legend()  # 显示图例
+    plt.xticks(x, rotation=rotation, fontsize = 18)
+    plt.yticks(fontsize=18)
+    plt.legend(fontsize=18)  # 显示图例
+    plt.ylim(65, 101)
 
     plt.tight_layout()
     plt.savefig(outPath, dpi=300, bbox_inches="tight", facecolor="white")
+    print(outPath)
     plt.close()

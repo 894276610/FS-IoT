@@ -1,9 +1,11 @@
 #ifndef  _GROUNDNUT_BURSTCLASSIFIER_H_
-#define _GROUNDNUT_BURSTCLASSIFIER_H_
+#define  _GROUNDNUT_BURSTCLASSIFIER_H_
 
 #include <iostream>
+#include <string>
 #include <unordered_map>
 #include "kburst.h"
+#include <sstream>
 
 namespace groundnut{
 
@@ -14,7 +16,7 @@ struct ConfigBurstClf
     int maxUniPkt = 1000; // duplicated with configburstdataset
     int maxPktIndex = 500; 
     int maxTrainItem = 1000;
-    float distanceTrh = 0.5;
+    float distanceTrh = 0.45;
     float penalty = 0.01;
 
     std::string ToString() const
@@ -72,7 +74,6 @@ std::vector<std::unique_ptr<std::mutex>> uniPktMutex;
 std::unordered_map<uint16_t, BurstGroups>* oriTrainset;
 
 };
-    
 }
 
 #endif

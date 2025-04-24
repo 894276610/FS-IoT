@@ -78,11 +78,20 @@ class LabSetting:
     end = 60.0;
     step = 3;
 
+    cm_width = 12;
+    cm_len = 8;
+
     def ResultTxtPath(self):
         return self.baseFolder + self.datasetName + "/" + self.ToString() + ".txt";
 
     def ResultCsvPath(self):
-        return self.baseFolder + self.datasetName + "/" + self.ToString() + ".csv";   
+        baseFolder = None;
+        if self.methodName == "ahmed":
+            baseFolder =  "/home/kunling/iot-device-fingerprinting-main/results/multidatasetcombinedclassifier/" 
+        else:
+            baseFolder = self.baseFolder;
+        
+        return baseFolder + self.datasetName + "/" + self.ToString() + ".csv";   
        
     def ToString(self):
         if self.methodName == "burstiot":
@@ -91,7 +100,8 @@ class LabSetting:
             return f"{self.methodName}-metrics-{self.experimentMode}-{self.scenario}{self.configDataset.ToStringWoBurstTrh()}";
         elif self.methodName == "shahid":
             return f"{self.methodName}-metrics-{self.experimentMode}-{self.scenario}{self.configDataset.ToStringWoBurstTrh()}{self.configShahid.ToString()}";     
-            
+        elif self.methodName == "ahmed":
+            return f"R({self.configDataset.trainBudget}minutes)true_pred";
 methodNameList = ["burst", "byte"]
 
 # 6条线的配置
@@ -99,49 +109,63 @@ default_series_config = [
     {   # 系列1
         'data': None,
         'label': 'ByteIoT',
-        'marker': 's',          # 方形标记
-        'linestyle': '--',      # 虚线
+        'marker': '*',          # 方形标记
         'color': '#D95319',     # 橙色
-        'markerfacecolor': 'white'
+        'markerfacecolor': '#D95319',
+        'markeredgecolor': '#D95319',
+        'linewidth': 3,
+        'markersize': 16,   
     },
     {   # 系列2
         'data': None,
         'label': 'BurstIoT',
-        'marker': 'o',          # 圆形标记
-        'color': '#2C6FB3',     # 蓝色
-        'markeredgecolor': 'red',
-        'markerfacecolor': 'yellow'
+        'marker': '^',          # 圆形标记
+         # red
+        'color': '#FFA500',    
+        'markeredgecolor': '#FFA500',
+        'markerfacecolor': '#FFA500',
+        'alpha': 0.7,            # 透明度
+        'markersize': 10,   
+        'linewidth': 3,
     },
     {   # 系列3
         'data': None,
         'label': 'CloudEdge',
-        'marker': '^',          # 三角形标记
-        'linestyle': '-.',      # 点划线
-        'color': '#EDB120',     # 黄色
-        'linewidth': 3
+        'marker': 'o',          # 三角形标记
+        'color': '#af8215',     # 黄色 EDB120
+        'linewidth': 3,
+        'markeredgecolor': '#af8215',
+        'markerfacecolor': '#af8215',
+        'markersize': 10, 
+        'alpha': 0.3,            # 透明度
+
     },
     {   # 系列4
         'data': None,
-        'label': 'FogNet',
-        'marker': 'D',          # 菱形标记
-        'color': '#7E2F8E',     # 紫色
-        'linestyle': ':',       # 点线
-        'markersize': 10
+        'label': 'SmartMesh',
+        'marker': 's',          # 星形标记
+        'color': '#2C6FB3',     # 蓝色
+        'alpha': 0.7,            # 透明度
+        'markerfacecolor': '#2C6FB3',
+        'markeredgecolor': '#2C6FB3',
+        'markersize': 6, 
+        'linewidth': 3,
     },
     {   # 系列5
-        'data': None,
-        'label': 'SmartMesh',
-        'marker': 'X',          # 叉形标记
-        'color': '#77AC30',     # 绿色
-        'alpha': 0.7            # 透明度
-    },
-    {   # 系列6
         'data': None,
         'label': 'IoTGuard',
         'marker': 'P',          # 五边形标记
         'color': '#A2142F',     # 深红色
         'markeredgecolor': 'black',
         'markerfacecolor': '#A2142F'
+    },
+    {   
+        'data': None,
+        'label': 'ThreatWatch',
+        'marker': 'H',          # 六边形标记
+        'color': '#17BECF',     # 青色
+        'markeredgecolor': 'black',
+        'markerfacecolor': '#17BECF'
     }
 ]
 
@@ -195,4 +219,3 @@ from pathlib import Path
 # nameTemplate = "(slotDur=1800)(trainRate=0.01)(uniTrh=50)(inTrh={2,0}(ouTrh={15,0}byteiot-metrics.txt"
 
 # accuracy = ReadAccMetric(basePath.joinpath(nameTemplate))
-

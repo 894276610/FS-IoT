@@ -23,5 +23,28 @@ def GetLsEnableSettings():
 
     return settings
 
-settings = GetLsEnableSettings()
+def GetInTrhSettings():
+    settings = LabSetting();
+    settings.datasetList = ["UNSW201620"]
+    settings.methodName = "burst";
+    settings.yLabel = "combined"
+    settings.graphName = "LineChart"
+    settings.scenario = "inTrh"
+    settings.experimentMode = "division"
+
+    settings.burstTrh = BurstTrh();
+    settings.burstTrh.inTrh = 2.0;  # should meaningless
+    settings.burstTrh.ouTrh = 15.0;        
+    settings.burstTrh.uniTrh = 1000;
+    settings.burstTrh.longShortEnable = 1; 
+
+    settings.xLabel = "inTrh"
+    settings.start = 0.1;
+    settings.end = 1.5;
+    settings.step = 0.1;
+
+    return settings
+
+# settings = GetLsEnableSettings()
+settings = GetInTrhSettings()
 PlotCombined(settings)

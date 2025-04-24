@@ -1,11 +1,13 @@
 #include "shahidDataset.h"
 #include "time-utils.h"
+#include "timer.h"
 
 namespace groundnut
 {
 
 void ShahidDataset::TrainTestSplit(std::unordered_map<uint16_t, ShahidSlots>& trainSet, std::unordered_map<uint16_t, ShahidSlots>& testSet, int trainBudget)
 {
+    PROFILE_SCOPE("Split");
     for (auto& [deviceId, instances] : this->data)
     {
         {
@@ -166,6 +168,7 @@ void ShahidSlot::AddPacket(const KPacket* packet)
 
 void ShahidDataset::Load(PacketDataset& dataset)
 {
+    PROFILE_SCOPE("Load");
     // name 
     this->name = dataset.GetName();
 

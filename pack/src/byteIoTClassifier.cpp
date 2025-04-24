@@ -8,6 +8,7 @@ namespace groundnut
 
 void ByteIoTClassifier::Train(std::unordered_map<uint16_t, BurstVec>* trainset)
 {
+    
     this->oriTrainset = trainset;
 }
 
@@ -39,7 +40,7 @@ std::string ByteIoTClassifier::Predict(const std::shared_ptr<KBurst> preInstnace
 
 void ByteIoTClassifier::Predict(std::unordered_map<uint16_t, BurstVec>* testset, ClassificationMetrics& metric, std::vector<std::string>& y_true, std::vector<std::string>& y_pred, bool reviewEnable)
 {
-    PROFILE_SCOPE("predict");
+    PROFILE_SCOPE("Predict");
     std::mutex reviewMutex;
 
     // Step 1: 数据预处理（不变）

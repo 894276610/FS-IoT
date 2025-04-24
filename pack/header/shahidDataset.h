@@ -77,7 +77,7 @@ public:
     size_t configN; // first N value of the stream.
     size_t slotDuration = 1800;
     size_t timeout; // timeout value of a long stream.
-    float trainRate = 0.15;
+    float trainRate = 0.5;
     float testRate = 0.5;
 
     std::vector<groundnut::KDevice> devicesVec; 

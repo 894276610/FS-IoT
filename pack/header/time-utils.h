@@ -3,17 +3,38 @@
 #include <ctime>
 #include <tuple>
 #include <sstream>
+#include <cmath>
 
 inline float Time2Float(const timespec& time)
 {
     return static_cast<float>(time.tv_sec) + static_cast<float>(time.tv_nsec) / 1e9f;
 }
 
-inline timespec Float2time(float ftime)
+inline timespec Double2time(double ftime)
 {
-    long int sec = int(ftime);
-    long int nsec = (ftime - sec)*1e9;
-    return timespec{sec, nsec};
+    struct timespec ts;
+    double seconds = static_cast<double>(ftime); // 提升精度到double
+    double int_part;
+    double fraction = std::modf(seconds, &int_part);
+
+    // 计算纳秒并四舍五入
+    double nanoseconds = fraction * 1e9;
+    nanoseconds = std::round(nanoseconds);
+
+    // 处理进位或借位
+    if (nanoseconds >= 1e9) {
+        nanoseconds -= 1e9;
+        int_part += 1;
+    } else if (nanoseconds < 0) {
+        nanoseconds += 1e9;
+        int_part -= 1;
+    }
+
+    // 转换为timespec成员类型
+    ts.tv_sec = static_cast<time_t>(int_part);
+    ts.tv_nsec = static_cast<long>(nanoseconds);
+
+    return ts;
 }
 
 inline std::string ToString(const timespec& time) 
@@ -87,8 +108,8 @@ inline timespec& operator+=( timespec& lhs, timespec& rhs) {
     return lhs;
 }
 
-inline timespec& operator+=( timespec& lhs, float rhs) {
-    timespec trhs = Float2time(rhs);
+inline timespec& operator+=( timespec& lhs, double rhs) {
+    timespec trhs = Double2time(rhs);
     lhs = lhs + trhs;
     return lhs;
 }

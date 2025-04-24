@@ -54,6 +54,9 @@ def GetDivAttribute(path, deviceLabel, attribute):
             \s*entropy:([\d.]+)                    # entropy
             \s*burstRate:([\d.]+)                  # burstRate
             \s*diversity:(\d+)                     # diversity
+            \s*normEntropy:([\d.]+)                #normEntropy:0.34399
+            \s*uniBurstNum:(\d+)                             #uniBurstNum:354
+            \s*burstNum:(\d+)                             #burstNum:44861
         '''
 
         for block in device_blocks:
@@ -66,8 +69,10 @@ def GetDivAttribute(path, deviceLabel, attribute):
             entropy = float(match.group(3))
             burst_rate = float(match.group(4))
             diversity = int(match.group(5))
-                
-                
+            normEntropy = float(match.group(6))
+            uniBurstNum = int(match.group(7))
+            burstNum = int(match.group(8))
+                    
             if(device_name != deviceLabel):
                 continue;
 
@@ -79,5 +84,11 @@ def GetDivAttribute(path, deviceLabel, attribute):
                 return burst_rate
             elif(attribute == "diversity"):
                 return diversity
+            elif(attribute == "normEntropy"):
+                return normEntropy
+            elif(attribute == "uniBurstNum"):
+                return uniBurstNum
+            elif(attribute == "burstNum"):
+                return burstNum
             else:
                 raise "attribute not found!" 

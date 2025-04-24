@@ -3,11 +3,12 @@
 #include "boClassifier.h"
 #include "burstDataset.h"
 #include "time-utils.h"
+#include "timer.h"
 
 std::string GetMetricPath(LabSetting settings);
 std::string GetPredCsvPath(LabSetting settings);
 std::string NameDivMetric(LabSetting settings, std::string mode);
-timespec Float2time(float ftime);
+timespec Double2time(double ftime);
 
 void InstancePercentLab(LabSetting settings)
 { 
@@ -62,6 +63,8 @@ void HourBudgetLab(LabSetting settings)
     int& budget = settings.config.trainBudget;
     for(budget = settings.start; budget <= settings.end; budget+= settings.step)
     {
+        Instrumentor::Get().BeginSession("Train", datasetRootFolder + settings.methodName + std::to_string(budget) + "min" + "load-split-train-identification.json");
+        PROFILE_SCOPE("Load-Split-Train-Identification");
         std::cout << "budget: " << budget << " minute" << std::endl;
 
         ClassificationMetrics metric;
@@ -79,12 +82,17 @@ void HourBudgetLab(LabSetting settings)
         groundnut::BoClassifier clf(settings.clfConfig);
         std::cout << "before train" << std::endl;
         clf.Train(&trainset);
-        clf.Predict(&testset, metric, y_true, y_pred, settings.review);
+        groundnut::ReviewBook rbook = clf.Predict(&testset, metric, y_true, y_pred, settings.review);
         
+        Instrumentor::Get().EndSession();
         SerializePrediction(y_true, y_pred, GetPredCsvPath(settings));
         std::ofstream outMetric(GetMetricPath(settings));
         outMetric << ToString(metric);
         outMetric.close();
+
+        rbook.Tofile(GetMetricPath(settings) + ".txt");
+
+
     }
 }
 
@@ -110,7 +118,7 @@ void DivisionLab(LabSetting settings)
         pVar = &settings.config.burstTrh.inTrh;
     }
 
-    for(*pVar = Float2time(settings.start); *pVar < Float2time(settings.end); *pVar += settings.step)
+    for(*pVar = Double2time(settings.start); *pVar < Double2time(settings.end); *pVar += settings.step)
     {
         groundnut::BurstDataset burstDataset(datasetName, settings.config);
         std::ofstream outMetric(NameDivMetric(settings, "burst"));

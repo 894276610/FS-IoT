@@ -4,6 +4,7 @@
 #include "utils-metric.h"
 #include "shahidClassifier.h"
 #include "shahidDataset.h"
+#include "timer.h"
 
 std::string GetMetricPath(LabSetting settings);
 std::string GetPredCsvPath(LabSetting settings);
@@ -24,6 +25,9 @@ void HourBudgetLab(LabSetting settings)
     int& budget = settings.config.trainBudget;
     for( budget = settings.start; budget <= settings.end; budget+= settings.step)
     {
+        Instrumentor::Get().BeginSession("Train", outFolder + settings.methodName + "load-split-train-identification.json");
+        
+
         std::cout << "budget: " << budget << "min" << std::endl;
 
         groundnut::ShahidDataset shahidDataset(datasetName, 6, settings.config.slotDuration, 600);
@@ -37,6 +41,8 @@ void HourBudgetLab(LabSetting settings)
         groundnut::ShahidClassifier clf(shahidDataset.devicesVec);
         clf.Train(&trainSet);
         clf.Predict(&testSet, y_true, y_pred);
+
+        Instrumentor::Get().EndSession();
         
         SerializePrediction(y_true, y_pred, GetPredCsvPath(settings));
     }

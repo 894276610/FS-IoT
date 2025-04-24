@@ -1,5 +1,6 @@
 #include "byteIoTDataset.h"
 #include <cmath>
+#include "timer.h"
 
 namespace groundnut{
 
@@ -127,6 +128,7 @@ BPCountMap ByteIoTDataset::MergeByHash(BurstVec& burstVec)
 
 void ByteIoTDataset::Load(PacketDataset& dataset)
 {  
+    PROFILE_SCOPE("Load");
     // name 
     this->name = dataset.GetName();
 
@@ -188,6 +190,7 @@ void ByteIoTDataset::MakeInstances()
 // should not exceed the bounded instances min * 60/  1800
 float ByteIoTDataset::TrainTestSplitByTime(int min)
 {
+    PROFILE_SCOPE("Split");
     float averageTrainInstanceSize = 0;
     for (auto& [deviceId, instances] : rawMap)
     {

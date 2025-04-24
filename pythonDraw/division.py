@@ -1,7 +1,7 @@
 from pathlib import Path
 from utils import  PlotLineChart
 from utils_plot import PlotSeriesLineChart
-from pythonDraw.file_reader import GetDevList, GetDivAttribute
+from file_reader import GetDevList, GetDivAttribute
 import pandas as pd
 import re
 from utils import *
@@ -25,7 +25,7 @@ def PlotFixedDivByAttribute(setting):
     for datasetName in setting.datasetList:
         devList = GetDevList(datasetName);
         for deviceLabel in devList:
-            x_axis =[x for x in range(setting.start, setting.end, setting.step)];
+            x_axis =[round(x,1) for x in range(setting.start, setting.end, setting.step)];
             y_axis = [];
             for fixedSlot in x_axis:
                 inPath = Path(f"/media/kunling/BigE/{datasetName}").joinpath(f"fixed-divmetrics-{fixedSlot}.txt");
@@ -98,7 +98,7 @@ def PlotBurstLsEnableByDevice(datasetName, deviceLabel, setting):
 
 def PlotBurstCombinedByDevice(datasetName, deviceLabel, setting):
     x_axis = np.arange(setting.start, setting.end, setting.step).tolist()
-    y_repeatRate, y_burstRate, y_entropy = [], [], [];
+    y_disRate, y_repeatRate, y_burstRate, y_entropy, y_normEntropy, y_uniBurstNum, y_burstNum = [], [], [], [], [], [], [];
 
     xLabel = setting.xLabel;
     scenario = setting.scenario;
@@ -112,18 +112,23 @@ def PlotBurstCombinedByDevice(datasetName, deviceLabel, setting):
     
     for var in x_axis:           
         if(xLabel == "ouTrh" or xLabel == "Duration Threshold"):
-            setting.burstTrh.ouTrh = var;               
+            setting.burstTrh.ouTrh = round(var,1);               
             xLabel = "Duration Threshold";  
         elif(xLabel == "inTrh" or xLabel == "Interval Threshold"):
-            setting.burstTrh.inTrh = var;
+            setting.burstTrh.inTrh = round(var,1);
             xLabel = "Interval Threshold";
         else:
             raise "independent variable name error:" + xLabel;
         
         inPath = GetBurstDivPath(datasetName, setting.burstTrh);
-        #y_burstRate.append(getDivAttribute(inPath, deviceLabel, "burstRate"))
+        y_burstRate.append(GetDivAttribute(inPath, deviceLabel, "burstRate"))
         y_repeatRate.append(GetDivAttribute(inPath, deviceLabel, "repeat-rate"))
         y_entropy.append(GetDivAttribute(inPath, deviceLabel, "entropy"))
+        y_normEntropy.append(GetDivAttribute(inPath, deviceLabel, "normEntropy"))
+        y_uniBurstNum.append(GetDivAttribute(inPath, deviceLabel, "uniBurstNum"))
+        y_burstNum.append(GetDivAttribute(inPath, deviceLabel, "burstNum"))
+        y_disRate.append(GetDivAttribute(inPath, deviceLabel, "burstNum")/GetDivAttribute(inPath, deviceLabel, "uniBurstNum"))
+
 
     default_series_config[0]['data'] = y_repeatRate;
     default_series_config[0]['label'] = "Repeat Rate";
@@ -134,7 +139,24 @@ def PlotBurstCombinedByDevice(datasetName, deviceLabel, setting):
     default_series_config[2]['data'] = y_burstRate;
     default_series_config[2]['label'] = "Speed";
 
-    config = default_series_config[:2] 
+    default_series_config[3]['data'] = y_normEntropy;
+    default_series_config[3]['label'] = "Norm Entropy";
+
+    default_series_config[4]['data'] = y_disRate;
+    default_series_config[4]['label'] = "Distinct Rate";
+
+    default_series_config[5]['data'] = y_burstNum;
+    default_series_config[5]['label'] = "Burst Num";
+
+    print("y_burstRate length:",len(y_burstRate))
+    print("y_repeatRate length:",len(y_repeatRate))
+    print("y_entropy length:",len(y_entropy))
+    print("y_normEntropy length:",len(y_normEntropy))
+    print("y_uniBurstNum length:",len(y_uniBurstNum))
+    print("y_burstNum length:",len(y_burstNum))
+
+
+    config = default_series_config[:5] 
 
     outPath = Path(f"/home/kunling/BurstIoT/pythonDraw/dev-combined/{datasetName}-{deviceLabel}-{setting.methodName}-{xLabel}-combined-{setting.graphName}.png");
     if not Path.is_dir(outPath.parent):

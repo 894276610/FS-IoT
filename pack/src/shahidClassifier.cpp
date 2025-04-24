@@ -1,11 +1,13 @@
 #include "shahidClassifier.h"
 #include <mlpack.hpp>
+#include "timer.h"
 
 namespace groundnut
 {
 
 void ShahidClassifier::Train(std::unordered_map<uint16_t, ShahidSlots>* trainset)
 {
+    PROFILE_SCOPE("Train");
     arma::mat trainMat;
     arma::Row<size_t> trainLabels;
 
@@ -58,6 +60,7 @@ std::string ShahidClassifier::Predict(const ShahidSlot slot)
 
 void ShahidClassifier::Predict(std::unordered_map<uint16_t, ShahidSlots>* testset, std::vector<std::string>& y_true, std::vector<std::string>& y_pred)
 {
+    PROFILE_SCOPE("Identification");
     for(const auto& [devId, slots] : *testset)
     {
         for(const auto& slot : slots)

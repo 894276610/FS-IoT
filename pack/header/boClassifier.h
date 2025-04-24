@@ -5,6 +5,9 @@
 #include "kburst.h"
 #include "utils-metric.h"
 #include <sstream>
+#include <memory>
+#include <vector>
+
 
 namespace groundnut
 {
@@ -51,6 +54,13 @@ struct ReviewBook
 
         return ss.str();
     }
+
+    inline void Tofile(const std::filesystem::path path)
+    {
+        std::ofstream fout(path);
+        fout << ToString();
+        fout.close();
+    }
 };
 
 class Aggregator
@@ -65,7 +75,7 @@ public:
 private:
     std::unordered_map<std::string, float> scoreBoard;
     std::set<std::string> devNameSet;
-    float distance_threshold =0.5;
+    float distance_threshold =0.45;
     float penalty = 0.01;
 };
 
@@ -82,6 +92,6 @@ private:
     BurstClassifier bclf;
     ConfigBurstClf config;
 };
-}
 
+}
 #endif

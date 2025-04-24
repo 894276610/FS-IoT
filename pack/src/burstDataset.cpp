@@ -1,6 +1,7 @@
 #include "burstDataset.h"
 #include <cmath>
 #include "kburst.h"
+#include "timer.h"
 
 namespace groundnut{
 
@@ -128,6 +129,7 @@ float BurstDataset::ShannonEntropy(const BPCountMap& uniBPCountMap) const
 
 void BurstDataset::Load(PacketDataset& dataset)
 {  
+    PROFILE_SCOPE("Load");
     // name 
     this->name = dataset.GetName();
 
@@ -193,6 +195,7 @@ void BurstDataset::MakeBursts()
 
 float BurstDataset::TrainTestSplitByTime(int min)
 {
+    PROFILE_SCOPE("Split");
     float avgInstance = 0;
 
     for (auto& [deviceId, burstGroup] : rawMap)

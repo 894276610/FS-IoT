@@ -15,10 +15,10 @@ namespace groundnut{
 struct ConfigBurstDataset
 {
 	int slotDuration = 1800;
-	float trainRate = 0.15;
+	float trainRate = 0.15f;
 	int trainBudget = 10000; // by minute
-	float valiRate = 0.3;
-	float testRate = 0.5;
+	float valiRate = 0.3f;
+	float testRate = 0.5f;
 	BurstTrh burstTrh;
 
 	template<class Archive>

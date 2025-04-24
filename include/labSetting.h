@@ -20,9 +20,9 @@ struct LabSetting
     groundnut::ConfigBurstClf clfConfig;
     groundnut::ConfigShahid configShahid;
 
-    float start = 0.01;
-    float end = 0.15;
-    float step = 0.01;
+    double start = 0.01;
+    double end = 0.15;
+    double step = 0.01;
     bool review = false;
 
     std::string ToString()

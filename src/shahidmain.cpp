@@ -26,14 +26,15 @@ LabSetting GetHourBudgetSettings()
     LabSetting settings;
     settings.methodName = "shahid";
     settings.baseFolder = "/media/kunling/BigE/";
-    settings.datasetName = "UNSW201620";
+    settings.datasetName = "UNSW201620"; // "NEUKI2019"; //"UNSW201620";
     settings.mappingFolder = "/home/kunling/BurstIoT/mappings/";
     settings.experimentMode = "hbd";
     settings.scenario = "hbd";
+    settings.config.trainRate = 0.5f;
     // settings.config.burstTrh.inTrh = {2,0};
-    settings.start = 30; // sec slotduration
-    settings.end = 300;
-    settings.step = 30;
+    settings.start = 12300; // sec slotduration
+    settings.end = 15000;
+    settings.step = 90;
     // settings.review = false;
     return settings;
 }
