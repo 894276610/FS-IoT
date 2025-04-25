@@ -7,7 +7,7 @@
 
 std::string GetMetricPath(LabSetting settings);
 std::string GetPredCsvPath(LabSetting settings);
-std::string NameDivMetric(LabSetting settings, std::string mode);
+std::string GetDivisionStem(LabSetting settings, std::string mode);
 timespec Double2time(double ftime);
 
 void InstancePercentLab(LabSetting settings)
@@ -24,28 +24,25 @@ void InstancePercentLab(LabSetting settings)
     
     float& trainRate = settings.config.trainRate;
     settings.config.trainBudget = 100000000;
-    for(trainRate = settings.start; trainRate <= settings.end; trainRate += settings.step)
-    {
-        std::cout << "trainRate: " << trainRate << std::endl;
+    // for(trainRate = settings.start; trainRate <= settings.end; trainRate += settings.step)
+    // {
+    //     std::cout << "trainRate: " << trainRate << std::endl;
 
-        groundnut::BurstDataset burstDataset(datasetName, settings.config);
-        ClassificationMetrics metric;
+    //     groundnut::BurstDataset burstDataset(datasetName, settings.config);
 
-        burstDataset.Load(pktDataset);
-        burstDataset.TrainTestSplit();
-        auto& trainset = burstDataset.GetTrainset();
-        auto& testset = burstDataset.GetTestset();
-        std::vector<std::string> y_true, y_pred;
+    //     burstDataset.Load(pktDataset);
+    //     burstDataset.TrainTestSplit();
+    //     auto& trainset = burstDataset.GetTrainset();
+    //     auto& testset = burstDataset.GetTestset();
+    //     std::vector<std::string> y_true, y_pred;
 
-        groundnut::BoClassifier boclf(settings.clfConfig);
-        boclf.Train(&trainset);
-        groundnut::ReviewBook reviewBook = boclf.Predict(&testset, metric, y_true, y_pred, settings.review);
+    //     groundnut::BoClassifier boclf(settings.clfConfig);
+    //     boclf.Train(&trainset);
 
-        SerializePrediction(y_true, y_pred, GetPredCsvPath(settings));
-        std::ofstream outMetric(GetMetricPath(settings));
-        outMetric << ToString(metric);
-        outMetric.close(); 
-    }
+    //     ResultBundle result;
+    //     groundnut::ReviewBook reviewBook = boclf.Predict(&testset, result, settings.review);
+    //     result.SaveCsv(GetPredCsvPath(settings));
+    // }
 }
 
 void HourBudgetLab(LabSetting settings)
@@ -67,7 +64,7 @@ void HourBudgetLab(LabSetting settings)
         PROFILE_SCOPE("Load-Split-Train-Identification");
         std::cout << "budget: " << budget << " minute" << std::endl;
 
-        ClassificationMetrics metric;
+        // ClassificationMetrics metric;
         groundnut::BurstDataset burstDataset(datasetName, settings.config);
 
         burstDataset.Load(pktDataset);
@@ -82,15 +79,15 @@ void HourBudgetLab(LabSetting settings)
         groundnut::BoClassifier clf(settings.clfConfig);
         std::cout << "before train" << std::endl;
         clf.Train(&trainset);
-        groundnut::ReviewBook rbook = clf.Predict(&testset, metric, y_true, y_pred, settings.review);
+        // groundnut::ReviewBook rbook = clf.Predict(&testset, metric, y_true, y_pred, settings.review);
         
         Instrumentor::Get().EndSession();
-        SerializePrediction(y_true, y_pred, GetPredCsvPath(settings));
-        std::ofstream outMetric(GetMetricPath(settings));
-        outMetric << ToString(metric);
-        outMetric.close();
+        // SerializePrediction(y_true, y_pred, GetPredCsvPath(settings));
+        // std::ofstream outMetric(GetMetricPath(settings));
+        // outMetric << ToString(metric);
+        // outMetric.close();
 
-        rbook.Tofile(GetMetricPath(settings) + ".txt");
+        // rbook.Tofile(GetMetricPath(settings) + ".txt");
 
 
     }
@@ -118,25 +115,25 @@ void DivisionLab(LabSetting settings)
         pVar = &settings.config.burstTrh.inTrh;
     }
 
-    for(*pVar = Double2time(settings.start); *pVar < Double2time(settings.end); *pVar += settings.step)
-    {
-        groundnut::BurstDataset burstDataset(datasetName, settings.config);
-        std::ofstream outMetric(NameDivMetric(settings, "burst"));
-        groundnut::BurstGroups totalSamples;
+    // for(*pVar = Double2time(settings.start); *pVar < Double2time(settings.end); *pVar += settings.step)
+    // {
+    //     groundnut::BurstDataset burstDataset(datasetName, settings.config);
+    //     std::ofstream outMetric(GetDivisionStem(settings, "burst"));
+    //     groundnut::BurstGroups totalSamples;
 
-        burstDataset.Load(pktDataset);
-        auto& rawMap = burstDataset.GetRawMap();
+    //     burstDataset.Load(pktDataset);
+    //     auto& rawMap = burstDataset.GetRawMap();
 
-        for(auto& [devid, burstGroups]: rawMap)
-        {
-            std::string deviceName = burstDataset.GetDevicesVec()[devid].GetLabel();
-            groundnut::DivMetric metric = burstDataset.GenDivMetric(deviceName, burstGroups);
-            totalSamples.insert(totalSamples.end(), burstGroups.begin(), burstGroups.end());
-            outMetric << metric.ToString();
-        }
+    //     for(auto& [devid, burstGroups]: rawMap)
+    //     {
+    //         std::string deviceName = burstDataset.GetDevicesVec()[devid].GetLabel();
+    //         groundnut::DivMetric metric = burstDataset.GenDivMetric(deviceName, burstGroups);
+    //         totalSamples.insert(totalSamples.end(), burstGroups.begin(), burstGroups.end());
+    //         outMetric << metric.ToString();
+    //     }
 
-        groundnut::DivMetric metric = burstDataset.GenDivMetric("total", totalSamples);
-        outMetric << metric.ToString();        
-        outMetric.close();
-    }
+    //     groundnut::DivMetric metric = burstDataset.GenDivMetric("total", totalSamples);
+    //     outMetric << metric.ToString();        
+    //     outMetric.close();
+    // }
 }

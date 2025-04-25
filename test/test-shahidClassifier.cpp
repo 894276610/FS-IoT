@@ -14,13 +14,13 @@ using namespace groundnut;
 TEST_CASE("byteiot classifier could init", "[single-file]")
 {
     // Setup device and test packets
-    groundnut::PacketDataset packetDataset("Aalto-partial");
+    groundnut::PacketDataset packetDataset(groundnut::DatasetEnum::Aalto_TEST);
     packetDataset.AddTragetDevice("5c:cf:7f:06:d9:02", "iKettle2");
     packetDataset.AddTragetDevice("3c:49:37:03:17:db", "ednet-cam1");
 
     packetDataset.LoadPcap(pcapPath);
     
-    ShahidDataset shahidDataset("Aalto-partial", 6, 1800, 600);
+    ShahidDataset shahidDataset(groundnut::DatasetEnum::Aalto_TEST, 6, 1800, 600);
     shahidDataset.Load(packetDataset);
 
     std::unordered_map<uint16_t, ShahidSlots> trainSet, testSet;

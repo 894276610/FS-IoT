@@ -63,7 +63,7 @@ class ShahidDataset
 {
 
 public:
-    ShahidDataset(std::string name, size_t configN, size_t timeSlot, size_t timeout=600): 
+    ShahidDataset(DatasetEnum name, size_t configN, size_t timeSlot, size_t timeout=600): 
     name(name), configN(configN), slotDuration(timeSlot), timeout(timeout)
     {}
 
@@ -73,7 +73,7 @@ public:
     std::unordered_map<uint16_t, ShahidSlots>& GetData(){return data;}
     
 public:
-    std::string name;
+    DatasetEnum name;
     size_t configN; // first N value of the stream.
     size_t slotDuration = 1800;
     size_t timeout; // timeout value of a long stream.

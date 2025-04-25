@@ -1,20 +1,17 @@
 #include "labSetting.h"
-
-void InstancePercentLab(LabSetting settings);
-void HourBudgetLab(LabSetting settings);
-void DivisionLab(LabSetting settings);
+#include "experiment.h"
 
 LabSetting GetDivisionSettings()
 {
     LabSetting settings;
 
-    settings.methodName = "burstiot";
+    settings.methodName = MethodEnum::FSIOT;
     settings.baseFolder = "/media/kunling/BigE/";
-    settings.datasetName = "UNSW201620";
+    settings.datasetName = groundnut::DatasetEnum::UNSW201620; ;
     settings.mappingFolder = "/home/kunling/BurstIoT/mappings/";
     settings.experimentMode = "division";
     //settings.config;
-    settings.scenario = "inTrh";
+    settings.scenario = ExperimentEnum::BURST_INTRH_EVALUATION;
     settings.config.burstTrh.inTrh = {2,0};
     settings.start = 0.1; // sec slotduration
     settings.end = 0.5;
@@ -23,16 +20,16 @@ LabSetting GetDivisionSettings()
     return settings;
 }
 
-LabSetting GetHourBudgetSettings()
+LabSetting GetFewShotSettingTemplate()
 {
     LabSetting settings;
 
-    settings.methodName = "burstiot";
+    settings.methodName = MethodEnum::FSIOT;
     settings.baseFolder = "/media/kunling/BigE/";
-    settings.datasetName = "IOTBEHAV2021"; // "NEUKI2019"; //"UNSW201620"; //"NEUKI2019" //IOTBEHAV2021
+    settings.datasetName = groundnut::DatasetEnum::UNSW201620; // "NEUKI2019"; //"UNSW201620"; //"NEUKI2019" //IOTBEHAV2021
     settings.mappingFolder = "/home/kunling/BurstIoT/mappings/";
     settings.experimentMode = "hbd";
-    settings.scenario = "hbd";
+    settings.scenario = ExperimentEnum::FEW_SHOTS;
     settings.config.burstTrh.inTrh = {2,0};
     settings.start = 30; // sec slotduration
     settings.end = 30;
@@ -42,20 +39,22 @@ LabSetting GetHourBudgetSettings()
 }
 
 int main() {
-    
-  LabSetting settings = GetHourBudgetSettings();
-//   LabSetting settings = GetDivisionSettings();
+   
+LabSetting settings = GetFewShotSettingTemplate();
+std::unique_ptr<Experiment> pExpreiment = CreateExperiment(settings);
+pExpreiment->Run();
 
-  if(settings.experimentMode == "ipc")
-  {
-      InstancePercentLab(settings);
-  }
-  else if(settings.experimentMode == "hbd")
-  {
-      HourBudgetLab(settings);
-  }
-  else if(settings.experimentMode == "division")
-  {
-      DivisionLab(settings);
-  }
+// Create an experiment
+//   if(settings.experimentMode == "ipc")
+//   {
+//       InstancePercentLab(settings);
+//   }
+//   else if(settings.experimentMode == "hbd")
+//   {
+//       HourBudgetLab(settings);
+//   }
+//   else if(settings.experimentMode == "division")
+//   {
+//       DivisionLab(settings);
+//   }
 }

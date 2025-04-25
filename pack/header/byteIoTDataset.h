@@ -8,7 +8,7 @@ class ByteIoTDataset
 
 public:
     ByteIoTDataset() = default;
-	ByteIoTDataset(const std::string& datasetName, ConfigBurstDataset configBurstDataset):
+	ByteIoTDataset(const DatasetEnum datasetName, ConfigBurstDataset configBurstDataset):
 	name(datasetName), config(configBurstDataset){}
 
     void Load(PacketDataset&);
@@ -18,7 +18,7 @@ public:
     DivMetric GenDivMetric(std::string name, BurstVec& burstVec);
 
 	std::vector<KDevice>& GetDevicesVec(){return devicesVec;}
-    std::string & GetName(){return name;}
+    DatasetEnum GetName(){return name;}
 
     std::unordered_map<uint16_t, BurstVec>& GetRawMap(){return rawMap;}
 	std::unordered_map<uint16_t, BurstVec>& GetTrainset(){return trainset;}
@@ -35,7 +35,7 @@ private:
     std::unordered_map<std::shared_ptr<KBurst>, int> MergeByHash(BurstVec& burstVec);
 
 private:
-    std::string name;
+    DatasetEnum name;
     ConfigBurstDataset config;
 
     std::vector<groundnut::KDevice> devicesVec;

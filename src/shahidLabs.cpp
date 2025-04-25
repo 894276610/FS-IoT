@@ -1,7 +1,6 @@
 #include <string>
 #include <packetDataset.h>
 #include "labSetting.h"
-#include "utils-metric.h"
 #include "shahidClassifier.h"
 #include "shahidDataset.h"
 #include "timer.h"
@@ -23,27 +22,27 @@ void HourBudgetLab(LabSetting settings)
     pktDataset.AutoLoad(outFolder,pktDatasetOutName);
 
     int& budget = settings.config.trainBudget;
-    for( budget = settings.start; budget <= settings.end; budget+= settings.step)
-    {
-        Instrumentor::Get().BeginSession("Train", outFolder + settings.methodName + "load-split-train-identification.json");
+    // for( budget = settings.start; budget <= settings.end; budget+= settings.step)
+    // {
+    //     Instrumentor::Get().BeginSession("Train", outFolder + settings.methodName + "load-split-train-identification.json");
         
 
-        std::cout << "budget: " << budget << "min" << std::endl;
+    //     std::cout << "budget: " << budget << "min" << std::endl;
 
-        groundnut::ShahidDataset shahidDataset(datasetName, 6, settings.config.slotDuration, 600);
-        std::unordered_map<uint16_t, groundnut::ShahidSlots> trainSet, testSet;
+    //     groundnut::ShahidDataset shahidDataset(datasetName, 6, settings.config.slotDuration, 600);
+    //     std::unordered_map<uint16_t, groundnut::ShahidSlots> trainSet, testSet;
 
-        shahidDataset.Load(pktDataset);
+    //     shahidDataset.Load(pktDataset);
 
-        shahidDataset.TrainTestSplit(trainSet, testSet, budget);
-        std::vector<std::string> y_true, y_pred;
+    //     shahidDataset.TrainTestSplit(trainSet, testSet, budget);
+    //     std::vector<std::string> y_true, y_pred;
     
-        groundnut::ShahidClassifier clf(shahidDataset.devicesVec);
-        clf.Train(&trainSet);
-        clf.Predict(&testSet, y_true, y_pred);
+    //     groundnut::ShahidClassifier clf(shahidDataset.devicesVec);
+    //     clf.Train(&trainSet);
+    //     clf.Predict(&testSet, y_true, y_pred);
 
-        Instrumentor::Get().EndSession();
+    //     Instrumentor::Get().EndSession();
         
-        SerializePrediction(y_true, y_pred, GetPredCsvPath(settings));
-    }
+    //     SerializePrediction(y_true, y_pred, GetPredCsvPath(settings));
+    // }
 }

@@ -1,7 +1,7 @@
 #include "boClassifier.h"
 #include <set>
 #include <cmath>
-#include "utils-metric.h"
+#include "resultBundle.h"
 #include <thread>
 #include "timer.h"
 
@@ -119,7 +119,7 @@ std::vector<ReviewBurst> BoClassifier::Predict(BurstVec instance, std::string& s
     return reviewList;
 }
 
-ReviewBook BoClassifier::Predict(std::unordered_map<uint16_t, BurstGroups>* testset,  ClassificationMetrics& metric, std::vector<std::string>& y_true, std::vector<std::string>& y_pred, bool reviewEnable)
+ReviewBook BoClassifier::Predict(std::unordered_map<uint16_t, BurstGroups>* testset,  ResultBundle& result, bool reviewEnable)
 {
     PROFILE_SCOPE("predict");
     std::mutex reviewMutex;
@@ -134,8 +134,8 @@ ReviewBook BoClassifier::Predict(std::unordered_map<uint16_t, BurstGroups>* test
     }
 
     // Step 2: 预分配结果容器
-    y_pred.resize(allBgroups.size());
-    y_true.resize(allBgroups.size());
+    std::vector<std::string> y_pred(allBgroups.size());
+    std::vector<std::string> y_true(allBgroups.size());
 
     // Step 3: 并行处理实现
     const size_t num_threads = std::thread::hardware_concurrency();
@@ -183,7 +183,7 @@ ReviewBook BoClassifier::Predict(std::unordered_map<uint16_t, BurstGroups>* test
     std::cout << "actual vec size" << y_true.size() << std::endl;
     std::cout << "prediction vec size" << y_pred.size() << std::endl;
 
-    metric = calculate_metrics(y_true, y_pred);
+    result.Update(y_true, y_pred);
     return rBook;
 }
 

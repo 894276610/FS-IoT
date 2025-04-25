@@ -6,16 +6,16 @@
 
 namespace groundnut{
 
-void PacketDataset::AutoLoad(const std::string& datasetRootFolder, const std::string& pktDatasetOutName)
+void PacketDataset::AutoLoad(const std::string& datasetRawFolder, const std::string& pktDatasetFilePath)
 {
-    if(std::filesystem::exists(datasetRootFolder + pktDatasetOutName))
+    if(std::filesystem::exists(pktDatasetFilePath))
     {
-        LoadBin(datasetRootFolder + pktDatasetOutName);
+        LoadBin(pktDatasetFilePath);
     }
     else
     {
-        LoadPcap(datasetRootFolder + "RAW");
-        Serialize(datasetRootFolder+ pktDatasetOutName);  
+        LoadPcap(datasetRawFolder);
+        Serialize(pktDatasetFilePath);  
     }
 }
 
@@ -67,7 +67,7 @@ void PacketDataset::LoadPcap(const std::filesystem::path& inputFolder)
                 {
                     tasks.emplace_back(std::async(std::launch::async,
                         [this, i, smallrawVec] {
-                            StoreKPackets(i, smallrawVec, this->name);
+                            StoreKPackets(i, smallrawVec);
                         }));
                 }
 
@@ -94,7 +94,7 @@ void PacketDataset::LoadPcap(const std::filesystem::path& inputFolder)
     }
 }
 
-void PacketDataset::StoreKPackets(int index, std::vector<pcpp::RawPacket*> rawVec, const std::string& datasetName)
+void PacketDataset::StoreKPackets(int index, std::vector<pcpp::RawPacket*> rawVec)
 {
     //PROFILE_SCOPE("StoreKPackets ");
 	

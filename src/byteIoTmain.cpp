@@ -8,7 +8,6 @@
 #include "burstDataset.h"
 #include "boClassifier.h"
 #include "kburst.h"
-#include "utils-metric.h"
 #include <fstream>
 #include "timer.h"
 
@@ -24,11 +23,12 @@ void DivisionLab(LabSetting settings);
 LabSetting GetDivisionSetting()
 {
     LabSetting settings;
-    settings.methodName = "byteiot";
+    settings.methodName = MethodEnum::BYTEIOT;
     settings.baseFolder = "/media/kunling/BigE/";
-    settings.datasetName = "UNSW201620";
+    settings.datasetName = groundnut::DatasetEnum::BehavIoT2021;
     settings.mappingFolder = "/home/kunling/BurstIoT/mappings/";
     settings.experimentMode = "division";
+    settings.scenario = ExperimentEnum::BYTEIOT_SLOT_LENGTH;
 
     settings.config.slotDuration = 15;
     settings.start = 15; // sec slotduration
@@ -38,15 +38,15 @@ LabSetting GetDivisionSetting()
     return settings;
 }
 
-LabSetting GetHourBudgetSettings()
+LabSetting GetFewShotSettingTemplate()
 {
     LabSetting settings;
-    settings.methodName = "byteiot";
+    settings.methodName = MethodEnum::BYTEIOT;
     settings.baseFolder = "/media/kunling/BigE/";
-    settings.datasetName = "IOTBEHAV2021"; //"IOTBEHAV2021";//"NEUKI2019"; // "UNSW201620";
+    settings.datasetName = groundnut::DatasetEnum::BehavIoT2021; //"IOTBEHAV2021";//"NEUKI2019"; // "UNSW201620";
     settings.mappingFolder = "/home/kunling/BurstIoT/mappings/";
     settings.experimentMode = "hbd";
-    settings.scenario = "hbd";
+    settings.scenario = ExperimentEnum::FEW_SHOTS;
     settings.config.burstTrh.inTrh = {2,0};
     settings.config.valiRate = 0.0f;
     settings.config.trainRate = 0.5f;
@@ -59,20 +59,20 @@ LabSetting GetHourBudgetSettings()
 
 int main() {
     
-    LabSetting settings = GetHourBudgetSettings();
+    LabSetting settings = GetFewShotSettingTemplate();
 
-    if(settings.experimentMode == "ipc")
-    {
-        InstancePercentLab(settings);
-    }
-    else if(settings.experimentMode == "hbd")
-    {
-        HourBudgetLab(settings);
-    }
-    else if(settings.experimentMode == "division")
-    {
-        DivisionLab(settings);
-    }
+    // if(settings.experimentMode == "ipc")
+    // {
+    //     InstancePercentLab(settings);
+    // }
+    // else if(settings.experimentMode == "hbd")
+    // {
+    //     HourBudgetLab(settings);
+    // }
+    // else if(settings.experimentMode == "division")
+    // {
+    //     DivisionLab(settings);
+    // }
 }
 
 /*

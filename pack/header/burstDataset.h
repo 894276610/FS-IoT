@@ -57,9 +57,9 @@ class BurstDataset
 public:
 
 	BurstDataset() = default;
-	BurstDataset(const std::string& datasetName, const ConfigBurstDataset configBurstDataset):
+	BurstDataset(const DatasetEnum datasetName, const ConfigBurstDataset configBurstDataset):
 	name(datasetName), configBurstDataset(configBurstDataset) {}
-	BurstDataset(const std::string& datasetName) : name(datasetName){}
+	BurstDataset(const DatasetEnum datasetName) : name(datasetName){}
 
 	void Load(PacketDataset&);
 	DivMetric GenDivMetric(std::string name, BurstGroups& burstGroups);
@@ -78,7 +78,7 @@ public:
 	float TrainTestSplitByTime(int min);
 
 	// getter and setter
-	std::string & GetName(){return name;}
+	DatasetEnum GetName(){return name;}
 	int GetSlotDuration(){return configBurstDataset.slotDuration;}
 	BurstTrh& GetBurstTrh(){return configBurstDataset.burstTrh;}
 	std::vector<KDevice>& GetDevicesVec(){return devicesVec;}
@@ -90,7 +90,7 @@ public:
 
 	void SetSlotDuration(int duration){configBurstDataset.slotDuration = duration;}
 	void SetBurstTrh(const BurstTrh& trh){this->configBurstDataset.burstTrh = trh;}
-	void SetName(const std::string name){this->name = name;}
+	void SetName(DatasetEnum name){this->name = name;}
 	
 	template<class Archive>
 	void serialize(Archive& ar, const unsigned int version) {
@@ -106,7 +106,7 @@ private:
     void MakeBursts();	
 
 private:
-	std::string name;
+	DatasetEnum name;
 	ConfigBurstDataset configBurstDataset;
     std::vector<groundnut::KDevice> devicesVec; // should Add constructor !
 

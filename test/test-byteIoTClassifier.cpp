@@ -13,14 +13,14 @@ using namespace groundnut;
 TEST_CASE("byteiot classifier could init", "[single-file]")
 {
     // Setup device and test packets
-    groundnut::PacketDataset packetDataset("Aalto-partial");
+    groundnut::PacketDataset packetDataset(groundnut::DatasetEnum::Aalto_TEST);
     packetDataset.AddTragetDevice("5c:cf:7f:06:d9:02", "iKettle2");
     packetDataset.AddTragetDevice("3c:49:37:03:17:db", "ednet-cam1");
 
     packetDataset.LoadPcap(pcapPath);
     
     ConfigBurstDataset config;
-    ByteIoTDataset byteIoTDataset("Aalto-partial", config);
+    ByteIoTDataset byteIoTDataset(groundnut::DatasetEnum::Aalto_TEST, config);
 
     byteIoTDataset.Load(packetDataset);
     byteIoTDataset.TrainTestSplit();

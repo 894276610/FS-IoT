@@ -69,10 +69,17 @@ struct DatasetStat
 	}
 };
 
+enum class DatasetEnum {
+    UNSW201620, // 20 days
+    BehavIoT2021,
+	UNSW_TEST,
+	Aalto_TEST
+};
+
 class PacketDataset
 {
 public:
-	inline PacketDataset(const std::string& datasetName):name(datasetName)
+	inline PacketDataset(DatasetEnum dataset):name(dataset)
 	{
 	}
 
@@ -83,11 +90,11 @@ public:
     void LoadPcap(const std::filesystem::path& inputFolder);
 
     // getter and setter
-	inline const std::string GetName(){return name;}
+	inline const DatasetEnum GetName(){return name;}
 	inline std::set<KPacket>& GetDataset(){return dataset;}
 	inline const std::unordered_map<std::string, groundnut::KDevice> & GetDevicesMap(){return this->devicesMap;}
     inline const DatasetStat& GetDatasetStat(){return stat;}
-    inline void SetDatasetName(const std::string& datasetName){this->name = datasetName;}
+    inline void SetDatasetName(const DatasetEnum dataset){this->name = dataset;}
     inline void AddTragetDevice(pcpp::MacAddress mac, std::string label)
     {
 		stat.devStat.emplace_back(label);
@@ -110,7 +117,7 @@ public:
 	
 private:   
     void GarbageCollection(int taskNum);	
-    void StoreKPackets(int index, std::vector<pcpp::RawPacket*> rawVec, const std::string& datasetName);
+    void StoreKPackets(int index, std::vector<pcpp::RawPacket*> rawVec);
     void AddPacket(short deviceId, short signedLen, uint32_t hash5tuple, timespec timestamp);
     bool AddPacket(const std::string& addr, bool isSource, pcpp::RawPacket* pRawPacket);
     int  safeGetDevId(const std::string& addr);
@@ -122,7 +129,7 @@ public:
 	std::vector<pcpp::RawPacketVector*> GetRawPacketVec(){return rawPacketVec;}
 
 private:
-	std::string name;
+	DatasetEnum name;
 	std::set<KPacket> dataset;
 	DatasetStat stat;
     std::unordered_map<std::string, groundnut::KDevice> devicesMap; // mac string, kdevice

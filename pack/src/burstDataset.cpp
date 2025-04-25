@@ -210,7 +210,7 @@ float BurstDataset::TrainTestSplitByTime(int min)
         int maxTrainNum = std::ceil(totalSize * configBurstDataset.trainRate);
         size_t trainNum = std::min(maxTrainNum, minBudgetTrainNum);
 
-        std::cout << "device: " << GetDevicesVec()[deviceId].GetLabel() << "totalSize:" << totalSize << "trainNum:" << trainNum << std::endl;
+        //std::cout << "device: " << GetDevicesVec()[deviceId].GetLabel() << "totalSize:" << totalSize << "trainNum:" << trainNum << std::endl;
 
         int valiNum = std::floor(totalSize * configBurstDataset.valiRate);
         size_t testNum = std::ceil(totalSize * configBurstDataset.testRate);

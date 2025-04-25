@@ -33,16 +33,16 @@ include_directories(${Mlpack_INCLUDE_DIR})
 
 # add_compile_options(-Wunused-variable -Wall -Wextra -Werror)
 
-add_executable(BurstIoTExe ${CMAKE_SOURCE_DIR}/src/burstIoTmain.cpp ${CMAKE_SOURCE_DIR}/src/burstIoTLabs.cpp ${CMAKE_SOURCE_DIR}/src/utils.cpp)
-add_executable(ByteIoTExe ${CMAKE_SOURCE_DIR}/src/byteIoTmain.cpp ${CMAKE_SOURCE_DIR}/src/byteIoTLabs.cpp ${CMAKE_SOURCE_DIR}/src/utils.cpp)
-add_executable(ShahidExe ${CMAKE_SOURCE_DIR}/src/shahidmain.cpp ${CMAKE_SOURCE_DIR}/src/shahidLabs.cpp ${CMAKE_SOURCE_DIR}/src/utils.cpp)
+add_executable(FSIoTExe ${CMAKE_SOURCE_DIR}/src/burstIoTmain.cpp ${CMAKE_SOURCE_DIR}/src/labSetting.cpp ${CMAKE_SOURCE_DIR}/src/experiment.cpp )
+add_executable(ByteIoTExe ${CMAKE_SOURCE_DIR}/src/byteIoTmain.cpp ${CMAKE_SOURCE_DIR}/src/labSetting.cpp ${CMAKE_SOURCE_DIR}/src/experiment.cpp )
+add_executable(ShahidExe ${CMAKE_SOURCE_DIR}/src/shahidmain.cpp ${CMAKE_SOURCE_DIR}/src/labSetting.cpp ${CMAKE_SOURCE_DIR}/src/experiment.cpp )
 
 # add_executable(MLExe ${CMAKE_SOURCE_DIR}/src/MLmain.cpp)
 
 # target_compile_options(MyExecutable PRIVATE -fsanitize=address -fno-omit-frame-pointer)
 # target_link_options(MyExecutable PRIVATE -fsanitize=address)
 
-target_link_libraries(BurstIoTExe pack Boost::serialization Packet++ Pcap++ Common++ )
+target_link_libraries(FSIoTExe pack Boost::serialization Packet++ Pcap++ Common++ )
 target_link_libraries(ByteIoTExe pack Boost::serialization Packet++ Pcap++ Common++)
 target_link_libraries(ShahidExe pack Boost::serialization Packet++ Pcap++ Common++)
 # target_link_libraries(MLExe OpenMP::OpenMP_CXX armadillo)
