@@ -243,29 +243,17 @@ float ByteIoTDataset::TrainTestSplit()
         // std::cout << "device: " + GetDevicesVec()[deviceId].GetLabel() << std::endl;
         // std::cout << "totalSize:" << totalSize<< std::endl;
         size_t trainNum = std::ceil(totalSize * config.trainRate);
-        int valiNum = std::floor(totalSize * config.valiRate);
         size_t testNum = std::ceil(totalSize * config.testRate);
 
-        if(trainNum + valiNum + testNum > instances.size())
+        if(trainNum  + testNum > instances.size())
         {
             std::cout << "warning: overflow of "<< GetDevicesVec()[deviceId].GetLabel()<<std::endl;
-            std::cout << "trainNum:" << trainNum << ",valiNum:" << valiNum << ",testNum:" << testNum << std::endl;
-            std::cout << "totalSize:" + std::to_string(totalSize);
-            std::cout << ", trainValiTestSum:" + std::to_string(trainNum + valiNum + testNum) << std::endl << std::endl;
+            std::cout << "trainNum:" << trainNum  << ",testNum:" << testNum << std::endl;
+            std::cout << "totalSize:" + std::to_string(totalSize) << std::endl;
             
             //throw "overflow ! totalSize:" + std::to_string(totalSize) + "," \
             + std::to_string(trainNum + valiNum + testNum)\
             + "device: " + GetDevicesVec()[deviceId].GetLabel() + "\n";
-        }
-
-        if( valiNum <= 0 )
-        {
-            std::cout << "warning: vali sample of "<< GetDevicesVec()[deviceId].GetLabel()<< " is empty, device:"  << std::endl;
-            std::cout << "trainNum:" << trainNum << ",valiNum:" << valiNum << ",testNum:" << testNum << std::endl;
-            std::cout << "totalSize:" + std::to_string(totalSize);
-            std::cout << ", trainValiTestSum:" + std::to_string(trainNum + valiNum + testNum) << std::endl << std::endl;
-
-            //throw "valiNum < 0, device:" + GetDevicesVec()[deviceId].GetLabel() + "\n";
         }
 
         size_t testStart = instances.size() - testNum;

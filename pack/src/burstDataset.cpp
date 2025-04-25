@@ -212,30 +212,20 @@ float BurstDataset::TrainTestSplitByTime(int min)
 
         //std::cout << "device: " << GetDevicesVec()[deviceId].GetLabel() << "totalSize:" << totalSize << "trainNum:" << trainNum << std::endl;
 
-        int valiNum = std::floor(totalSize * configBurstDataset.valiRate);
         size_t testNum = std::ceil(totalSize * configBurstDataset.testRate);
 
         size_t testStart = totalSize - testNum;
-        size_t valiStart = totalSize - testNum - valiNum;
 
-        if(trainNum + testNum + valiNum > burstGroup.size())
+        if(trainNum + testNum  > burstGroup.size())
         {
-            valiNum = burstGroup.size() - trainNum - testNum;
             std::cout << "overflow ! totalNum:" + std::to_string(burstGroup.size())\
              + "device: " + GetDevicesVec()[deviceId].GetLabel() + "\n";
         }
 
-        if( valiNum <=0 )
-        {
-            std::cout << "valiNum < 0, device:" + GetDevicesVec()[deviceId].GetLabel() + "\n";
-        }
-
         BurstGroups trainGroups(burstGroup.begin(), burstGroup.begin() + trainNum);
-        BurstGroups valiGroups(burstGroup.begin() + valiStart, burstGroup.begin() + valiStart + valiNum);
         BurstGroups testGroups(burstGroup.begin() + testStart, burstGroup.end());
 
         trainset.insert({ deviceId, trainGroups });
-        valiset.insert({ deviceId, valiGroups });
         testset.insert({ deviceId, testGroups });
         
         avgInstance += trainNum;
@@ -257,29 +247,21 @@ void BurstDataset::TrainTestSplit()
         
         size_t trainNum = std::ceil(burstGroup.size() * configBurstDataset.trainRate);
         size_t testNum = std::ceil(burstGroup.size() * configBurstDataset.testRate);
-        int valiNum = std::floor(burstGroup.size() * configBurstDataset.valiRate);
         
-        if(trainNum + testNum + valiNum > burstGroup.size())
+        if(trainNum + testNum  > burstGroup.size())
         {
-            valiNum = burstGroup.size() - trainNum - testNum;
             throw "overflow ! totalNum:" + std::to_string(burstGroup.size())\
              + "device: " + GetDevicesVec()[deviceId].GetLabel() + "\n";
         }
 
-        if( valiNum <=0 )
-        {
-            throw "valiNum < 0, device:" + GetDevicesVec()[deviceId].GetLabel() + "\n";
-        }
+
         
         size_t testStart = burstGroup.size() - testNum;
-        size_t valiStart = burstGroup.size() - testNum - valiNum;
 
         BurstGroups trainGroups(burstGroup.begin(), burstGroup.begin() + trainNum);
-        BurstGroups valiGroups(burstGroup.begin() + valiStart, burstGroup.begin() + valiStart + valiNum);
         BurstGroups testGroups(burstGroup.begin() + testStart, burstGroup.end());
 
         trainset.insert({ deviceId, trainGroups });
-        valiset.insert({ deviceId, valiGroups });
         testset.insert({ deviceId, testGroups });
     }
 }

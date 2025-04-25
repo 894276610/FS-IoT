@@ -51,7 +51,7 @@ TEST_CASE("burstClassifier init", "[single-file]")
     // ednet train instance contains 2 bursts;
     REQUIRE(burstDataset.GetTestset()[1][0].size() == 2);
     
-    ConfigBurstClf cfg;
+    FsClfConfig cfg;
     BurstClassifier clf(cfg);
     auto& trainset = burstDataset.GetTrainset();
     clf.Train(&trainset);

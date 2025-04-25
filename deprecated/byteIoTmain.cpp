@@ -26,15 +26,14 @@ LabSetting GetDivisionSetting()
     settings.methodName = MethodEnum::BYTEIOT;
     settings.baseFolder = "/media/kunling/BigE/";
     settings.datasetName = groundnut::DatasetEnum::BehavIoT2021;
-    settings.mappingFolder = "/home/kunling/BurstIoT/mappings/";
-    settings.experimentMode = "division";
+    settings.independentArg = IndependentArgEnum::WINDOW_SIZE;
     settings.scenario = ExperimentEnum::BYTEIOT_SLOT_LENGTH;
 
-    settings.config.slotDuration = 15;
+    settings.slotDuration = 15;
     settings.start = 15; // sec slotduration
     settings.end = 300;
     settings.step = 15;
-    settings.review = false;
+    settings.clfConfig.review = false;
     return settings;
 }
 
@@ -44,16 +43,14 @@ LabSetting GetFewShotSettingTemplate()
     settings.methodName = MethodEnum::BYTEIOT;
     settings.baseFolder = "/media/kunling/BigE/";
     settings.datasetName = groundnut::DatasetEnum::BehavIoT2021; //"IOTBEHAV2021";//"NEUKI2019"; // "UNSW201620";
-    settings.mappingFolder = "/home/kunling/BurstIoT/mappings/";
-    settings.experimentMode = "hbd";
+    settings.independentArg = IndependentArgEnum::TRAINING_SIZE;
     settings.scenario = ExperimentEnum::FEW_SHOTS;
-    settings.config.burstTrh.inTrh = {2,0};
-    settings.config.valiRate = 0.0f;
-    settings.config.trainRate = 0.5f;
+    settings.burstTrh.inTrh = {2,0};
+    settings.trainRate = 0.5f;
     settings.start = 4200; // sec slotduration
     settings.end = 4800;
     settings.step = 300;
-    settings.review = false;
+    settings.clfConfig.review = false;
     return settings;
 }
 

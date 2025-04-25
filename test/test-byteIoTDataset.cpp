@@ -27,7 +27,6 @@ TEST_CASE(" packetDataset init test", "[single-file]")
     config.slotDuration = 1800;
 	config.trainRate = 0.15;
 	config.trainBudget = 10000; // by minute
-	config.valiRate = 0.3;
 	config.testRate = 0.5;
 
     BurstTrh trh{50, {2,0}, {15,0}};

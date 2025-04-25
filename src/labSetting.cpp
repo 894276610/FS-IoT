@@ -1,5 +1,22 @@
 #include "labSetting.h"
 
+std::string LabSetting::GetScenarioInfo()
+{
+    std::stringstream ss;
+    ss << methodName << "-" << scenario << "-" ;
+    ss << independentArg << "-" << datasetName << "-";
+    return ss.str();
+}
+
+std::string LabSetting::GetTrainTestSplitInfo()
+{
+    std::stringstream ss;
+    ss << "(slot=" << slotDuration << ")";
+    ss << "(trainR=" << trainRate << ")";
+    ss << "(trainB=" << trainBudget << "min)";
+    ss << "(testR="<< testRate << ")";
+    return ss.str();
+}
 std::string LabSetting::GetDatasetFolder()
 {
     std::stringstream ss;
@@ -27,21 +44,17 @@ std::string LabSetting::GetResultCsvPath()
 std::string LabSetting::GetMetricStem()
 {
     std::stringstream ss;
-    ss << methodName << "-metrics";
-
-    if(methodName == MethodEnum::BYTEIOT)
+    ss << GetScenarioInfo() << GetTrainTestSplitInfo();
+    switch(methodName)
     {
-        ss << "-" << experimentMode << "-" << scenario\
-        << config.ToStringWoBurstTrh();
-    }
-    else if(methodName == MethodEnum::FSIOT)
-    {
-        ss << ToString();
-    }
-    else if(methodName == MethodEnum::SHAHID)
-    {
-        ss << "-" << experimentMode << "-" << scenario\
-        << config.ToStringWoBurstTrh() << configShahid.ToString();
+        case MethodEnum::BYTEIOT:
+            break;
+        case MethodEnum::FSIOT:
+            ss << burstTrh.ToString() << clfConfig.ToString();
+            break;
+        case MethodEnum::AHMED:
+            ss << shahidConfig.ToString();
+            break;
     }
     return ss.str();
 }
@@ -69,11 +82,11 @@ std::string LabSetting::GetDivisionStem()
       // 如果mode为"fixed"，则将slotDuration拼接
       if(mode == "fixed")
       {
-          ss << "-" << config.slotDuration; 
+          ss << "-" << slotDuration; 
       }
       else if(mode == "burst")
       {
-          ss << config.burstTrh.ToString();
+          ss << burstTrh.ToString();
       }
   
       ss << ".txt";
@@ -95,14 +108,50 @@ std::string LabSetting::GetPktDatasetFilePath()
 std::string LabSetting::GetDeviceMappingFilePath()
 {
     std::stringstream ss;
-    ss << mappingFolder << datasetName << "_device_mac_mappings.csv";
+    ss << GetDatasetFolder() << "mappings/" << datasetName << "_device_mac_mappings.csv";
     return ss.str();
 }
 
 std::string LabSetting::GetTimeCostFilePath()
 {
-    std::string budgetStr = std::to_string(config.trainBudget) + "min";
+    std::string budgetStr = std::to_string(trainBudget) + "min";
     std::stringstream ss;
     ss << GetDatasetFolder() << methodName << budgetStr << "-timeCost.json";
     return ss.str();
+}
+
+LabSetting GetFewShotSettingTemplate()
+{
+    LabSetting settings;
+    settings.baseFolder = "/media/kunling/BigE/";
+
+    settings.methodName = MethodEnum::FSIOT;
+    settings.datasetName = groundnut::DatasetEnum::UNSW201620; // "NEUKI2019"; //"UNSW201620"; //"NEUKI2019" //IOTBEHAV2021
+    settings.independentArg = IndependentArgEnum::TRAINING_SIZE;
+    settings.scenario = ExperimentEnum::FEW_SHOTS;
+    settings.burstTrh.inTrh = {2,0};
+    settings.start = 30; // sec slotduration
+    settings.end = 30;
+    settings.step = 30;
+    settings.clfConfig.review = false;
+    return settings;
+}
+
+LabSetting GetDivisionSettingTemplate()
+{
+    LabSetting settings;
+    settings.baseFolder = "/media/kunling/BigE/";
+
+    settings.methodName = MethodEnum::FSIOT;
+    settings.datasetName = groundnut::DatasetEnum::UNSW201620; 
+    settings.scenario = ExperimentEnum::DIVISION;
+
+    settings.independentArg = IndependentArgEnum::IN_TRH;
+    //settings.config;
+    settings.burstTrh.inTrh = {2,0};
+    settings.start = 0.1; // sec slotduration
+    settings.end = 0.5;
+    settings.step = 0.1;
+    settings.clfConfig.review = false;
+    return settings;
 }

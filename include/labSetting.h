@@ -10,6 +10,7 @@
 
 enum class ExperimentEnum {
     FEW_SHOTS,
+    DIVISION,
     BURST_EXTRACTION,
     SAME_ACCURACY,
     BURST_INTRH_EVALUATION,
@@ -22,6 +23,18 @@ enum class MethodEnum {
     AHMED,
     SHAHID
 };
+
+enum class IndependentArgEnum {
+    IN_TRH,
+    OUT_TRH,
+    TRAINING_SIZE,
+    WINDOW_SIZE
+};
+
+
+inline std::ostream& operator<<(std::ostream& os, IndependentArgEnum type) {
+    return os << magic_enum::enum_name(type);
+}
 
 inline std::ostream& operator<<(std::ostream& os, ExperimentEnum type) {
     return os << magic_enum::enum_name(type);
@@ -43,31 +56,30 @@ inline std::string operator+(std::string_view lhs, ExperimentEnum rhs) {
     return lhs.data() + std::string(magic_enum::enum_name(rhs));
 }
 
-
 struct LabSetting
 {
-    std::string baseFolder = "/media/kunling/BigE/";
     MethodEnum methodName = MethodEnum::FSIOT;
     groundnut::DatasetEnum datasetName = groundnut::DatasetEnum::UNSW201620;
-    std::string mappingFolder = "/home/kunling/BurstIoT/mappings/";
-    std::string experimentMode = "ipc";
-    ExperimentEnum scenario;
+    ExperimentEnum scenario = ExperimentEnum::FEW_SHOTS;
 
-    groundnut::ConfigBurstDataset config;
-    groundnut::ConfigBurstClf clfConfig;
-    groundnut::ConfigShahid configShahid;
+    std::string baseFolder = "/media/kunling/BigE/";
 
-    double start = 0.01;
-    double end = 0.15;
-    double step = 0.01;
-    bool review = false;
+    int slotDuration = 1800; // 30 minutes
+	float trainRate = 0.15f; // Take the more strict limit for training.
+	int trainBudget = 10000; // by minute
+	float testRate =  0.5f;
 
-    std::string ToString()
-    {
-        std::stringstream ss;
-        ss << "-" << experimentMode << "-" << scenario << config.ToString() << clfConfig.ToString();
-        return ss.str();
-    }
+    IndependentArgEnum independentArg = IndependentArgEnum::TRAINING_SIZE;
+    double start = 0;
+    double end = 0;
+    double step = 0;
+
+    groundnut::BurstTrh burstTrh;         // FS-IoT setting
+    groundnut::FsClfConfig clfConfig;     // FS-IoT classifier setting
+    groundnut::ShahidConfig shahidConfig; // Shahid setting
+
+    std::string GetScenarioInfo();
+    std::string GetTrainTestSplitInfo();
 
     std::string GetRawTrafficFolder();
     std::string GetPktDatasetFilePath();
@@ -83,9 +95,13 @@ struct LabSetting
     std::string GetResultCsvPath();
     std::string GetReviewPath();
 
+
 private:
     std::string GetDatasetFolder();
 
 };
+
+LabSetting GetFewShotSettingTemplate();
+LabSetting GetDivisionSettingTemplate();
 
 #endif

@@ -12,15 +12,35 @@
 
 namespace groundnut{
 
-struct ConfigBurstDataset
+class ConfigDataset
 {
-	int slotDuration = 1800;
-	float trainRate = 0.15f;
+public:
+	int slotDuration = 1800; // 槽持续时间，单位为秒
+	float trainRate = 0.15f; // 训练数据比例
 	int trainBudget = 10000; // by minute
-	float valiRate = 0.3f;
-	float testRate = 0.5f;
+	float testRate =  0.5f;
+
+public:
+	virtual inline std::string ToString() const
+	{
+		std::stringstream ss;
+		ss << "(slot=" << slotDuration << ")";
+		ss << "(trainR=" << trainRate << ")";
+		ss << "(trainB=" << trainBudget << "min)";
+		ss << "(testR="<< testRate << ")";
+		return ss.str();
+	}
+
+};
+class ConfigBurstDataset : public ConfigDataset
+{
+public:
+	ConfigBurstDataset(){}
+
+public:
 	BurstTrh burstTrh;
 
+public:
 	template<class Archive>
 	void serialize(Archive& ar, const unsigned int version) {
 		ar& slotDuration;
@@ -31,23 +51,7 @@ struct ConfigBurstDataset
 	inline std::string ToString() const
 	{
 		std::stringstream ss;
-		ss << "(slot=" << slotDuration << ")";
-		ss << "(trainR=" << trainRate << "%)";
-		ss << "(trainB=" << trainBudget << "minute)";
-		ss << "(valiR=" << valiRate << "%)";
-		ss << "(testR="<< testRate << "%)";
-		ss << burstTrh.ToString();
-		return ss.str();
-	}
-
-	inline std::string ToStringWoBurstTrh() const
-	{
-		std::stringstream ss;
-		ss << "(slot=" << slotDuration << ")";
-		ss << "(trainR=" << trainRate << "%)";
-		ss << "(trainB=" << trainBudget << "minute)";
-		ss << "(valiR=" << valiRate << "%)";
-		ss << "(testR="<< testRate << "%)";
+		ss << ConfigDataset::ToString() << burstTrh.ToString();
 		return ss.str();
 	}
 };
@@ -55,7 +59,6 @@ struct ConfigBurstDataset
 class BurstDataset
 {
 public:
-
 	BurstDataset() = default;
 	BurstDataset(const DatasetEnum datasetName, const ConfigBurstDataset configBurstDataset):
 	name(datasetName), configBurstDataset(configBurstDataset) {}

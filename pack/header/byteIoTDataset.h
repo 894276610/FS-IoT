@@ -8,8 +8,8 @@ class ByteIoTDataset
 
 public:
     ByteIoTDataset() = default;
-	ByteIoTDataset(const DatasetEnum datasetName, ConfigBurstDataset configBurstDataset):
-	name(datasetName), config(configBurstDataset){}
+	ByteIoTDataset(const DatasetEnum datasetName, ConfigDataset configDataset):
+	name(datasetName), config(configDataset){}
 
     void Load(PacketDataset&);
 	float TrainTestSplit();
@@ -36,7 +36,7 @@ private:
 
 private:
     DatasetEnum name;
-    ConfigBurstDataset config;
+    ConfigDataset config;
 
     std::vector<groundnut::KDevice> devicesVec;
 

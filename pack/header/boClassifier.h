@@ -83,14 +83,14 @@ class BoClassifier
 {
 
 public: 
-    BoClassifier(const ConfigBurstClf& config): bclf(config){}
+    BoClassifier(const FsClfConfig& config): bclf(config){}
     void Train(std::unordered_map<uint16_t, BurstGroups>* trainset);
     std::vector<ReviewBurst> Predict(BurstVec instance, std::string& strResult, bool reviewEnable = true);
     ReviewBook Predict(std::unordered_map<uint16_t, BurstGroups>* testset, ResultBundle& result, bool reviewEnable = true);
 
 private:
     BurstClassifier bclf;
-    ConfigBurstClf config;
+    FsClfConfig config;
 };
 
 }

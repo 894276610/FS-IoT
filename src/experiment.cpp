@@ -8,12 +8,12 @@
 
 void ShahidFewShotsExperiment::RunOnce(LabSetting setting)
 {
-    int budget = setting.config.trainBudget;
+    int budget = setting.trainBudget;
 
     Instrumentor::Get().BeginSession("TimeOverhead", setting.GetTimeCostFilePath());
     std::cout << "budget: " << budget << "min" << std::endl;
 
-    groundnut::ShahidDataset shahidDataset(setting.datasetName, 6, setting.config.slotDuration, 600);
+    groundnut::ShahidDataset shahidDataset(setting.datasetName, 6, setting.slotDuration, 600);
     std::unordered_map<uint16_t, groundnut::ShahidSlots> trainSet, testSet;
 
     shahidDataset.Load(pktDataset);
@@ -30,24 +30,27 @@ void ShahidFewShotsExperiment::RunOnce(LabSetting setting)
 }
 void ByteIoTFewShotsExperiment::RunOnce(LabSetting setting)
 {      
-    int budget = setting.config.trainBudget;
+    int budget = setting.trainBudget;
+    groundnut::ByteIoTClassifier clf;
+    groundnut::ConfigDataset config;
+    ResultBundle result;
+
+    config.slotDuration = setting.slotDuration;
+    config.trainRate = setting.trainRate;
+    config.trainBudget = setting.trainBudget;
+    config.testRate = setting.testRate;
 
     std::cout << "budget: " << budget << "min" << std::endl;
     Instrumentor::Get().BeginSession("TimeOverhead", setting.GetTimeCostFilePath());
-    
-    groundnut::ByteIoTClassifier clf;
-    groundnut::ByteIoTDataset byteIoTDataset( setting.datasetName, setting.config);
-
+ 
+    groundnut::ByteIoTDataset byteIoTDataset( setting.datasetName, config);
     byteIoTDataset.Load(pktDataset);
     byteIoTDataset.TrainTestSplitByTime(budget);
     auto& trainset = byteIoTDataset.GetTrainset();
     auto& testset  = byteIoTDataset.GetTestset();
-    std::vector<std::string> y_true, y_pred;
-
-    ResultBundle result;
 
     clf.Train(&trainset);
-    clf.Predict(&testset, result, setting.review);
+    clf.Predict(&testset, result, setting.clfConfig.review);
     Instrumentor::Get().EndSession();
     
     result.SaveCsv(setting.GetResultCsvPath());
@@ -55,13 +58,20 @@ void ByteIoTFewShotsExperiment::RunOnce(LabSetting setting)
 
 void FSIoTFewShotsExperiment::RunOnce(LabSetting setting)
 {
-    int budget = setting.config.trainBudget;
+    int budget = setting.trainBudget;
     std::cout << "Training budget: " << budget << " minute." << std::endl;
+    groundnut::ConfigBurstDataset config;
+
+    config.slotDuration = setting.slotDuration;
+    config.trainRate = setting.trainRate;
+    config.trainBudget = setting.trainBudget;
+    config.testRate = setting.testRate;
+    config.burstTrh = setting.burstTrh;
 
     Instrumentor::Get().BeginSession("FewShotsExperiment", setting.GetTimeCostFilePath());
     PROFILE_SCOPE("TimeOverhead");
 
-    groundnut::BurstDataset burstDataset(pktDataset.GetName(), setting.config);
+    groundnut::BurstDataset burstDataset(pktDataset.GetName(), config);
     burstDataset.Load(pktDataset);
     burstDataset.TrainTestSplitByTime(budget);
     auto& trainset = burstDataset.GetTrainset();
@@ -72,7 +82,7 @@ void FSIoTFewShotsExperiment::RunOnce(LabSetting setting)
     std::cout << "Finish training." << std::endl;
 
     ResultBundle result;
-    groundnut::ReviewBook rbook = clf.Predict(&testset, result, setting.review);
+    groundnut::ReviewBook rbook = clf.Predict(&testset, result, setting.clfConfig.review);
     std::cout << "Finish prediction." << std::endl;
     Instrumentor::Get().EndSession();
     
@@ -83,7 +93,7 @@ void FSIoTFewShotsExperiment::RunOnce(LabSetting setting)
 void FewShotsExperiment::Run()
 {
     groundnut::DatasetEnum datasetName = this->setting.datasetName;
-    int& budget = this->setting.config.trainBudget;
+    int& budget = this->setting.trainBudget;
     
     pktDataset.AddTragetDevices(setting.GetDeviceMappingFilePath());
     pktDataset.AutoLoad(setting.GetRawTrafficFolder(), setting.GetPktDatasetFilePath());
@@ -91,6 +101,5 @@ void FewShotsExperiment::Run()
     for(budget = setting.start; budget <= setting.end; budget += setting.step)
     {
         RunOnce(setting);
-        
     }
 }

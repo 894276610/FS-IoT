@@ -9,7 +9,7 @@
 
 namespace groundnut{
 
-struct ConfigBurstClf
+struct FsClfConfig
 {
     int uniPktTolr = 200; // 200 for lsenable = true. 10 for lsenable = false;
     int pktTolr = 1000;   // 1000 for lsenable = false; 100 for lsenable = true
@@ -18,6 +18,7 @@ struct ConfigBurstClf
     int maxTrainItem = 1000;
     float distanceTrh = 0.45;
     float penalty = 0.01;
+    bool review = false;
 
     std::string ToString() const
     {
@@ -36,7 +37,7 @@ struct ConfigBurstClf
 class BurstClassifier{
 
 public:
-BurstClassifier(const ConfigBurstClf& config):config(config)
+BurstClassifier(const FsClfConfig& config):config(config)
 {
     for (int i = 0; i < config.maxUniPkt; ++i) {
         uniPktMutex.emplace_back(std::make_unique<std::mutex>());
@@ -67,7 +68,7 @@ std::shared_ptr<KBurst> FindKeysEQ(
 
 private:
 
-ConfigBurstClf config;
+FsClfConfig config;
 BurstCache cache;
 std::vector<BurstGroups> train;
 std::vector<std::unique_ptr<std::mutex>> uniPktMutex;

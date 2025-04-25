@@ -12,7 +12,7 @@
 namespace groundnut
 {
 
-class ConfigShahid
+class ShahidConfig
 {
 public:
     size_t configN = 6;

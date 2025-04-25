@@ -26,10 +26,9 @@ LabSetting GetFewShotSettingTemplate()
     settings.methodName = MethodEnum::SHAHID;
     settings.baseFolder = "/media/kunling/BigE/";
     settings.datasetName = groundnut::DatasetEnum::UNSW201620; // "NEUKI2019"; //"UNSW201620";
-    settings.mappingFolder = "/home/kunling/BurstIoT/mappings/";
-    settings.experimentMode = "hbd";
+    settings.independentArg = IndependentArgEnum::TRAINING_SIZE;
     settings.scenario = ExperimentEnum::FEW_SHOTS;
-    settings.config.trainRate = 0.5f;
+    settings.trainRate = 0.5f;
     // settings.config.burstTrh.inTrh = {2,0};
     settings.start = 12300; // sec slotduration
     settings.end = 15000;
