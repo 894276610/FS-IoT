@@ -58,16 +58,14 @@ std::string ShahidClassifier::Predict(const ShahidSlot slot)
     return it->first;
 }
 
-void ShahidClassifier::Predict(std::unordered_map<uint16_t, ShahidSlots>* testset, std::vector<std::string>& y_true, std::vector<std::string>& y_pred)
+void ShahidClassifier::Predict(std::unordered_map<uint16_t, ShahidSlots>* testset, ResultBundle& result)
 {
     PROFILE_SCOPE("Identification");
     for(const auto& [devId, slots] : *testset)
     {
         for(const auto& slot : slots)
         {
-            
-            y_pred.push_back(Predict(slot));
-            y_true.push_back(devicesVec[devId].GetLabel());
+            result.Add(Predict(slot), devicesVec[devId].GetLabel());
         }
     }
 }

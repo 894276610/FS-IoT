@@ -41,7 +41,7 @@ LabSetting GetFewShotSettingTemplate()
 int main() {
    
 LabSetting settings = GetFewShotSettingTemplate();
-std::unique_ptr<Experiment> pExpreiment = CreateExperiment(settings);
+std::unique_ptr<Experiment> pExpreiment = ExperimentFactory::CreateExperiment(settings);
 pExpreiment->Run();
 
 // Create an experiment

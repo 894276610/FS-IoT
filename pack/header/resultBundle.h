@@ -23,6 +23,12 @@ public:
         this->pred_labels = pred_labels;    
     }
 
+    void Add(std::string true_label, std::string pred_label)
+    {
+        true_labels.push_back(true_label);
+        pred_labels.push_back(pred_label);
+    }
+    
     void SaveCsv(const std::filesystem::path& outPath)
     {
         std::ofstream ofs(outPath);

@@ -3,8 +3,6 @@
 
 #include "labSetting.h"
 
-
-
 class Experiment {
 public:
     Experiment(LabSetting setting)
@@ -18,28 +16,79 @@ protected:
     LabSetting setting;
 };
 
-
 class FewShotsExperiment : public Experiment {
 public:
-    FewShotsExperiment(LabSetting setting) : Experiment(setting) {}
+    FewShotsExperiment(LabSetting setting) : 
+    Experiment(setting), pktDataset(setting.datasetName){}
 
     void Run() override;
+
+    virtual void RunOnce(LabSetting setting) = 0;
+
+protected:
+    groundnut::PacketDataset pktDataset;
 };
 
-// class BurstExtractionExperiment : public Experiment {
-// public:
-//     BurstExtractionExperiment(LabSetting setting) : Experiment(setting) {}
+class FSIoTFewShotsExperiment : public FewShotsExperiment {
+public:
+    FSIoTFewShotsExperiment(LabSetting setting) : FewShotsExperiment(setting) {}
 
-//     void Run() override;
-// };
+    void RunOnce(LabSetting setting) override;
+};
 
-// class SameAccuracyExperiment : public Experiment {
-// public:
-//     SameAccuracyExperiment(LabSetting setting) : Experiment(setting) {}
+class ByteIoTFewShotsExperiment : public FewShotsExperiment {
+public:
+    ByteIoTFewShotsExperiment(LabSetting setting) : FewShotsExperiment(setting) {}
 
-//     void Run() override;
-// };
+    void RunOnce(LabSetting setting) override;
+};
 
-std::unique_ptr<Experiment> CreateExperiment(LabSetting setting);
+class ShahidFewShotsExperiment  : public FewShotsExperiment {
+public:
+    ShahidFewShotsExperiment(LabSetting setting) : FewShotsExperiment(setting) {}
+
+    void RunOnce(LabSetting setting) override;
+};
+
+class ExperimentFactory {
+public:
+static std::unique_ptr<Experiment> CreateExperiment(const LabSetting& setting) {
+    switch (setting.scenario) {
+        case ExperimentEnum::FEW_SHOTS:
+            return CreateFewShotsExperiment(setting);
+        case ExperimentEnum::SAME_ACCURACY:
+            return CreateAccAlignExperiment(setting);
+        default:
+            throw std::runtime_error("Invalid experiment scenario");
+    }
+}
+
+private:
+    static std::unique_ptr<Experiment> CreateFewShotsExperiment(const LabSetting& setting) {
+        switch (setting.methodName) {
+            case MethodEnum::FSIOT:
+                return std::make_unique<FSIoTFewShotsExperiment>(setting);
+            case MethodEnum::BYTEIOT:
+                return std::make_unique<ByteIoTFewShotsExperiment>(setting);
+            case MethodEnum::SHAHID:
+                return std::make_unique<ShahidFewShotsExperiment>(setting);
+            default:
+                throw std::runtime_error("Invalid method name");
+        }
+    }
+
+    static std::unique_ptr<Experiment> CreateAccAlignExperiment(const LabSetting& setting) {
+        switch (setting.methodName) {
+            case MethodEnum::FSIOT:
+                return std::make_unique<FSIoTFewShotsExperiment>(setting);
+            case MethodEnum::BYTEIOT:
+                return std::make_unique<ByteIoTFewShotsExperiment>(setting);
+            case MethodEnum::SHAHID:
+                return std::make_unique<ShahidFewShotsExperiment>(setting);
+            default:
+                throw std::runtime_error("Invalid method name");
+        }
+    }
+};
 
 #endif

@@ -79,9 +79,10 @@ enum class DatasetEnum {
 class PacketDataset
 {
 public:
+
+	inline PacketDataset(){}
 	inline PacketDataset(DatasetEnum dataset):name(dataset)
-	{
-	}
+	{}
 
 	// 选择性载入
 	void AutoLoad(const std::string& datasetRootFolder, const std::string& pktDatasetOutName);
