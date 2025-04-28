@@ -128,7 +128,6 @@ BPCountMap ByteIoTDataset::MergeByHash(BurstVec& burstVec)
 
 void ByteIoTDataset::Load(PacketDataset& dataset)
 {  
-    PROFILE_SCOPE("Load");
     // name 
     this->name = dataset.GetName();
 
@@ -190,7 +189,6 @@ void ByteIoTDataset::MakeInstances()
 // should not exceed the bounded instances min * 60/  1800
 float ByteIoTDataset::TrainTestSplitByTime(int min)
 {
-    PROFILE_SCOPE("Split");
     float averageTrainInstanceSize = 0;
     for (auto& [deviceId, instances] : rawMap)
     {
@@ -202,12 +200,7 @@ float ByteIoTDataset::TrainTestSplitByTime(int min)
         
         size_t totalSize = instances.size();
 
-        std::cout << "device: " + GetDevicesVec()[deviceId].GetLabel() << std::endl;
-
         int maxTrainNum = std::ceil(totalSize * config.trainRate);
-        std::cout << "totalSize:" << totalSize << "trainRate" << config.trainRate;
-        std::cout << "maxTrainNum:" << maxTrainNum << std::endl;
-
         int min15xPreferTrainNum = min * 60 / config.slotDuration;
         size_t trainNum = std::min(maxTrainNum, min15xPreferTrainNum);
 

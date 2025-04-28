@@ -17,7 +17,7 @@ namespace groundnut{
 TEST_CASE(" packetDataset init test", "[single-file]")
 {
     // Setup device and test packets
-    groundnut::PacketDataset packetDataset(groundnut::DatasetEnum::Aalto_TEST);
+    groundnut::PacketDataset packetDataset("Aalto_TEST");
     packetDataset.AddTragetDevice("5c:cf:7f:06:d9:02", "iKettle2");
     packetDataset.AddTragetDevice("3c:49:37:03:17:db", "ednet-cam1");
 
@@ -31,11 +31,11 @@ TEST_CASE(" packetDataset init test", "[single-file]")
 
     BurstTrh trh{50, {2,0}, {15,0}};
     config.burstTrh = trh;
-    ByteIoTDataset byteIoTDataset(groundnut::DatasetEnum::Aalto_TEST, config);
+    ByteIoTDataset byteIoTDataset("Aalto_TEST", config);
 
     byteIoTDataset.Load(packetDataset);
     REQUIRE(byteIoTDataset.GetDevicesVec()[0].GetLabel() == "iKettle2");
-    REQUIRE(byteIoTDataset.GetName() == groundnut::DatasetEnum::Aalto_TEST);
+    REQUIRE(byteIoTDataset.GetName() == "Aalto_TEST");
 
     // August 17 iKettle   
     REQUIRE(byteIoTDataset.GetRawMap()[0][0]->GetPktNum() == 12); //deviceId = 0, instanceIndex = 0 has 12 packets
@@ -70,7 +70,5 @@ TEST_CASE(" packetDataset init test", "[single-file]")
     std::cout << metric.ToString();
 
     metric = byteIoTDataset.GenDivMetric("ednet-cam1", byteIoTDataset.GetRawMap()[1]);
-
-    
 }
 }

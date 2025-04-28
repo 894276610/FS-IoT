@@ -10,7 +10,7 @@ std::filesystem::path pcapPath = "/home/kunling/BurstIoT/test/pcap-test";
 TEST_CASE(" packetDataset init test", "[single-file]")
 {
     // Setup device and test packets
-    groundnut::PacketDataset dataset(groundnut::DatasetEnum::UNSW_TEST);
+    groundnut::PacketDataset dataset("UNSW_TEST");
     dataset.AddTragetDevice("5c:cf:7f:06:d9:02", "bulb");
     dataset.LoadPcap(pcapPath);
 
@@ -23,7 +23,7 @@ TEST_CASE(" packetDataset init test", "[single-file]")
 
     CHECK(dataset.GetDevicesMap().size() == 1);
     REQUIRE(dataset.GetDevicesMap().at("5c:cf:7f:06:d9:02").GetLabel() == "bulb");
-    REQUIRE(dataset.GetName() == groundnut::DatasetEnum::UNSW_TEST); 
+    REQUIRE(dataset.GetName() == "UNSW_TEST"); 
 
     for(auto pPacketVec: dataset.GetRawPacketVec())
     {
@@ -33,8 +33,8 @@ TEST_CASE(" packetDataset init test", "[single-file]")
 
 TEST_CASE(" packetDataset devices load", "[single-file]")
 {
-    groundnut::PacketDataset dataset(groundnut::DatasetEnum::UNSW_TEST);
-    dataset.AddTragetDevices(std::filesystem::path("/home/kunling/BurstIoT/mappings/UNSW201620_device_mac_mappings.csv"));
+    groundnut::PacketDataset dataset("UNSW_TEST");
+    dataset.UpdateTargetDevices(std::filesystem::path("/home/kunling/BurstIoT/mappings/UNSW201620_device_mac_mappings.csv"));
 
     REQUIRE(dataset.GetDevicesMap().size() == 22);
 }

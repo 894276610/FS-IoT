@@ -7,7 +7,6 @@ namespace groundnut
 
 void ShahidClassifier::Train(std::unordered_map<uint16_t, ShahidSlots>* trainset)
 {
-    PROFILE_SCOPE("Train");
     arma::mat trainMat;
     arma::Row<size_t> trainLabels;
 
@@ -60,7 +59,6 @@ std::string ShahidClassifier::Predict(const ShahidSlot slot)
 
 void ShahidClassifier::Predict(std::unordered_map<uint16_t, ShahidSlots>* testset, ResultBundle& result)
 {
-    PROFILE_SCOPE("Identification");
     for(const auto& [devId, slots] : *testset)
     {
         for(const auto& slot : slots)

@@ -5,28 +5,28 @@
 #include "byteIoTClassifier.h"
 #include "shahidDataset.h"
 #include "shahidClassifier.h"
+#include "magic_enum.hpp"
 
 void ShahidFewShotsExperiment::RunOnce(LabSetting setting)
 {
     int budget = setting.trainBudget;
 
-    Instrumentor::Get().BeginSession("TimeOverhead", setting.GetTimeCostFilePath());
+    Instrumentor::Get().BeginCsvSession("TimeOverhead", setting.GetTimeOverheadPath());
     std::cout << "budget: " << budget << "min" << std::endl;
 
-    groundnut::ShahidDataset shahidDataset(setting.datasetName, 6, setting.slotDuration, 600);
+    groundnut::ShahidDataset shahidDataset(pktDataset.GetName(), 6, setting.slotDuration, 600);
     std::unordered_map<uint16_t, groundnut::ShahidSlots> trainSet, testSet;
 
     shahidDataset.Load(pktDataset);
-
     shahidDataset.TrainTestSplit(trainSet, testSet, budget);
 
     groundnut::ShahidClassifier clf(shahidDataset.devicesVec);
     ResultBundle result;
     clf.Train(&trainSet);
     clf.Predict(&testSet, result);
-    Instrumentor::Get().EndSession();
+    Instrumentor::Get().EndCsvSession();
 
-    result.SaveCsv(setting.GetResultCsvPath());
+    result.SaveCsv(setting.GetPredictionCsvPath());
 }
 void ByteIoTFewShotsExperiment::RunOnce(LabSetting setting)
 {      
@@ -41,9 +41,9 @@ void ByteIoTFewShotsExperiment::RunOnce(LabSetting setting)
     config.testRate = setting.testRate;
 
     std::cout << "budget: " << budget << "min" << std::endl;
-    Instrumentor::Get().BeginSession("TimeOverhead", setting.GetTimeCostFilePath());
+    Instrumentor::Get().BeginCsvSession("ByteIoT-FewShotsExperiment", setting.GetTimeOverheadPath());
  
-    groundnut::ByteIoTDataset byteIoTDataset( setting.datasetName, config);
+    groundnut::ByteIoTDataset byteIoTDataset(pktDataset.GetName(), config);
     byteIoTDataset.Load(pktDataset);
     byteIoTDataset.TrainTestSplitByTime(budget);
     auto& trainset = byteIoTDataset.GetTrainset();
@@ -51,9 +51,9 @@ void ByteIoTFewShotsExperiment::RunOnce(LabSetting setting)
 
     clf.Train(&trainset);
     clf.Predict(&testset, result, setting.clfConfig.review);
-    Instrumentor::Get().EndSession();
+    Instrumentor::Get().EndCsvSession();
     
-    result.SaveCsv(setting.GetResultCsvPath());
+    result.SaveCsv(setting.GetPredictionCsvPath());
 }
 
 void FSIoTFewShotsExperiment::RunOnce(LabSetting setting)
@@ -68,38 +68,63 @@ void FSIoTFewShotsExperiment::RunOnce(LabSetting setting)
     config.testRate = setting.testRate;
     config.burstTrh = setting.burstTrh;
 
-    Instrumentor::Get().BeginSession("FewShotsExperiment", setting.GetTimeCostFilePath());
-    PROFILE_SCOPE("TimeOverhead");
+    Instrumentor::Get().BeginCsvSession("FSIOT-FewShotsExperiment", setting.GetTimeOverheadPath());
 
     groundnut::BurstDataset burstDataset(pktDataset.GetName(), config);
-    burstDataset.Load(pktDataset);
-    burstDataset.TrainTestSplitByTime(budget);
+    groundnut::BoClassifier clf(setting.clfConfig);
+    ResultBundle result;
+    groundnut::ReviewBook rbook;
+
+    {
+        PROFILE_SCOPE("Load", setting.ToString().c_str());
+        burstDataset.Load(pktDataset);
+    }
+
+    {
+        PROFILE_SCOPE("Split", setting.ToString().c_str());
+        burstDataset.TrainTestSplitByTime(budget);
+    }
+
     auto& trainset = burstDataset.GetTrainset();
     auto& testset = burstDataset.GetTestset();
-    
-    groundnut::BoClassifier clf(setting.clfConfig);
-    clf.Train(&trainset);
-    std::cout << "Finish training." << std::endl;
 
-    ResultBundle result;
-    groundnut::ReviewBook rbook = clf.Predict(&testset, result, setting.clfConfig.review);
-    std::cout << "Finish prediction." << std::endl;
-    Instrumentor::Get().EndSession();
+    {
+        PROFILE_SCOPE("Train", setting.ToString().c_str());
+        clf.Train(&trainset);    
+    }
+   
+    {
+        PROFILE_SCOPE("Predict", setting.ToString().c_str());
+        rbook = clf.Predict(&testset, result, setting.clfConfig.review);
+    }
+
+    Instrumentor::Get().EndCsvSession();
     
-    result.SaveCsv(setting.GetResultCsvPath());
+    result.SaveCsv(setting.GetPredictionCsvPath());
+
+    if(!setting.clfConfig.review)
+    {
+        return;
+    }
+
     rbook.Tofile(setting.GetReviewPath());
 }
 
 void FewShotsExperiment::Run()
 {
-    groundnut::DatasetEnum datasetName = this->setting.datasetName;
     int& budget = this->setting.trainBudget;
     
-    pktDataset.AddTragetDevices(setting.GetDeviceMappingFilePath());
+    std::cout << "device count:" << pktDataset.GetDevicesMap().size() << std::endl;
+    
+    Instrumentor::Get().BeginCsvSession("FSIOT-FewShotsExperiment", setting.GetTimeOverheadPath());
+    pktDataset.UpdateTargetDevices(setting.GetDeviceMappingFilePath());
     pktDataset.AutoLoad(setting.GetRawTrafficFolder(), setting.GetPktDatasetFilePath());
+    Instrumentor::Get().EndCsvSession();
 
+    std::cout << "device count:" << pktDataset.GetDevicesMap().size() << std::endl;
     for(budget = setting.start; budget <= setting.end; budget += setting.step)
     {
         RunOnce(setting);
     }
+
 }

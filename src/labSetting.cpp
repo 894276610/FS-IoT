@@ -17,31 +17,33 @@ std::string LabSetting::GetTrainTestSplitInfo()
     ss << "(testR="<< testRate << ")";
     return ss.str();
 }
-std::string LabSetting::GetDatasetFolder()
+
+std::string LabSetting::GetResultFolder()
 {
     std::stringstream ss;
-    ss << baseFolder << magic_enum::enum_name(datasetName) << "/";
+    ss << baseFolder << "Result/" <<  magic_enum::enum_name(datasetName) << "/";
+    return ss.str();
+}
+
+std::string LabSetting::GetDataFolder()
+{
+    std::stringstream ss;
+    ss << baseFolder << "Data/" <<  magic_enum::enum_name(datasetName) << "/";
     return ss.str();
 }
 
 std::string LabSetting::GetReviewPath()
 {
-    return GetDatasetFolder() + GetMetricStem() + ".review";
+    return GetResultFolder() + "ReviewBook/" + ToString() + ".review";
 }
 
 
-std::string LabSetting::GetMetricPath()
-{   
-    return GetDatasetFolder() + GetMetricStem() + ".txt";
-}
-
-std::string LabSetting::GetResultCsvPath()
+std::string LabSetting::GetPredictionCsvPath()
 {
-    return GetDatasetFolder() + GetMetricStem() + ".csv";
+    return GetResultFolder() + "PredictionCSV/" + ToString() + ".csv";
 }
 
-
-std::string LabSetting::GetMetricStem()
+std::string LabSetting::ToString()
 {
     std::stringstream ss;
     ss << GetScenarioInfo() << GetTrainTestSplitInfo();
@@ -58,72 +60,38 @@ std::string LabSetting::GetMetricStem()
     }
     return ss.str();
 }
-std::string LabSetting::GetDivisionStem()
-{
-      // 创建一个字符串流
-      std::stringstream ss;
-      std::string mode;
-    
-      // 将baseFolder和datasetName拼接，并加上"/"
-      ss << GetDatasetFolder();
-
-      if(methodName == MethodEnum::BYTEIOT)
-      {
-          mode = "fixed";
-      }
-      else if(methodName == MethodEnum::FSIOT)
-      {
-          mode = "burst";
-      }
-
-      // 将mode和"-divmetrics"拼接
-      ss << mode << "-divmetrics";
-  
-      // 如果mode为"fixed"，则将slotDuration拼接
-      if(mode == "fixed")
-      {
-          ss << "-" << slotDuration; 
-      }
-      else if(mode == "burst")
-      {
-          ss << burstTrh.ToString();
-      }
-  
-      ss << ".txt";
-      return ss.str();
-}
+// 
 
 std::string LabSetting::GetRawTrafficFolder()
 {
-    return GetDatasetFolder() + "RAW/";
+    return GetDataFolder() + "Pcap/";
 }
 
 std::string LabSetting::GetPktDatasetFilePath()
 {
     std::stringstream ss;
-    ss << GetDatasetFolder() << datasetName << ".pktDataset";
+    ss << GetDataFolder() << "Features/" <<  datasetName << ".pktDataset";
     return ss.str();
 }
 
 std::string LabSetting::GetDeviceMappingFilePath()
 {
     std::stringstream ss;
-    ss << GetDatasetFolder() << "mappings/" << datasetName << "_device_mac_mappings.csv";
+    ss << GetDataFolder() << "Map/" << datasetName << "_device_mac_mappings.csv";
     return ss.str();
 }
 
-std::string LabSetting::GetTimeCostFilePath()
+std::string LabSetting::GetTimeOverheadPath()
 {
-    std::string budgetStr = std::to_string(trainBudget) + "min";
     std::stringstream ss;
-    ss << GetDatasetFolder() << methodName << budgetStr << "-timeCost.json";
+    ss << GetResultFolder() << "/TimeOverhead/" << datasetName << "-" << methodName << "-TimeOverhead.csv";
     return ss.str();
 }
 
 LabSetting GetFewShotSettingTemplate()
 {
     LabSetting settings;
-    settings.baseFolder = "/media/kunling/BigE/";
+    settings.baseFolder = "/media/kunling/BigE/IoT/";
 
     settings.methodName = MethodEnum::FSIOT;
     settings.datasetName = groundnut::DatasetEnum::UNSW201620; // "NEUKI2019"; //"UNSW201620"; //"NEUKI2019" //IOTBEHAV2021
@@ -140,8 +108,7 @@ LabSetting GetFewShotSettingTemplate()
 LabSetting GetDivisionSettingTemplate()
 {
     LabSetting settings;
-    settings.baseFolder = "/media/kunling/BigE/";
-
+    settings.baseFolder = "/media/kunling/BigE/IoT/";
     settings.methodName = MethodEnum::FSIOT;
     settings.datasetName = groundnut::DatasetEnum::UNSW201620; 
     settings.scenario = ExperimentEnum::DIVISION;
@@ -155,3 +122,38 @@ LabSetting GetDivisionSettingTemplate()
     settings.clfConfig.review = false;
     return settings;
 }
+
+// std::string LabSetting::GetDivisionStem()
+// {
+//       // 创建一个字符串流
+//       std::stringstream ss;
+//       std::string mode;
+    
+//       // 将baseFolder和datasetName拼接，并加上"/"
+//       ss << GetResultFolder();
+
+//       if(methodName == MethodEnum::BYTEIOT)
+//       {
+//           mode = "fixed";
+//       }
+//       else if(methodName == MethodEnum::FSIOT)
+//       {
+//           mode = "burst";
+//       }
+
+//       // 将mode和"-divmetrics"拼接
+//       ss << mode << "-divmetrics";
+  
+//       // 如果mode为"fixed"，则将slotDuration拼接
+//       if(mode == "fixed")
+//       {
+//           ss << "-" << slotDuration; 
+//       }
+//       else if(mode == "burst")
+//       {
+//           ss << burstTrh.ToString();
+//       }
+  
+//       ss << ".txt";
+//       return ss.str();
+// }

@@ -16,20 +16,20 @@ namespace groundnut{
 TEST_CASE(" packetDataset init test", "[single-file]")
 {
     // Setup device and test packets
-    groundnut::PacketDataset packetDataset(groundnut::DatasetEnum::Aalto_TEST);
+    groundnut::PacketDataset packetDataset("Aalto_TEST");
     packetDataset.AddTragetDevice("5c:cf:7f:06:d9:02", "iKettle2");
     packetDataset.AddTragetDevice("3c:49:37:03:17:db", "ednet-cam1");
 
     packetDataset.LoadPcap(pcapPath);
     
 
-    BurstDataset burstDataset(groundnut::DatasetEnum::Aalto_TEST);
+    BurstDataset burstDataset("Aalto_TEST");
     BurstTrh trh{50, {2,0}, {15,0}};
 
     burstDataset.Load(packetDataset);
     REQUIRE(burstDataset.GetBurstTrh().inTrh.tv_nsec == trh.inTrh.tv_nsec);
     REQUIRE(burstDataset.GetDevicesVec()[0].GetLabel() == "iKettle2");
-    REQUIRE(burstDataset.GetName() == groundnut::DatasetEnum::Aalto_TEST);
+    REQUIRE(burstDataset.GetName() == "Aalto_TEST");
 
     // August 17 iKettle
     
@@ -59,7 +59,7 @@ TEST_CASE(" packetDataset init test", "[single-file]")
     BurstDataset burstDataset2;
     groundnut::LoadBin(burstDataset2, serializePath);
 
-    REQUIRE(burstDataset2.GetName() == groundnut::DatasetEnum::Aalto_TEST);
+    REQUIRE(burstDataset2.GetName() == "Aalto_TEST");
     REQUIRE(burstDataset2.GetRawMap()[0][1].size() == 2); //deviceId = 0, slotindex = 1 has 2 bursts
     REQUIRE(burstDataset2.GetRawMap()[0][1][0]->GetPktNum() == 10); //first one contains 10 pkts
     REQUIRE(burstDataset2.GetRawMap()[0][1][1]->GetPktNum() == 1);  //second one contains 1 pkt

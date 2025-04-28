@@ -85,6 +85,8 @@
         "charconv": "cpp",
         "complex": "cpp",
         "csetjmp": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "coroutine": "cpp",
+        "span": "cpp"
     }
 }

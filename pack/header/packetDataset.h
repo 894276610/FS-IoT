@@ -81,7 +81,7 @@ class PacketDataset
 public:
 
 	inline PacketDataset(){}
-	inline PacketDataset(DatasetEnum dataset):name(dataset)
+	inline PacketDataset(std::string dataset):name(dataset)
 	{}
 
 	// 选择性载入
@@ -91,19 +91,18 @@ public:
     void LoadPcap(const std::filesystem::path& inputFolder);
 
     // getter and setter
-	inline const DatasetEnum GetName(){return name;}
+	inline const std::string GetName(){return name;}
 	inline std::set<KPacket>& GetDataset(){return dataset;}
 	inline const std::unordered_map<std::string, groundnut::KDevice> & GetDevicesMap(){return this->devicesMap;}
     inline const DatasetStat& GetDatasetStat(){return stat;}
-    inline void SetDatasetName(const DatasetEnum dataset){this->name = dataset;}
+    inline void SetDatasetName(const std::string dataset){this->name = dataset;}
     inline void AddTragetDevice(pcpp::MacAddress mac, std::string label)
     {
 		stat.devStat.emplace_back(label);
         devicesMap.try_emplace(mac.toString(), label, mac);
     }
 
-    void AddTragetDevices(std::filesystem::path mapping_mac_path);
-
+    void UpdateTargetDevices(std::filesystem::path mapping_mac_path);
 
     // serialize
     inline void Serialize(const std::filesystem::path& outPath)
@@ -130,7 +129,7 @@ public:
 	std::vector<pcpp::RawPacketVector*> GetRawPacketVec(){return rawPacketVec;}
 
 private:
-	DatasetEnum name;
+	std::string name;
 	std::set<KPacket> dataset;
 	DatasetStat stat;
     std::unordered_map<std::string, groundnut::KDevice> devicesMap; // mac string, kdevice

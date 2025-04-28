@@ -3,6 +3,7 @@
 #include <future>
 #include "common-utils.h"
 #include "csv.h"
+#include "timer.h"
 
 namespace groundnut{
 
@@ -22,7 +23,6 @@ void PacketDataset::AutoLoad(const std::string& datasetRawFolder, const std::str
 
 void PacketDataset::LoadPcap(const std::filesystem::path& inputFolder)
 {
-    //PROFILE_FUNCTION();
     
     std::vector<std::filesystem::path> paths = groundnut::GetFilesInSuffix(inputFolder, {".pcap", ".pcapng"});
     
@@ -213,12 +213,14 @@ void PacketDataset::CloseReader(pcpp::IFileReaderDevice* reader)
 	}
 }
 
-void PacketDataset::AddTragetDevices(std::filesystem::path mapping_mac_path)
+void PacketDataset::UpdateTargetDevices(std::filesystem::path mapping_mac_path)
 {
     io::CSVReader<2> reader(mapping_mac_path);  
     reader.read_header(io::ignore_extra_column, "Device", "MAC");
         
     std::string name, mac;
+
+    KDevice::ClearDevIdCounter();
     while (reader.read_row(name, mac)) {
         AddTragetDevice(mac, name);
     }

@@ -13,6 +13,7 @@
 struct ProfileResult
 {
 	std::string Name;
+	std::string Params;
 	long long Start, End;
 	std::thread::id ThreadID;
 };
@@ -34,29 +35,69 @@ private:
 public:
 	Instrumentor()
 		: m_CurrentSession(nullptr), m_ProfileCount(0)
-	{
-	}
+	{}
 	
-	void BeginSession(const std::string& name, const std::string& filepath)
+	std::string currentTimeFormatted() {
+		auto now = std::chrono::system_clock::now();
+		auto in_time_t = std::chrono::system_clock::to_time_t(now);
+		
+		std::tm tm_buf;
+		localtime_r(&in_time_t, &tm_buf); // POSIX版本，线程安全
+		
+		std::stringstream ss;
+		ss << std::put_time(&tm_buf, "%Y-%m-%d %H:%M:%S");
+		return ss.str();
+	}
+
+	void BeginCsvSession(const std::string& name, const std::string& filepath)
 	{
 		if (m_ProfileCount != 0)
 		{
 			std::cout << "something wrong m_profile count is not 0";
 		}
-		m_OutputStream.open(filepath);
-		WriteHeader();
+
+		m_OutputStream.open(filepath, std::ios::out | std::ios::app);
 		m_CurrentSession = new InstrumentationSession{ name };
 	}
 
-	void EndSession()
+	void EndCsvSession()
 	{
-		WriteFooter();
 		m_OutputStream.close();
 		delete m_CurrentSession;
 		m_CurrentSession = nullptr;			
 		m_ProfileCount = 0;
 	}
 
+	// void BeginSession(const std::string& name, const std::string& filepath)
+	// {
+	// 	if (m_ProfileCount != 0)
+	// 	{
+	// 		std::cout << "something wrong m_profile count is not 0";
+	// 	}
+	// 	m_OutputStream.open(filepath);
+	// 	WriteHeader();
+	// 	m_CurrentSession = new InstrumentationSession{ name };
+	// }
+
+	// void EndSession()
+	// {
+	// 	WriteFooter();
+	// 	m_OutputStream.close();
+	// 	delete m_CurrentSession;
+	// 	m_CurrentSession = nullptr;			
+	// 	m_ProfileCount = 0;
+	// }
+
+	void WriteCsvProfile(const ProfileResult& result)
+	{
+		std::unique_lock<std::mutex> lock(mtx);
+		if(m_OutputStream.tellp() == 0) {
+            m_OutputStream << "Process,Params,Time,TimeStamp" << std::endl;
+        }
+
+		// Timestamp use the same format as time.strftime("%Y-%m-%d %H:%M:%S")
+		m_OutputStream << result.Name << "," << result.Params << "," << (result.End - result.Start)/1e3f << "," << currentTimeFormatted() << std::endl;
+	}
 	void WriteProfile(const ProfileResult& result)
 	{
 		std::unique_lock<std::mutex> lock(mtx);
@@ -104,8 +145,8 @@ public:
 class InstrumentationTimer
 {
 public:
-	InstrumentationTimer(const char* name)
-		:m_Name(name), m_Stopped(false)
+	InstrumentationTimer(const char* name, const char* param)
+		:m_ProcessName(name), m_ParamDescription(param), m_Stopped(false)
 	{
 		m_StartTimePoint = std::chrono::high_resolution_clock::now();
 	}
@@ -123,17 +164,20 @@ public:
 		auto stop = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
 		
 		std::thread::id threadID = std::this_thread::get_id();
-		Instrumentor::Get().WriteProfile({ m_Name, start, stop, threadID});
+		Instrumentor::Get().WriteCsvProfile({m_ProcessName, m_ParamDescription, start, stop, threadID});
+		// Instrumentor::Get().WriteProfile({ m_Name, start, stop, threadID});
 	}
+
 private:
-	const char* m_Name;
+	const char* m_ProcessName;
+	const char* m_ParamDescription;
 	std::chrono::time_point< std::chrono::high_resolution_clock> m_StartTimePoint;
 	bool m_Stopped;
 };
 
 #define PROFILING 1
 #if PROFILING
-#define PROFILE_SCOPE(name) InstrumentationTimer time##__LINE__(name)
+#define PROFILE_SCOPE(name, param) InstrumentationTimer time##__LINE__((name), (param))
 #define PROFILE_FUNCTION() PROFILE_SCOPE(__FUNCSIG__)
 #else
 #define PROFILE_SCOPE(name)

@@ -7,7 +7,6 @@ namespace groundnut
 
 void ShahidDataset::TrainTestSplit(std::unordered_map<uint16_t, ShahidSlots>& trainSet, std::unordered_map<uint16_t, ShahidSlots>& testSet, int trainBudget)
 {
-    PROFILE_SCOPE("Split");
     for (auto& [deviceId, instances] : this->data)
     {
         {
@@ -17,7 +16,6 @@ void ShahidDataset::TrainTestSplit(std::unordered_map<uint16_t, ShahidSlots>& tr
         }
         
         size_t totalSize = instances.size();
-        std::cout << "device: " + devicesVec[deviceId].GetLabel() << std::endl;
 
         int maxTrainNum = std::ceil(totalSize * trainRate);
       
@@ -29,9 +27,6 @@ void ShahidDataset::TrainTestSplit(std::unordered_map<uint16_t, ShahidSlots>& tr
 
         ShahidSlots trainInstances(instances.begin(), instances.begin() + trainNum);
         ShahidSlots testInstances(instances.begin() + testStart, instances.end());
-
-        std::cout << "totalSize:" << totalSize << "trainRate" << trainRate;
-        std::cout << "maxTrainNum:" << maxTrainNum << "trainNum" << trainNum << std::endl;
 
         trainSet.insert({ deviceId, trainInstances });
         testSet.insert({  deviceId, testInstances });
@@ -168,7 +163,6 @@ void ShahidSlot::AddPacket(const KPacket* packet)
 
 void ShahidDataset::Load(PacketDataset& dataset)
 {
-    PROFILE_SCOPE("Load");
     // name 
     this->name = dataset.GetName();
 

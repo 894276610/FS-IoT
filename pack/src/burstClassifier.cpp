@@ -1,4 +1,5 @@
 #include "burstClassifier.h"
+#include "timer.h"
 #include <future>
 #include <thread>
 
@@ -33,8 +34,8 @@ void BurstClassifier::TrainDevice(uint16_t deviceId, BurstGroups burstGroups)
     MergeByKey(&trainMap);
 	
 	int pktIndex, uniPktIndex = 0;
-    std::cout << "deviceName:" << trainMap.begin()->first->GetLabel();
-    std::cout << ", size:" << trainMap.size() << std::endl;
+    // std::cout << "deviceName:" << trainMap.begin()->first->GetLabel();
+    // std::cout << ", size:" << trainMap.size() << std::endl;
 
 	for (auto& [burst, num] : trainMap)
 	{       

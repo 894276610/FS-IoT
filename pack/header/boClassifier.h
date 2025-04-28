@@ -57,6 +57,11 @@ struct ReviewBook
 
     inline void Tofile(const std::filesystem::path path)
     {
+        if(!std::filesystem::exists(path.parent_path()))
+        {
+            std::filesystem::create_directories(path.parent_path());
+        }
+
         std::ofstream fout(path);
         fout << ToString();
         fout.close();

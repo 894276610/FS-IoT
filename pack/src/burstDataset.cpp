@@ -129,7 +129,6 @@ float BurstDataset::ShannonEntropy(const BPCountMap& uniBPCountMap) const
 
 void BurstDataset::Load(PacketDataset& dataset)
 {  
-    PROFILE_SCOPE("Load");
     // name 
     this->name = dataset.GetName();
 
@@ -195,7 +194,7 @@ void BurstDataset::MakeBursts()
 
 float BurstDataset::TrainTestSplitByTime(int min)
 {
-    PROFILE_SCOPE("Split");
+    std::string profileName = "Split, Budget=" + std::to_string(min) + "min";
     float avgInstance = 0;
 
     for (auto& [deviceId, burstGroup] : rawMap)

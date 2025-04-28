@@ -31,6 +31,11 @@ public:
     
     void SaveCsv(const std::filesystem::path& outPath)
     {
+        if(!std::filesystem::exists(outPath.parent_path()))
+        {
+            std::filesystem::create_directories(outPath.parent_path());
+        }
+
         std::ofstream ofs(outPath);
         ofs << "y_true,y_pred" << std::endl;
         
@@ -40,6 +45,8 @@ public:
         }
     
         ofs.close();
+
+        std::cout << "Output to " << outPath << std::endl;
     }
 
 private:

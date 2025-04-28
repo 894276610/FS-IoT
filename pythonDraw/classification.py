@@ -10,11 +10,11 @@ def GetAhmedMetric(labSettings:LabSetting):
     for trainBudget in trainBudgetList:
         print("trainBudget:", trainBudget)
         labSettings.methodName = "ahmed"
-        resultPath = labSettings.ResultCsvPath();
+        resultPath = labSettings.GetResultCsvPath();
         print(GetMetric(resultPath)[0]);
 
 
-def PlotBudgetPerformance(labSettings:LabSetting):
+def PlotFewShot(labSettings:LabSetting):
 
     trainBudgetList = np.arange(labSettings.start, labSettings.end, labSettings.step);
     
@@ -26,21 +26,21 @@ def PlotBudgetPerformance(labSettings:LabSetting):
     for trainBudget in trainBudgetList:
         labSettings.configDataset.trainBudget = trainBudget;
 
-        labSettings.methodName = "burstiot"
-        resultPath = labSettings.ResultTxtPath();
+        labSettings.methodName = MethodName.FSIOT.name
+        resultPath = labSettings.GetResultCsvPath();
         print(resultPath)
-        burstIoTAccList.append(ReadAccMetric(resultPath));
+        burstIoTAccList.append(GetMetric(resultPath)[0]);
 
-        labSettings.methodName = "byteiot"
-        resultPath = labSettings.ResultTxtPath();
-        byteIoTAccList.append(ReadAccMetric(resultPath));
+        labSettings.methodName = MethodName.BYTEIOT.name
+        resultPath = labSettings.GetResultCsvPath();
+        byteIoTAccList.append(GetMetric(resultPath)[0]);
     
-        labSettings.methodName = "shahid"
-        resultPath = labSettings.ResultCsvPath();
+        labSettings.methodName = MethodName.SHAHID.name
+        resultPath = labSettings.GetResultCsvPath();
         shahidAccList.append(GetMetric(resultPath)[0]);
     
-        labSettings.methodName = "ahmed"
-        resultPath = labSettings.ResultCsvPath();
+        labSettings.methodName = MethodName.AHMED.name;
+        resultPath = labSettings.GetResultCsvPath();
         ahmedAccList.append(GetMetric(resultPath)[0]);
 
     print(trainBudgetList)
@@ -65,5 +65,5 @@ def PlotBudgetPerformance(labSettings:LabSetting):
 
     config = default_series_config[:4] 
 
-    PlotSeriesLineChart(trainingBudgetListHour, config, labSettings.xLabel, labSettings.yLabel, outputBaseFolder +  f"{labSettings.datasetName}" + labSettings.ToString() + ".pdf", showText=False)
+    PlotSeriesLineChart(trainingBudgetListHour, config, labSettings.xLabel, labSettings.yLabel, labSettings.GetResultCsvPath() + ".pdf", showText=False)
     # PlotLineChart(trainBudgetList, byteIoTAccList, burstIoTAccList, outputBaseFolder +  f"{labSettings.datasetName}" + labSettings.ToString() + ".png")

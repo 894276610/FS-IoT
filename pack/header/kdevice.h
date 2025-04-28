@@ -36,6 +36,7 @@ public:
 	const std::string& GetLabel() const { return m_label; }
     const pcpp::MacAddress& GetAddr() const { return m_mac; }
     uint16_t GetDevId() const { return devId; }
+	static void ClearDevIdCounter() { devIdCounter = 0; }
 
 	template<class Archive>
 	void serialize(Archive& ar, const unsigned int version) {

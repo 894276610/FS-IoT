@@ -84,20 +84,22 @@ struct LabSetting
     std::string GetRawTrafficFolder();
     std::string GetPktDatasetFilePath();
     std::string GetDeviceMappingFilePath();
-    std::string GetTimeCostFilePath();
+    std::string GetTimeOverheadPath();
 
-    std::string GetMetricStem();
+    std::string ToString();
     std::string GetMetricPath();
 
     std::string GetDivisionStem();
     std::string GetDivisionPath();
 
-    std::string GetResultCsvPath();
+    std::string GetPredictionCsvPath();
     std::string GetReviewPath();
 
 
 private:
     std::string GetDatasetFolder();
+    std::string GetResultFolder();
+    std::string GetDataFolder();
 
 };
 

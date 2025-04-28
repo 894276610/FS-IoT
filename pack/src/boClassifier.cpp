@@ -79,7 +79,7 @@ std::string Aggregator::FetchResult()
 
 void BoClassifier::Train(std::unordered_map<uint16_t, BurstGroups>* trainset)
 {
-    PROFILE_SCOPE("TRAINING...");
+    PROFILE_SCOPE("train", config.ToString().c_str());
     bclf.Train(trainset);
 }
 
@@ -121,7 +121,6 @@ std::vector<ReviewBurst> BoClassifier::Predict(BurstVec instance, std::string& s
 
 ReviewBook BoClassifier::Predict(std::unordered_map<uint16_t, BurstGroups>* testset,  ResultBundle& result, bool reviewEnable)
 {
-    PROFILE_SCOPE("predict");
     std::mutex reviewMutex;
     ReviewBook rBook;
 
@@ -179,9 +178,6 @@ ReviewBook BoClassifier::Predict(std::unordered_map<uint16_t, BurstGroups>* test
     parallel_process([](BurstVec* bg) { 
         return (*bg)[0]->GetLabel(); 
     }, y_true);
-
-    std::cout << "actual vec size" << y_true.size() << std::endl;
-    std::cout << "prediction vec size" << y_pred.size() << std::endl;
 
     result.Update(y_true, y_pred);
     return rBook;

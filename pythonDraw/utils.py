@@ -1,6 +1,26 @@
 import matplotlib.pyplot as plt
+from enum import Enum
 
-outputBaseFolder = "/home/kunling/BurstIoT/pythonDraw/classification/"
+class MethodName(Enum):
+    FSIOT = 1;
+    BYTEIOT = 2;
+    AHMED = 3;
+    SHAHID = 4;
+
+class ExperimentEnum(Enum):
+    FEW_SHOTS = 1;
+    DIVISION = 2;
+    SAME_ACCURACY = 3;
+
+class IndependentArgEnum(Enum):
+    IN_TRH = 1;
+    OUT_TRH = 2;
+    TRAINING_SIZE = 3;
+    WINDOW_SIZE = 4;
+
+class DatasetEnum(Enum):
+    UNSW201620 = 1;
+    BehavIoT2021 = 2;
 
 class ConfigShahid:
     configN = 6;
@@ -18,21 +38,19 @@ class BurstTrh:
     def ToString(self):
         return f"(uniTrh={self.uniTrh})(inTrh={self.inTrh}s)(ouTrh={self.ouTrh}s)(lsenable={self.longShortEnable})";
 
-
-class ConfigBurstDataset:
+class ConfigDataset:
     slotDuration = 1800;
     trainRate = 0.15;
     trainBudget = 300;
-    valiRate = 0.3;
     testRate = 0.5;
-    burstTrh = BurstTrh()
-    
 
     def ToString(self):
-        return f"(slot={self.slotDuration})(trainR={self.trainRate}%)(trainB={self.trainBudget}minute)(valiR={self.valiRate}%)(testR={self.testRate}%)" + self.burstTrh.ToString();
+        return f"(slot={self.slotDuration})(trainR={self.trainRate}%)(trainB={self.trainBudget}minute)(testR={self.testRate}%)"
 
-    def ToStringWoBurstTrh(self):
-        return f"(slot={self.slotDuration})(trainR={self.trainRate}%)(trainB={self.trainBudget}minute)(valiR={self.valiRate}%)(testR={self.testRate}%)";
+class ConfigBurstDataset(ConfigDataset):
+    burstTrh = BurstTrh()
+    def ToString(self):
+        return f"(slot={self.slotDuration})(trainR={self.trainRate})(trainB={self.trainBudget}min)(testR={self.testRate})" + self.burstTrh.ToString();
 
 class ConfigBurstClf:
     def __init__(self, lsenable=True):
@@ -60,49 +78,69 @@ class ConfigBurstClf:
     
 class LabSetting:
     baseFolder = "/media/kunling/BigE/";
-    datasetName = "UNSW201620";
-    mappingFolder = "/home/kunling/BurstIoT/mappings/";
-    methodName = "burstiot" # byte
-    experimentMode = "hbd"
-    scenario = "lsEnable"  
-    graphName = "LineChart"
+    datasetName = DatasetEnum.UNSW201620.name;
+    methodName = MethodName.BYTEIOT.name;
+    scenario = ExperimentEnum.FEW_SHOTS.name;
 
-    xLabel = "Slot Duration"
-    yLabel = "Accuracy"
-    
-    configDataset = ConfigBurstDataset()
+    configDataset = ConfigDataset()
+    configBurstDataset = ConfigBurstDataset()
     configBurstClf = ConfigBurstClf()
     configShahid = ConfigShahid()
     
+    independentArg = IndependentArgEnum.TRAINING_SIZE.name;
     start = 4.0;
     end = 60.0;
     step = 3;
 
-    cm_width = 12;
-    cm_len = 8;
+    graphName = "LineChart"
+    xLabel = "Slot Duration"
+    yLabel = "Accuracy"
 
-    def ResultTxtPath(self):
-        return self.baseFolder + self.datasetName + "/" + self.ToString() + ".txt";
-
-    def ResultCsvPath(self):
-        baseFolder = None;
-        if self.methodName == "ahmed":
-            baseFolder =  "/home/kunling/iot-device-fingerprinting-main/results/multidatasetcombinedclassifier/" 
+    def GetCmWidth(self):
+        if(self.datasetName == DatasetEnum.UNSW201620.name):
+            return 12;
+        elif(self.datasetName == DatasetEnum.BehavIoT2021.name):
+            return 23;
         else:
-            baseFolder = self.baseFolder;
+            print("error: datasetName is not UNSW201620 or BehavIoT2021")
+            return 0;
         
-        return baseFolder + self.datasetName + "/" + self.ToString() + ".csv";   
-       
+    def GetCmLen(self):
+        if(self.datasetName == DatasetEnum.UNSW201620.name):
+            return 8;
+        elif(self.datasetName == DatasetEnum.BehavIoT2021.name):
+            return 12;
+        else:
+            print("error: datasetName is not UNSW201620 or BehavIoT2021")
+            return 0;
+
+    def GetOutputPath(self):
+        return self.baseFolder + "GraphResult/";
+
+    def GetDatasetPath(self):
+        return self.baseFolder + self.datasetName + "/";
+
+    def GetCmPath(self):
+        self.GetDatasetPath() + "CM/" + self.ToString() + ".pdf"
+
+    def GetFewShotGraphPath(self):
+        return self.GetOutputPath() + self.ToString() + ".pdf"
+
+    def GetResultCsvPath(self):
+        return self.GetDatasetPath() + self.ToString() + ".csv";
+
     def ToString(self):
-        if self.methodName == "burstiot":
-            return f"{self.methodName}-metrics-{self.experimentMode}-{self.scenario}{self.configDataset.ToString()}{self.configBurstClf.ToString()}";     
-        elif self.methodName == "byteiot":
-            return f"{self.methodName}-metrics-{self.experimentMode}-{self.scenario}{self.configDataset.ToStringWoBurstTrh()}";
-        elif self.methodName == "shahid":
-            return f"{self.methodName}-metrics-{self.experimentMode}-{self.scenario}{self.configDataset.ToStringWoBurstTrh()}{self.configShahid.ToString()}";     
-        elif self.methodName == "ahmed":
-            return f"R({self.configDataset.trainBudget}minutes)true_pred";
-methodNameList = ["burst", "byte"]
+        basicString = f"{self.methodName}-{self.scenario}-{self.independentArg}-{self.datasetName}-";
+        if self.methodName == MethodName.FSIOT.name:
+            basicString += f"{self.configBurstDataset.ToString()}{self.configBurstClf.ToString()}";     
+        elif self.methodName == MethodName.BYTEIOT.name:
+            basicString += f"{self.configDataset.ToString()}";
+        elif self.methodName == MethodName.SHAHID.name:
+            basicString += f"{self.configDataset.ToString()}{self.configShahid.ToString()}";     
+        elif self.methodName == MethodName.AHMED.name:
+            basicString = f"R({self.configDataset.trainBudget}minutes)true_pred"
+        
+        return basicString;
 
 # 6条线的配置
 default_series_config = [
@@ -212,10 +250,3 @@ def PlotLineChart(x, y, z, outPath):
     bbox_inches="tight",   
     facecolor="white")
     plt.show()
-
-from pathlib import Path
-
-# basePath = Path("/media/kunling/BigE/UNSW201620");
-# nameTemplate = "(slotDur=1800)(trainRate=0.01)(uniTrh=50)(inTrh={2,0}(ouTrh={15,0}byteiot-metrics.txt"
-
-# accuracy = ReadAccMetric(basePath.joinpath(nameTemplate))

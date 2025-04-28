@@ -2,6 +2,7 @@
 #define _EXPERIMENT_H
 
 #include "labSetting.h"
+#include "magic_enum.hpp"
 
 class Experiment {
 public:
@@ -18,8 +19,8 @@ protected:
 
 class FewShotsExperiment : public Experiment {
 public:
-    FewShotsExperiment(LabSetting setting) : 
-    Experiment(setting), pktDataset(setting.datasetName){}
+    FewShotsExperiment(LabSetting setting) :
+    Experiment(setting), pktDataset(std::string(magic_enum::enum_name(setting.datasetName))){}
 
     void Run() override;
 

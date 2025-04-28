@@ -19,12 +19,12 @@ std::filesystem::path serializePath = "/home/kunling/BurstIoT/test/ikettle-seria
 TEST_CASE("burstClassifier init", "[single-file]")
 {
     // prepare train set
-    groundnut::PacketDataset packetDataset(groundnut::DatasetEnum::Aalto_TEST);
+    groundnut::PacketDataset packetDataset("Aalto_TEST");
     packetDataset.AddTragetDevice("5c:cf:7f:06:d9:02", "iKettle");
     packetDataset.AddTragetDevice("3c:49:37:03:17:db", "ednet-cam1");
     packetDataset.LoadPcap(pcapPath);
 
-    BurstDataset burstDataset(groundnut::DatasetEnum::Aalto_TEST);
+    BurstDataset burstDataset("Aalto_TEST");
     BurstTrh trh{50, {2,0}, {15,0}};
 
     burstDataset.Load(packetDataset);

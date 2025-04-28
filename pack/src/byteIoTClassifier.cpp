@@ -40,7 +40,6 @@ std::string ByteIoTClassifier::Predict(const std::shared_ptr<KBurst> preInstnace
 
 void ByteIoTClassifier::Predict(std::unordered_map<uint16_t, BurstVec>* testset, ResultBundle& result, bool reviewEnable)
 {
-    PROFILE_SCOPE("Predict");
     std::mutex reviewMutex;
 
     // Step 1: 数据预处理（不变）
@@ -91,7 +90,6 @@ void ByteIoTClassifier::Predict(std::unordered_map<uint16_t, BurstVec>* testset,
 
     // Step 4: 保存结果
     result.Update(y_true, y_pred);
-    std::cout << "actual vec size" << y_true.size() << std::endl;
 }
 
 }
