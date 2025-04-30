@@ -79,7 +79,6 @@ std::string Aggregator::FetchResult()
 
 void BoClassifier::Train(std::unordered_map<uint16_t, BurstGroups>* trainset)
 {
-    PROFILE_SCOPE("train", config.ToString().c_str());
     bclf.Train(trainset);
 }
 

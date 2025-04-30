@@ -15,9 +15,6 @@ add_executable(test-shahidDataset test-shahidDataset.cpp)
 add_executable(test-shahidClassifier test-shahidClassifier.cpp)
 
 
-
-
-
 target_link_libraries(test-kpacket PRIVATE Catch2::Catch2WithMain
                                    PRIVATE pack)
 
@@ -45,5 +42,3 @@ target_link_libraries(test-byteIoTDataset PRIVATE Catch2::Catch2WithMain PRIVATE
 target_link_libraries(test-byteIoTClassifier PRIVATE Catch2::Catch2WithMain PRIVATE pack)
 target_link_libraries(test-shahidDataset PRIVATE Catch2::Catch2WithMain PRIVATE pack)
 target_link_libraries(test-shahidClassifier PRIVATE Catch2::Catch2WithMain PRIVATE pack)
-
-

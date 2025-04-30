@@ -1,10 +1,75 @@
 #include "labSetting.h"
 
+bool LabSetting::IsAhmedDataCSVFolderEmpty()
+{
+    if(!std::filesystem::exists(GetAhmedDataCSVFolder()))
+    {
+        return true;
+    }
+
+    if( CountCsvFiles(GetAhmedDataCSVFolder()) > 0)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+    
+}
+
+bool LabSetting::IsRawTrafficFolderEmpty()
+{
+    if(!std::filesystem::exists(GetRawTrafficFolder()))
+    {
+        return true;
+    }
+
+    if( CountPcapFiles(GetRawTrafficFolder()) > 0)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+size_t LabSetting::CountPcapFiles(const std::filesystem::path& directory)
+{
+    size_t count = 0;
+    
+    for (const auto& entry : std::filesystem::recursive_directory_iterator(directory)) {
+        if (entry.is_regular_file() && (entry.path().extension() == ".pcap" || entry.path().extension() == ".pcapng")) {
+            ++count;
+        }
+    }
+    
+    return count;
+}
+
+size_t LabSetting::CountCsvFiles(const std::filesystem::path& directory)
+{
+    size_t count = 0;
+    
+    for (const auto& entry : std::filesystem::recursive_directory_iterator(directory)) {
+        if (entry.is_regular_file() && entry.path().extension() == ".csv") {
+            ++count;
+        }
+    }
+    
+    return count;
+}
+
+// 获取场景信息
 std::string LabSetting::GetScenarioInfo()
 {
+    // 创建一个字符串流
     std::stringstream ss;
+    // 将方法名、场景、独立参数、数据集名称拼接到字符串流中
     ss << methodName << "-" << scenario << "-" ;
     ss << independentArg << "-" << datasetName << "-";
+    // 返回字符串流中的字符串
     return ss.str();
 }
 
@@ -22,6 +87,13 @@ std::string LabSetting::GetResultFolder()
 {
     std::stringstream ss;
     ss << baseFolder << "Result/" <<  magic_enum::enum_name(datasetName) << "/";
+    return ss.str();
+}
+
+std::string LabSetting::GetFeatureFolder()
+{
+    std::stringstream ss;
+    ss << GetDataFolder() << "Features/";
     return ss.str();
 }
 
@@ -60,7 +132,20 @@ std::string LabSetting::ToString()
     }
     return ss.str();
 }
-// 
+
+std::string LabSetting::GetAhmedFeatureDataPklPath()
+{
+    return GetFeatureFolder() + "featureData.pkl";
+}
+std::string LabSetting::GetAhmedFeatureDevicePklPath()
+{
+    return GetFeatureFolder() + "devices.pkl";
+}
+
+std::string LabSetting::GetAhmedDataCSVFolder()
+{
+    return GetDataFolder() + "CSV/";
+}
 
 std::string LabSetting::GetRawTrafficFolder()
 {
@@ -70,7 +155,7 @@ std::string LabSetting::GetRawTrafficFolder()
 std::string LabSetting::GetPktDatasetFilePath()
 {
     std::stringstream ss;
-    ss << GetDataFolder() << "Features/" <<  datasetName << ".pktDataset";
+    ss << GetFeatureFolder() <<  datasetName << ".pktDataset";
     return ss.str();
 }
 

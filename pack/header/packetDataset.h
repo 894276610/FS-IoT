@@ -73,7 +73,8 @@ enum class DatasetEnum {
     UNSW201620, // 20 days
     BehavIoT2021,
 	UNSW_TEST,
-	Aalto_TEST
+	Aalto_TEST,
+	UNSWMVP
 };
 
 class PacketDataset

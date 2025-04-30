@@ -26,7 +26,7 @@ TEST_CASE("byteiot classifier could init", "[single-file]")
     std::unordered_map<uint16_t, ShahidSlots> trainSet, testSet;
     shahidDataset.TrainTestSplit(trainSet, testSet, 30);
 
-    ShahidClassifier clf(shahidDataset.devicesVec);
+    ShahidClassifier clf(packetDataset.GetDevicesMap());
     
     clf.Train(&trainSet);
 

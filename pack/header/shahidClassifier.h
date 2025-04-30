@@ -10,7 +10,15 @@ class ShahidClassifier
 {
 
 public:
-ShahidClassifier(std::vector<groundnut::KDevice> devicesVec):devicesVec(devicesVec){}
+ShahidClassifier( std::unordered_map<std::string, groundnut::KDevice> devicesMap)
+{
+    devicesVec.clear();
+    devicesVec.resize(devicesMap.size());
+    for(auto [mac_string, kdevice] : devicesMap)
+    {
+        devicesVec[kdevice.GetDevId()] = kdevice;
+    }
+}
 
 void Train(std::unordered_map<uint16_t, ShahidSlots>* trainset);
 std::string Predict(const ShahidStream stream);
@@ -20,9 +28,7 @@ void Predict(std::unordered_map<uint16_t, ShahidSlots>* testset, ResultBundle& r
 
 private:
 std::vector<groundnut::KDevice> devicesVec; 
-
 mlpack::RandomForest<> rf;
-
 
 };
 

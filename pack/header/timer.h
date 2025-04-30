@@ -145,7 +145,7 @@ public:
 class InstrumentationTimer
 {
 public:
-	InstrumentationTimer(const char* name, const char* param)
+	InstrumentationTimer(const std::string name, const std::string param)
 		:m_ProcessName(name), m_ParamDescription(param), m_Stopped(false)
 	{
 		m_StartTimePoint = std::chrono::high_resolution_clock::now();
@@ -160,8 +160,8 @@ public:
 	{
 		auto endTimepoint = std::chrono::high_resolution_clock::now();
 
-		auto start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimePoint).time_since_epoch().count();
-		auto stop = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
+		auto start = std::chrono::time_point_cast<std::chrono::milliseconds>(m_StartTimePoint).time_since_epoch().count();
+		auto stop = std::chrono::time_point_cast<std::chrono::milliseconds>(endTimepoint).time_since_epoch().count();
 		
 		std::thread::id threadID = std::this_thread::get_id();
 		Instrumentor::Get().WriteCsvProfile({m_ProcessName, m_ParamDescription, start, stop, threadID});
@@ -169,8 +169,8 @@ public:
 	}
 
 private:
-	const char* m_ProcessName;
-	const char* m_ParamDescription;
+	std::string m_ProcessName;
+	std::string m_ParamDescription;
 	std::chrono::time_point< std::chrono::high_resolution_clock> m_StartTimePoint;
 	bool m_Stopped;
 };

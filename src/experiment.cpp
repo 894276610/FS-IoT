@@ -6,26 +6,56 @@
 #include "shahidDataset.h"
 #include "shahidClassifier.h"
 #include "magic_enum.hpp"
+#include <pybind11/embed.h>
+
+namespace py = pybind11;
+void AhmedFewShotsExperiment::RunOnce(LabSetting setting)
+{
+    {
+        py::module_ sys = py::module_::import("sys");
+        sys.attr("path").attr("append")("/home/kunling/iot-device-fingerprinting-main/src/scripts");
+    
+        py::module_ trainScript = py::module_::import("ModelTrainingScript"); 
+        std::string datasetName = std::string(magic_enum::enum_name(setting.datasetName));
+        trainScript.attr("runFewShotOnce")(setting.baseFolder, datasetName, setting.trainBudget);
+    }
+
+}
 
 void ShahidFewShotsExperiment::RunOnce(LabSetting setting)
 {
     int budget = setting.trainBudget;
 
     Instrumentor::Get().BeginCsvSession("TimeOverhead", setting.GetTimeOverheadPath());
-    std::cout << "budget: " << budget << "min" << std::endl;
+
+    std::cout << "Training budget: " << budget << " minute." << std::endl;
 
     groundnut::ShahidDataset shahidDataset(pktDataset.GetName(), 6, setting.slotDuration, 600);
     std::unordered_map<uint16_t, groundnut::ShahidSlots> trainSet, testSet;
-
-    shahidDataset.Load(pktDataset);
-    shahidDataset.TrainTestSplit(trainSet, testSet, budget);
-
-    groundnut::ShahidClassifier clf(shahidDataset.devicesVec);
+    groundnut::ShahidClassifier clf(pktDataset.GetDevicesMap());
     ResultBundle result;
-    clf.Train(&trainSet);
-    clf.Predict(&testSet, result);
-    Instrumentor::Get().EndCsvSession();
 
+    {
+        PROFILE_SCOPE("Load", setting.ToString());
+        shahidDataset.Load(pktDataset);
+    }
+
+    {
+        PROFILE_SCOPE("Split", setting.ToString());
+        shahidDataset.TrainTestSplit(trainSet, testSet, budget);
+    }
+
+    {
+        PROFILE_SCOPE("Train", setting.ToString());
+        clf.Train(&trainSet);
+    }
+
+    {
+        PROFILE_SCOPE("Predict", setting.ToString());
+        clf.Predict(&testSet, result);
+    }
+
+    Instrumentor::Get().EndCsvSession();
     result.SaveCsv(setting.GetPredictionCsvPath());
 }
 void ByteIoTFewShotsExperiment::RunOnce(LabSetting setting)
@@ -40,21 +70,40 @@ void ByteIoTFewShotsExperiment::RunOnce(LabSetting setting)
     config.trainBudget = setting.trainBudget;
     config.testRate = setting.testRate;
 
-    std::cout << "budget: " << budget << "min" << std::endl;
+    std::cout << "Training budget: " << budget << " minute." << std::endl;
+
     Instrumentor::Get().BeginCsvSession("ByteIoT-FewShotsExperiment", setting.GetTimeOverheadPath());
  
     groundnut::ByteIoTDataset byteIoTDataset(pktDataset.GetName(), config);
-    byteIoTDataset.Load(pktDataset);
-    byteIoTDataset.TrainTestSplitByTime(budget);
+
+    {
+        PROFILE_SCOPE("Load", setting.ToString());
+        byteIoTDataset.Load(pktDataset);
+    }
+
+    {
+        PROFILE_SCOPE("Split", setting.ToString());
+        byteIoTDataset.TrainTestSplitByTime(budget);
+    }
+    
     auto& trainset = byteIoTDataset.GetTrainset();
     auto& testset  = byteIoTDataset.GetTestset();
 
-    clf.Train(&trainset);
-    clf.Predict(&testset, result, setting.clfConfig.review);
+    {
+        PROFILE_SCOPE("Train", setting.ToString());
+        clf.Train(&trainset);
+    }
+
+    {
+        PROFILE_SCOPE("Predict", setting.ToString());
+        clf.Predict(&testset, result, setting.clfConfig.review);
+    }
+
     Instrumentor::Get().EndCsvSession();
-    
     result.SaveCsv(setting.GetPredictionCsvPath());
 }
+
+
 
 void FSIoTFewShotsExperiment::RunOnce(LabSetting setting)
 {
@@ -76,12 +125,12 @@ void FSIoTFewShotsExperiment::RunOnce(LabSetting setting)
     groundnut::ReviewBook rbook;
 
     {
-        PROFILE_SCOPE("Load", setting.ToString().c_str());
+        PROFILE_SCOPE("Load", setting.ToString());
         burstDataset.Load(pktDataset);
     }
 
     {
-        PROFILE_SCOPE("Split", setting.ToString().c_str());
+        PROFILE_SCOPE("Split", setting.ToString());
         burstDataset.TrainTestSplitByTime(budget);
     }
 
@@ -89,12 +138,12 @@ void FSIoTFewShotsExperiment::RunOnce(LabSetting setting)
     auto& testset = burstDataset.GetTestset();
 
     {
-        PROFILE_SCOPE("Train", setting.ToString().c_str());
+        PROFILE_SCOPE("Train", setting.ToString());
         clf.Train(&trainset);    
     }
    
     {
-        PROFILE_SCOPE("Predict", setting.ToString().c_str());
+        PROFILE_SCOPE("Predict", setting.ToString());
         rbook = clf.Predict(&testset, result, setting.clfConfig.review);
     }
 
@@ -110,21 +159,130 @@ void FSIoTFewShotsExperiment::RunOnce(LabSetting setting)
     rbook.Tofile(setting.GetReviewPath());
 }
 
+void FSIoTFewShotsExperiment::Preprocessing()
+{
+    Instrumentor::Get().BeginCsvSession("FSIOT-FewShotsExperiment", setting.GetTimeOverheadPath());
+    {
+        PROFILE_SCOPE("Preprocessing", setting.ToString());
+        pktDataset.UpdateTargetDevices(setting.GetDeviceMappingFilePath());
+        pktDataset.AutoLoad(setting.GetRawTrafficFolder(), setting.GetPktDatasetFilePath());
+    }
+    Instrumentor::Get().EndCsvSession();
+}
+
+void ByteIoTFewShotsExperiment::Preprocessing()
+{
+    Instrumentor::Get().BeginCsvSession("FSIOT-FewShotsExperiment", setting.GetTimeOverheadPath());
+    {
+        PROFILE_SCOPE("Preprocessing", setting.ToString());
+        pktDataset.UpdateTargetDevices(setting.GetDeviceMappingFilePath());
+        pktDataset.AutoLoad(setting.GetRawTrafficFolder(), setting.GetPktDatasetFilePath());
+    }
+    Instrumentor::Get().EndCsvSession();
+}
+
+void ShahidFewShotsExperiment::Preprocessing()
+{
+    Instrumentor::Get().BeginCsvSession("FSIOT-FewShotsExperiment", setting.GetTimeOverheadPath());
+    {
+        PROFILE_SCOPE("Preprocessing", setting.ToString());
+        pktDataset.UpdateTargetDevices(setting.GetDeviceMappingFilePath());
+        pktDataset.AutoLoad(setting.GetRawTrafficFolder(), setting.GetPktDatasetFilePath());
+    }
+    Instrumentor::Get().EndCsvSession();
+}
+
+size_t AhmedFewShotsExperiment::CountCsvFiles(const std::filesystem::path& directory)
+{
+    size_t count = 0;
+    
+    // 递归遍历目录
+    for (const auto& entry : std::filesystem::recursive_directory_iterator(directory)) {
+        // 检查是否是常规文件且扩展名为.csv
+        if (entry.is_regular_file() && entry.path().extension() == ".csv") {
+            ++count;
+        }
+    }
+    
+    return count;
+}
+
+void AhmedFewShotsExperiment::PcapToCsv()
+{
+    std::cout << "Converting pcap files to csv files..." << std::endl;
+    {
+
+        py::module_ sys = py::module_::import("sys");
+        sys.attr("path").attr("append")("/home/kunling/iot-device-fingerprinting-main/src/scripts");
+    
+        py::module_ pcapToCsvScript = py::module_::import("PCAP2CSV"); 
+        std::string datasetName = std::string(magic_enum::enum_name(setting.datasetName));
+        pcapToCsvScript.attr("PCAP2CSV")(setting.baseFolder, datasetName);
+    }
+    std::cout << "Total pcap files: " << setting.CountCsvFiles(setting.GetRawTrafficFolder()) << std::endl;
+}
+
+void AhmedFewShotsExperiment::CsvToFeatureData()
+{
+    std::cout << "Converting csv files to feature data..." << std::endl;
+    {
+
+        py::module_ sys = py::module_::import("sys");
+        sys.attr("path").attr("append")("/home/kunling/iot-device-fingerprinting-main/src/scripts");
+    
+        py::module_ csvToFeatureDataScript = py::module_::import("CSV2FeatureData"); 
+      
+        std::string datasetName = std::string(magic_enum::enum_name(setting.datasetName));
+        std::cout << "About to convert csv files to feature data for dataset: " << std::endl;
+        csvToFeatureDataScript.attr("CSV2FeatureDataWrapper")(setting.baseFolder, datasetName);
+    }
+}
+
+void AhmedFewShotsExperiment::Preprocessing()
+{
+    int status = 100;
+    std::cout << "Preprocesing..." << std::endl;
+
+    if(std::filesystem::exists(setting.GetAhmedFeatureDataPklPath()))
+    {
+        status = 3;
+    }
+    else if(!setting.IsAhmedDataCSVFolderEmpty())
+    {
+        status = 2;
+    }
+    else if(!setting.IsRawTrafficFolderEmpty())
+    {
+        status = 1;
+    }
+
+    switch(status)
+    {
+        case 1:
+            std::cout << "Converting pcap files to csv files..." << std::endl;
+            PcapToCsv();
+        case 2:
+            std::cout << "Converting csv files to feature data..." << std::endl;
+            CsvToFeatureData();
+        case 3:
+            std::cout << "Feature data exists, skipping preprocessing..." << std::endl;
+            break;
+    }
+}
+
 void FewShotsExperiment::Run()
 {
     int& budget = this->setting.trainBudget;
-    
-    std::cout << "device count:" << pktDataset.GetDevicesMap().size() << std::endl;
-    
+        
     Instrumentor::Get().BeginCsvSession("FSIOT-FewShotsExperiment", setting.GetTimeOverheadPath());
-    pktDataset.UpdateTargetDevices(setting.GetDeviceMappingFilePath());
-    pktDataset.AutoLoad(setting.GetRawTrafficFolder(), setting.GetPktDatasetFilePath());
+    {
+        PROFILE_SCOPE("Preprocessing", setting.ToString());
+        Preprocessing();
+    }
     Instrumentor::Get().EndCsvSession();
 
-    std::cout << "device count:" << pktDataset.GetDevicesMap().size() << std::endl;
     for(budget = setting.start; budget <= setting.end; budget += setting.step)
     {
         RunOnce(setting);
     }
-
 }

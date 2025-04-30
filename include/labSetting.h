@@ -62,7 +62,7 @@ struct LabSetting
     groundnut::DatasetEnum datasetName = groundnut::DatasetEnum::UNSW201620;
     ExperimentEnum scenario = ExperimentEnum::FEW_SHOTS;
 
-    std::string baseFolder = "/media/kunling/BigE/";
+    std::string baseFolder = "/media/kunling/BigE/IoT/";
 
     int slotDuration = 1800; // 30 minutes
 	float trainRate = 0.15f; // Take the more strict limit for training.
@@ -83,6 +83,13 @@ struct LabSetting
 
     std::string GetRawTrafficFolder();
     std::string GetPktDatasetFilePath();
+    std::string GetAhmedFeatureDataPklPath();
+    std::string GetAhmedFeatureDevicePklPath();
+    std::string GetAhmedDataCSVFolder();
+
+    bool IsAhmedDataCSVFolderEmpty();
+    bool IsRawTrafficFolderEmpty(); //TODO TO IMPLEMENT
+
     std::string GetDeviceMappingFilePath();
     std::string GetTimeOverheadPath();
 
@@ -92,15 +99,18 @@ struct LabSetting
     std::string GetDivisionStem();
     std::string GetDivisionPath();
 
+    
     std::string GetPredictionCsvPath();
     std::string GetReviewPath();
 
+    size_t CountCsvFiles(const std::filesystem::path& directory);
+    size_t CountPcapFiles(const std::filesystem::path& directory);
 
 private:
-    std::string GetDatasetFolder();
+
     std::string GetResultFolder();
     std::string GetDataFolder();
-
+    std::string GetFeatureFolder();
 };
 
 LabSetting GetFewShotSettingTemplate();
