@@ -2,8 +2,9 @@
 #include <iostream>
 namespace py = pybind11;
 
-int main() {
-    py::scoped_interpreter guard{};  // 启动 Python 解释器
+void Wrapper()
+{
+    //py::initialize_interpreter();
 
     // 获取 sys.path 并添加你的模块路径
     py::module_ sys = py::module_::import("sys");
@@ -20,5 +21,14 @@ int main() {
     std::string step = "30";
     trainScript.attr("runFewShot")(iotBase, datasetName, start, end, step);
 
+    //py::finalize_interpreter();
+}
+int main() {   
+    py::initialize_interpreter();
+
+    Wrapper();
+    std::cout << "Wrapper Done 1" << std::endl;
+    Wrapper();
+    std::cout << "Wrapper Done 2"<< std::endl;
     return 0;
 }

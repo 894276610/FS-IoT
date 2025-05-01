@@ -129,6 +129,21 @@ class LabSetting:
     def GetResultCsvPath(self):
         return self.GetDatasetPath() + self.ToString() + ".csv";
 
+
+##################### New Naming RUles #####################
+    def GetResultFolder(self):
+        return self.baseFolder + "Result/" + self.datasetName + "/";
+
+    def GetSummaryMetricCsvPath(self):
+        return self.GetResultFolder() + "summaryMetric.csv";
+
+    def GetPredictionCsvPath(self):
+        return self.GetResultFolder() + "PredictionCSV/" + self.ToString() + ".csv";
+
+    def GetConfusionMatrixPath(self):
+        return self.GetResultFolder() + "ConfusionMatrix/" + self.ToString() + ".pdf";
+
+
     def ToString(self):
         basicString = f"{self.methodName}-{self.scenario}-{self.independentArg}-{self.datasetName}-";
         if self.methodName == MethodName.FSIOT.name:
@@ -138,9 +153,35 @@ class LabSetting:
         elif self.methodName == MethodName.SHAHID.name:
             basicString += f"{self.configDataset.ToString()}{self.configShahid.ToString()}";     
         elif self.methodName == MethodName.AHMED.name:
-            basicString = f"R({self.configDataset.trainBudget}minutes)true_pred"
+            basicString += f"{self.configDataset.ToString()}";
         
         return basicString;
+
+#    ss << methodName << "-" << scenario << "-" ;
+#     ss << independentArg << "-" << datasetName << "-";
+    # std::stringstream ss;
+    # ss << "(slot=" << slotDuration << ")";
+    # ss << "(trainR=" << trainRate << ")";
+    # ss << "(trainB=" << trainBudget << "min)";
+    # ss << "(testR="<< testRate << ")";
+    # return ss.str();
+# std::string LabSetting::ToString()
+# {
+#     std::stringstream ss;
+#     ss << GetScenarioInfo() << GetTrainTestSplitInfo();
+#     switch(methodName)
+#     {
+#         case MethodEnum::BYTEIOT:
+#             break;
+#         case MethodEnum::FSIOT:
+#             ss << burstTrh.ToString() << clfConfig.ToString();
+#             break;
+#         case MethodEnum::AHMED:
+#             ss << shahidConfig.ToString();
+#             break;
+#     }
+#     return ss.str();
+# }
 
 # 6条线的配置
 default_series_config = [

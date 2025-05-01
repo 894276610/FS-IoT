@@ -61,12 +61,8 @@ public:
 class AhmedFewShotsExperiment : public FewShotsExperiment {
 public:
     AhmedFewShotsExperiment(LabSetting setting) : FewShotsExperiment(setting) {
-        py::initialize_interpreter();
     }
 
-    ~AhmedFewShotsExperiment() {
-        py::finalize_interpreter();
-    }
 
     size_t CountCsvFiles(const std::filesystem::path& directory);
     void PcapToCsv();

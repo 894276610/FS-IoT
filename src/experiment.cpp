@@ -19,7 +19,6 @@ void AhmedFewShotsExperiment::RunOnce(LabSetting setting)
         std::string datasetName = std::string(magic_enum::enum_name(setting.datasetName));
         trainScript.attr("runFewShotOnce")(setting.baseFolder, datasetName, setting.trainBudget);
     }
-
 }
 
 void ShahidFewShotsExperiment::RunOnce(LabSetting setting)

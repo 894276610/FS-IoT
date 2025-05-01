@@ -11,4 +11,4 @@ path = setting.GetCmPath()
 if not os.path.exists(path):
     os.makedirs(path)
 PlotConfusionMatrix(setting.GetResultCsvPath(), setting.GetCmPath(), width=setting.GetCmWidth(), len=setting.GetCmLen())
-# PlotFewShot(setting);
+PlotFewShot(setting);

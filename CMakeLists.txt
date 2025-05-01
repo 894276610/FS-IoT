@@ -43,7 +43,7 @@ include_directories(${PYTHON_INCLUDE_DIR})
 
 # add_compile_options(-Wunused-variable -Wall -Wextra -Werror)
 
-add_executable(MainExe ${CMAKE_SOURCE_DIR}/src/main.cpp ${CMAKE_SOURCE_DIR}/src/labSetting.cpp ${CMAKE_SOURCE_DIR}/src/experiment.cpp )
+add_executable(MainExe ${CMAKE_SOURCE_DIR}/src/main.cpp ${CMAKE_SOURCE_DIR}/src/labSetting.cpp ${CMAKE_SOURCE_DIR}/src/experiment.cpp ${CMAKE_SOURCE_DIR}/src/postproc.cpp)
 add_executable(TestBindExe ${CMAKE_SOURCE_DIR}/src/testBind.cpp)
 
 pybind11_add_module(example ${CMAKE_SOURCE_DIR}/src/testBind.cpp)

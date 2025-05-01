@@ -93,13 +93,14 @@ struct LabSetting
     std::string GetDeviceMappingFilePath();
     std::string GetTimeOverheadPath();
 
+    std::string GetConfusionMatrixPath();
+
     std::string ToString();
     std::string GetMetricPath();
 
     std::string GetDivisionStem();
     std::string GetDivisionPath();
 
-    
     std::string GetPredictionCsvPath();
     std::string GetReviewPath();
 

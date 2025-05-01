@@ -121,12 +121,14 @@ std::string LabSetting::ToString()
     ss << GetScenarioInfo() << GetTrainTestSplitInfo();
     switch(methodName)
     {
+        case MethodEnum::AHMED:
+            break;
         case MethodEnum::BYTEIOT:
             break;
         case MethodEnum::FSIOT:
             ss << burstTrh.ToString() << clfConfig.ToString();
             break;
-        case MethodEnum::AHMED:
+        case MethodEnum::SHAHID:
             ss << shahidConfig.ToString();
             break;
     }
@@ -156,6 +158,13 @@ std::string LabSetting::GetPktDatasetFilePath()
 {
     std::stringstream ss;
     ss << GetFeatureFolder() <<  datasetName << ".pktDataset";
+    return ss.str();
+}
+
+std::string LabSetting::GetConfusionMatrixPath()
+{
+    std::stringstream ss;
+    ss << GetResultFolder() << "ConfusionMatrix/" << "CM-" << ToString() << ".pdf";
     return ss.str();
 }
 
