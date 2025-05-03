@@ -58,6 +58,7 @@ public:
 
 		m_OutputStream.open(filepath, std::ios::out | std::ios::app);
 		m_CurrentSession = new InstrumentationSession{ name };
+		
 	}
 
 	void EndCsvSession()

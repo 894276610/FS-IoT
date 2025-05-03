@@ -15,7 +15,11 @@ void PacketDataset::AutoLoad(const std::string& datasetRawFolder, const std::str
     }
     else
     {
-        LoadPcap(datasetRawFolder);
+        {
+            PROFILE_SCOPE("LoadPcap", "NoParam");
+            LoadPcap(datasetRawFolder);
+        }
+      
         Serialize(pktDatasetFilePath);  
     }
 }

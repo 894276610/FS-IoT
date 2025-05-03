@@ -15,6 +15,7 @@ public:
     }
 
     virtual void Run() = 0;
+    void Postprocessing();
 
 protected:
     LabSetting setting;
@@ -28,39 +29,39 @@ public:
     void Run() override;
 
     virtual void Preprocessing() = 0;
-    virtual void RunOnce(LabSetting setting) = 0;
+    virtual void RunFewShotOnce(LabSetting setting) = 0;
 
 protected:
     groundnut::PacketDataset pktDataset;
 };
 
-class FSIoTFewShotsExperiment : public FewShotsExperiment {
+class FSIoTExperiment : public FewShotsExperiment {
 public:
-    FSIoTFewShotsExperiment(LabSetting setting) : FewShotsExperiment(setting) {}
+    FSIoTExperiment(LabSetting setting) : FewShotsExperiment(setting) {}
 
     void Preprocessing() override;
-    void RunOnce(LabSetting setting) override;
+    void RunFewShotOnce(LabSetting setting) override;
 };
 
-class ByteIoTFewShotsExperiment : public FewShotsExperiment {
+class ByteIoTExperiment : public FewShotsExperiment {
 public:
-    ByteIoTFewShotsExperiment(LabSetting setting) : FewShotsExperiment(setting) {}
+    ByteIoTExperiment(LabSetting setting) : FewShotsExperiment(setting) {}
 
     void Preprocessing() override;
-    void RunOnce(LabSetting setting) override;
+    void RunFewShotOnce(LabSetting setting) override;
 };
 
-class ShahidFewShotsExperiment  : public FewShotsExperiment {
+class ShahidExperiment  : public FewShotsExperiment {
 public:
-    ShahidFewShotsExperiment(LabSetting setting) : FewShotsExperiment(setting) {}
+    ShahidExperiment(LabSetting setting) : FewShotsExperiment(setting) {}
 
     void Preprocessing() override;
-    void RunOnce(LabSetting setting) override;
+    void RunFewShotOnce(LabSetting setting) override;
 };
 
-class AhmedFewShotsExperiment : public FewShotsExperiment {
+class AhmedExperiment : public FewShotsExperiment {
 public:
-    AhmedFewShotsExperiment(LabSetting setting) : FewShotsExperiment(setting) {
+    AhmedExperiment(LabSetting setting) : FewShotsExperiment(setting) {
     }
 
 
@@ -69,7 +70,7 @@ public:
     void CsvToFeatureData();
 
     void Preprocessing() override;
-    void RunOnce(LabSetting setting) override;
+    void RunFewShotOnce(LabSetting setting) override;
 
 };
 
@@ -90,13 +91,13 @@ private:
     static std::unique_ptr<Experiment> CreateFewShotsExperiment(const LabSetting& setting) {
         switch (setting.methodName) {
             case MethodEnum::FSIOT:
-                return std::make_unique<FSIoTFewShotsExperiment>(setting);
+                return std::make_unique<FSIoTExperiment>(setting);
             case MethodEnum::BYTEIOT:
-                return std::make_unique<ByteIoTFewShotsExperiment>(setting);
+                return std::make_unique<ByteIoTExperiment>(setting);
             case MethodEnum::SHAHID:
-                return std::make_unique<ShahidFewShotsExperiment>(setting);
+                return std::make_unique<ShahidExperiment>(setting);
             case MethodEnum::AHMED:
-                return std::make_unique<AhmedFewShotsExperiment>(setting);
+                return std::make_unique<AhmedExperiment>(setting);
             default:
                 throw std::runtime_error("Invalid method name");
         }
@@ -105,11 +106,11 @@ private:
     static std::unique_ptr<Experiment> CreateAccAlignExperiment(const LabSetting& setting) {
         switch (setting.methodName) {
             case MethodEnum::FSIOT:
-                return std::make_unique<FSIoTFewShotsExperiment>(setting);
+                return std::make_unique<FSIoTExperiment>(setting);
             case MethodEnum::BYTEIOT:
-                return std::make_unique<ByteIoTFewShotsExperiment>(setting);
+                return std::make_unique<ByteIoTExperiment>(setting);
             case MethodEnum::SHAHID:
-                return std::make_unique<ShahidFewShotsExperiment>(setting);
+                return std::make_unique<ShahidExperiment>(setting);
             default:
                 throw std::runtime_error("Invalid method name");
         }

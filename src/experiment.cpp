@@ -9,7 +9,7 @@
 #include <pybind11/embed.h>
 
 namespace py = pybind11;
-void AhmedFewShotsExperiment::RunOnce(LabSetting setting)
+void AhmedExperiment::RunFewShotOnce(LabSetting setting)
 {
     {
         py::module_ sys = py::module_::import("sys");
@@ -21,11 +21,10 @@ void AhmedFewShotsExperiment::RunOnce(LabSetting setting)
     }
 }
 
-void ShahidFewShotsExperiment::RunOnce(LabSetting setting)
+void ShahidExperiment::RunFewShotOnce(LabSetting setting)
 {
     int budget = setting.trainBudget;
 
-    Instrumentor::Get().BeginCsvSession("TimeOverhead", setting.GetTimeOverheadPath());
 
     std::cout << "Training budget: " << budget << " minute." << std::endl;
 
@@ -54,10 +53,9 @@ void ShahidFewShotsExperiment::RunOnce(LabSetting setting)
         clf.Predict(&testSet, result);
     }
 
-    Instrumentor::Get().EndCsvSession();
     result.SaveCsv(setting.GetPredictionCsvPath());
 }
-void ByteIoTFewShotsExperiment::RunOnce(LabSetting setting)
+void ByteIoTExperiment::RunFewShotOnce(LabSetting setting)
 {      
     int budget = setting.trainBudget;
     groundnut::ByteIoTClassifier clf;
@@ -71,7 +69,6 @@ void ByteIoTFewShotsExperiment::RunOnce(LabSetting setting)
 
     std::cout << "Training budget: " << budget << " minute." << std::endl;
 
-    Instrumentor::Get().BeginCsvSession("ByteIoT-FewShotsExperiment", setting.GetTimeOverheadPath());
  
     groundnut::ByteIoTDataset byteIoTDataset(pktDataset.GetName(), config);
 
@@ -98,13 +95,12 @@ void ByteIoTFewShotsExperiment::RunOnce(LabSetting setting)
         clf.Predict(&testset, result, setting.clfConfig.review);
     }
 
-    Instrumentor::Get().EndCsvSession();
     result.SaveCsv(setting.GetPredictionCsvPath());
 }
 
 
 
-void FSIoTFewShotsExperiment::RunOnce(LabSetting setting)
+void FSIoTExperiment::RunFewShotOnce(LabSetting setting)
 {
     int budget = setting.trainBudget;
     std::cout << "Training budget: " << budget << " minute." << std::endl;
@@ -116,7 +112,6 @@ void FSIoTFewShotsExperiment::RunOnce(LabSetting setting)
     config.testRate = setting.testRate;
     config.burstTrh = setting.burstTrh;
 
-    Instrumentor::Get().BeginCsvSession("FSIOT-FewShotsExperiment", setting.GetTimeOverheadPath());
 
     groundnut::BurstDataset burstDataset(pktDataset.GetName(), config);
     groundnut::BoClassifier clf(setting.clfConfig);
@@ -146,7 +141,6 @@ void FSIoTFewShotsExperiment::RunOnce(LabSetting setting)
         rbook = clf.Predict(&testset, result, setting.clfConfig.review);
     }
 
-    Instrumentor::Get().EndCsvSession();
     
     result.SaveCsv(setting.GetPredictionCsvPath());
 
@@ -158,40 +152,25 @@ void FSIoTFewShotsExperiment::RunOnce(LabSetting setting)
     rbook.Tofile(setting.GetReviewPath());
 }
 
-void FSIoTFewShotsExperiment::Preprocessing()
+void FSIoTExperiment::Preprocessing()
 {
-    Instrumentor::Get().BeginCsvSession("FSIOT-FewShotsExperiment", setting.GetTimeOverheadPath());
-    {
-        PROFILE_SCOPE("Preprocessing", setting.ToString());
-        pktDataset.UpdateTargetDevices(setting.GetDeviceMappingFilePath());
-        pktDataset.AutoLoad(setting.GetRawTrafficFolder(), setting.GetPktDatasetFilePath());
-    }
-    Instrumentor::Get().EndCsvSession();
+    pktDataset.UpdateTargetDevices(setting.GetDeviceMappingFilePath());
+    pktDataset.AutoLoad(setting.GetRawTrafficFolder(), setting.GetPktDatasetFilePath());
 }
 
-void ByteIoTFewShotsExperiment::Preprocessing()
+void ByteIoTExperiment::Preprocessing()
 {
-    Instrumentor::Get().BeginCsvSession("FSIOT-FewShotsExperiment", setting.GetTimeOverheadPath());
-    {
-        PROFILE_SCOPE("Preprocessing", setting.ToString());
-        pktDataset.UpdateTargetDevices(setting.GetDeviceMappingFilePath());
-        pktDataset.AutoLoad(setting.GetRawTrafficFolder(), setting.GetPktDatasetFilePath());
-    }
-    Instrumentor::Get().EndCsvSession();
+    pktDataset.UpdateTargetDevices(setting.GetDeviceMappingFilePath());
+    pktDataset.AutoLoad(setting.GetRawTrafficFolder(), setting.GetPktDatasetFilePath());
 }
 
-void ShahidFewShotsExperiment::Preprocessing()
+void ShahidExperiment::Preprocessing()
 {
-    Instrumentor::Get().BeginCsvSession("FSIOT-FewShotsExperiment", setting.GetTimeOverheadPath());
-    {
-        PROFILE_SCOPE("Preprocessing", setting.ToString());
-        pktDataset.UpdateTargetDevices(setting.GetDeviceMappingFilePath());
-        pktDataset.AutoLoad(setting.GetRawTrafficFolder(), setting.GetPktDatasetFilePath());
-    }
-    Instrumentor::Get().EndCsvSession();
+    pktDataset.UpdateTargetDevices(setting.GetDeviceMappingFilePath());
+    pktDataset.AutoLoad(setting.GetRawTrafficFolder(), setting.GetPktDatasetFilePath());
 }
 
-size_t AhmedFewShotsExperiment::CountCsvFiles(const std::filesystem::path& directory)
+size_t AhmedExperiment::CountCsvFiles(const std::filesystem::path& directory)
 {
     size_t count = 0;
     
@@ -206,7 +185,7 @@ size_t AhmedFewShotsExperiment::CountCsvFiles(const std::filesystem::path& direc
     return count;
 }
 
-void AhmedFewShotsExperiment::PcapToCsv()
+void AhmedExperiment::PcapToCsv()
 {
     std::cout << "Converting pcap files to csv files..." << std::endl;
     {
@@ -221,7 +200,7 @@ void AhmedFewShotsExperiment::PcapToCsv()
     std::cout << "Total pcap files: " << setting.CountCsvFiles(setting.GetRawTrafficFolder()) << std::endl;
 }
 
-void AhmedFewShotsExperiment::CsvToFeatureData()
+void AhmedExperiment::CsvToFeatureData()
 {
     std::cout << "Converting csv files to feature data..." << std::endl;
     {
@@ -237,8 +216,10 @@ void AhmedFewShotsExperiment::CsvToFeatureData()
     }
 }
 
-void AhmedFewShotsExperiment::Preprocessing()
+void AhmedExperiment::Preprocessing()
 {
+    PROFILE_SCOPE("Preprocessing", setting.ToString());
+
     int status = 100;
     std::cout << "Preprocesing..." << std::endl;
 
@@ -266,22 +247,30 @@ void AhmedFewShotsExperiment::Preprocessing()
         case 3:
             std::cout << "Feature data exists, skipping preprocessing..." << std::endl;
             break;
-    }
+    } 
 }
 
 void FewShotsExperiment::Run()
 {
     int& budget = this->setting.trainBudget;
-        
-    Instrumentor::Get().BeginCsvSession("FSIOT-FewShotsExperiment", setting.GetTimeOverheadPath());
-    {
-        PROFILE_SCOPE("Preprocessing", setting.ToString());
-        Preprocessing();
-    }
-    Instrumentor::Get().EndCsvSession();
+         
+    Instrumentor::Get().BeginCsvSession("Preprocessing", setting.GetTimeOverheadPath());
 
+    Preprocessing();
+    
     for(budget = setting.start; budget <= setting.end; budget += setting.step)
     {
-        RunOnce(setting);
+        RunFewShotOnce(setting);
     }
+
+    Postprocessing();
+    Instrumentor::Get().EndCsvSession();
+}
+
+void Experiment::Postprocessing()
+{
+    // 最困难的地方在与 labsetting 中的 枚举类型，是不一致的，有没有字符串类型的枚举？
+    // convert csv pred to csv summary
+
+    // draw confusion matrix
 }

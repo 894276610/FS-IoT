@@ -4,6 +4,7 @@ from utils import *;
 import os;
 from pathlib import Path
 import pandas as pd
+from settingTemplates import *
 import time
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
@@ -39,3 +40,10 @@ def ExtractMetrics(setting:LabSetting):
         newEntry.to_csv(outPath, mode='a', header=False, index=False)
     else:
         newEntry.to_csv(outPath, mode='w', index=False)
+
+def ExtractMetricsWrapper():
+
+    setting = GetFewShotSettingTemplate();
+    ExtractMetrics(setting);
+
+   

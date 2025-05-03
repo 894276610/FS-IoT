@@ -178,7 +178,7 @@ std::string LabSetting::GetDeviceMappingFilePath()
 std::string LabSetting::GetTimeOverheadPath()
 {
     std::stringstream ss;
-    ss << GetResultFolder() << "/TimeOverhead/" << datasetName << "-" << methodName << "-TimeOverhead.csv";
+    ss << GetResultFolder() << "TimeOverhead/" << datasetName << "-" << methodName << "-TimeOverhead.csv";
     return ss.str();
 }
 
