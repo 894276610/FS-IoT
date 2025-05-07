@@ -23,8 +23,8 @@ void FewShotLabs(std::string baseFolder) {
         settings.methodName = method;
         settings.datasetName = dataset;
         settings.scenario = scenario;
-        std::unique_ptr<Experiment> experiment = ExperimentFactory::CreateExperiment(settings);
-        experiment->Run();
+        std::unique_ptr<FewShotsInterface> experiment = ExperimentFactory::CreateFewShotsExperiment(settings);
+        experiment->RunFewShot();
     }
 }
 

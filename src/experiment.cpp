@@ -98,8 +98,6 @@ void ByteIoTExperiment::RunFewShotOnce(LabSetting setting)
     result.SaveCsv(setting.GetPredictionCsvPath());
 }
 
-
-
 void FSIoTExperiment::RunFewShotOnce(LabSetting setting)
 {
     int budget = setting.trainBudget;
@@ -111,9 +109,8 @@ void FSIoTExperiment::RunFewShotOnce(LabSetting setting)
     config.trainBudget = setting.trainBudget;
     config.testRate = setting.testRate;
     config.burstTrh = setting.burstTrh;
-
-
-    groundnut::BurstDataset burstDataset(pktDataset.GetName(), config);
+    
+    groundnut::BurstDataset burstDataset(this->pktDataset.GetName(), config);
     groundnut::BoClassifier clf(setting.clfConfig);
     ResultBundle result;
     groundnut::ReviewBook rbook;
@@ -152,68 +149,13 @@ void FSIoTExperiment::RunFewShotOnce(LabSetting setting)
     rbook.Tofile(setting.GetReviewPath());
 }
 
-void FSIoTExperiment::Preprocessing()
+void FSIoTExperiment::RunDivision()
+{}
+
+void Experiment::Preprocessing()
 {
     pktDataset.UpdateTargetDevices(setting.GetDeviceMappingFilePath());
     pktDataset.AutoLoad(setting.GetRawTrafficFolder(), setting.GetPktDatasetFilePath());
-}
-
-void ByteIoTExperiment::Preprocessing()
-{
-    pktDataset.UpdateTargetDevices(setting.GetDeviceMappingFilePath());
-    pktDataset.AutoLoad(setting.GetRawTrafficFolder(), setting.GetPktDatasetFilePath());
-}
-
-void ShahidExperiment::Preprocessing()
-{
-    pktDataset.UpdateTargetDevices(setting.GetDeviceMappingFilePath());
-    pktDataset.AutoLoad(setting.GetRawTrafficFolder(), setting.GetPktDatasetFilePath());
-}
-
-size_t AhmedExperiment::CountCsvFiles(const std::filesystem::path& directory)
-{
-    size_t count = 0;
-    
-    // 递归遍历目录
-    for (const auto& entry : std::filesystem::recursive_directory_iterator(directory)) {
-        // 检查是否是常规文件且扩展名为.csv
-        if (entry.is_regular_file() && entry.path().extension() == ".csv") {
-            ++count;
-        }
-    }
-    
-    return count;
-}
-
-void AhmedExperiment::PcapToCsv()
-{
-    std::cout << "Converting pcap files to csv files..." << std::endl;
-    {
-
-        py::module_ sys = py::module_::import("sys");
-        sys.attr("path").attr("append")("/home/kunling/iot-device-fingerprinting-main/src/scripts");
-    
-        py::module_ pcapToCsvScript = py::module_::import("PCAP2CSV"); 
-        std::string datasetName = std::string(magic_enum::enum_name(setting.datasetName));
-        pcapToCsvScript.attr("PCAP2CSV")(setting.baseFolder, datasetName);
-    }
-    std::cout << "Total pcap files: " << setting.CountCsvFiles(setting.GetRawTrafficFolder()) << std::endl;
-}
-
-void AhmedExperiment::CsvToFeatureData()
-{
-    std::cout << "Converting csv files to feature data..." << std::endl;
-    {
-
-        py::module_ sys = py::module_::import("sys");
-        sys.attr("path").attr("append")("/home/kunling/iot-device-fingerprinting-main/src/scripts");
-    
-        py::module_ csvToFeatureDataScript = py::module_::import("CSV2FeatureData"); 
-      
-        std::string datasetName = std::string(magic_enum::enum_name(setting.datasetName));
-        std::cout << "About to convert csv files to feature data for dataset: " << std::endl;
-        csvToFeatureDataScript.attr("CSV2FeatureDataWrapper")(setting.baseFolder, datasetName);
-    }
 }
 
 void AhmedExperiment::Preprocessing()
@@ -250,7 +192,38 @@ void AhmedExperiment::Preprocessing()
     } 
 }
 
-void FewShotsExperiment::Run()
+void AhmedExperiment::PcapToCsv()
+{
+    std::cout << "Converting pcap files to csv files..." << std::endl;
+    {
+
+        py::module_ sys = py::module_::import("sys");
+        sys.attr("path").attr("append")("/home/kunling/iot-device-fingerprinting-main/src/scripts");
+    
+        py::module_ pcapToCsvScript = py::module_::import("PCAP2CSV"); 
+        std::string datasetName = std::string(magic_enum::enum_name(setting.datasetName));
+        pcapToCsvScript.attr("PCAP2CSV")(setting.baseFolder, datasetName);
+    }
+    std::cout << "Total pcap files: " << setting.CountCsvFiles(setting.GetRawTrafficFolder()) << std::endl;
+}
+
+void AhmedExperiment::CsvToFeatureData()
+{
+    std::cout << "Converting csv files to feature data..." << std::endl;
+    {
+
+        py::module_ sys = py::module_::import("sys");
+        sys.attr("path").attr("append")("/home/kunling/iot-device-fingerprinting-main/src/scripts");
+    
+        py::module_ csvToFeatureDataScript = py::module_::import("CSV2FeatureData"); 
+      
+        std::string datasetName = std::string(magic_enum::enum_name(setting.datasetName));
+        std::cout << "About to convert csv files to feature data for dataset: " << std::endl;
+        csvToFeatureDataScript.attr("CSV2FeatureDataWrapper")(setting.baseFolder, datasetName);
+    }
+}
+
+void Experiment::DoFewShot()
 {
     int& budget = this->setting.trainBudget;
          
