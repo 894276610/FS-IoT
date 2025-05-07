@@ -16,20 +16,20 @@ def PlotFewShot(labSettings:LabSetting):
         labSettings.configDataset.trainBudget = trainBudget;
 
         labSettings.methodName = MethodName.FSIOT.name
-        resultPath = labSettings.GetResultCsvPath();
+        resultPath = labSettings.GetPredictionCsvPath();
         print(resultPath)
         burstIoTAccList.append(GetMetric(resultPath)[0]);
 
         labSettings.methodName = MethodName.BYTEIOT.name
-        resultPath = labSettings.GetResultCsvPath();
+        resultPath = labSettings.GetPredictionCsvPath();
         byteIoTAccList.append(GetMetric(resultPath)[0]);
     
         labSettings.methodName = MethodName.SHAHID.name
-        resultPath = labSettings.GetResultCsvPath();
+        resultPath = labSettings.GetPredictionCsvPath();
         shahidAccList.append(GetMetric(resultPath)[0]);
     
         labSettings.methodName = MethodName.AHMED.name;
-        resultPath = labSettings.GetResultCsvPath();
+        resultPath = labSettings.GetPredictionCsvPath();
         ahmedAccList.append(GetMetric(resultPath)[0]);
 
     print(trainBudgetList)
@@ -54,16 +54,10 @@ def PlotFewShot(labSettings:LabSetting):
 
     config = default_series_config[:4] 
 
-    PlotSeriesLineChart(trainingBudgetListHour, config, labSettings.xLabel, labSettings.yLabel, labSettings.GetResultCsvPath() + ".pdf", showText=False)
+    PlotSeriesLineChart(trainingBudgetListHour, config, labSettings.xLabel, labSettings.yLabel, labSettings.GetComparisonGraphPath() , showText=False)
 
 def GetMetric(csv_path):
 
-    """
-    读取CSV文件，计算准确率
-    
-    参数:
-        csv_path (str): CSV文件路径（格式：第一列是y_true，第二列是y_pred）
-    """
     # 1. 读取CSV文件
     data = pd.read_csv(csv_path)
     
@@ -132,12 +126,21 @@ def PlotSeriesLineChart(x, series_config, x_axisLabel, y_axisLabel,  outPath, ro
     plt.ylim(65, 101)
 
     plt.tight_layout()
+
+    # 保存图像
+    # check if the path has the folder
+    import os;
+    if not os.path.exists(os.path.dirname(outPath)):
+        os.makedirs(os.path.dirname(outPath))
+
     plt.savefig(outPath, dpi=300, bbox_inches="tight", facecolor="white")
     print(outPath)
     plt.close()
-
 
 if __name__ == "__main__":
     from settingTemplates import *;
     setting = GetFewShotSettingTemplate();
     PlotFewShot(setting);
+
+# BehavIoT2021-(slot=1800)(trainR=0.15)(trainB=300min)(testR=0.5)(uniTrh=1000)(inTrh=2.0s)(ouTrh=15.0s)(lsenable=1)(Tuni=200)(Tpkt=1000)(mUniPkt=1000)(mPktIdx=500)(dTrh=0.45)(maxTrainIt=1000)(pen=0.01).csv
+#               slot=1800)(trainR=0.15)(trainB=60minu)(testR=0.5)(uniTrh=1000)(inTrh=2.0s)(ouTrh=15.0s)(lsenable=1)(Tuni=200)(Tpkt=1000)(mUniPkt=1000)(mPktIdx=500)(dTrh=0.45)(maxTrainIt=1000)(pen=0.01).txt

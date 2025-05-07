@@ -5,10 +5,12 @@ import numpy as np
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
+from pathlib import Path
 
 def PlotCmWrapper(resultCsvPath, CmOutputPath, CmWidth, CmLen):
-    if not os.path.exists(CmOutputPath):
-        os.makedirs(CmOutputPath)
+    if(not Path.is_dir(Path(CmOutputPath).parent)):
+        Path(CmOutputPath).parent.mkdir(parents=True, exist_ok=True)
+
     PlotConfusionMatrix(resultCsvPath, CmOutputPath, CmWidth, CmLen)
 
 def PlotConfusionMatrix(csv_path, output_image='confusion_matrix.pdf', width = 15, len=10):
@@ -44,6 +46,17 @@ def PlotConfusionMatrix(csv_path, output_image='confusion_matrix.pdf', width = 1
     plt.ylabel('True Labels', fontsize=20)
     
     plt.tight_layout()
+
+    # create
+    from pathlib import Path
+
+    # if the parent exist
+
+
+    if(not Path.is_dir(Path(output_image).parent)):
+        print(Path(output_image).parent)
+        # Path(output_image).parent.mkdir(parents=True, exist_ok=True)
+
     plt.savefig(output_image, dpi=300, bbox_inches='tight')
     plt.close()
 
@@ -58,4 +71,13 @@ def format_value(val):
 if __name__ == '__main__':
     from settingTemplates import *;
     setting = GetFewShotSettingTemplate();
-    PlotCmWrapper(setting)
+    setting.methodName = MethodName.FSIOT.name;
+    setting.datasetName = DatasetEnum.UNSW201620.name;
+    setting.configBurstDataset.trainBudget = 60;
+    resultCsvPath = setting.GetPredictionCsvPath();
+    CmOutputPath = setting.GetConfusionMatrixPath();
+    CmWidth = setting.GetCmWidth();
+    CmLen = setting.GetCmLen();
+    print(resultCsvPath)
+    # resultCsvPath, CmOutputPath, CmWidth, CmLen
+    PlotCmWrapper(resultCsvPath, CmOutputPath, CmWidth, CmLen)

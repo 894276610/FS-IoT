@@ -261,16 +261,41 @@ void FewShotsExperiment::Run()
     for(budget = setting.start; budget <= setting.end; budget += setting.step)
     {
         RunFewShotOnce(setting);
+        Postprocessing();
     }
 
-    Postprocessing();
     Instrumentor::Get().EndCsvSession();
 }
 
+
+// TODO 应该不用依赖具体路径，而是依赖设置中的路径
 void Experiment::Postprocessing()
 {
-    // 最困难的地方在与 labsetting 中的 枚举类型，是不一致的，有没有字符串类型的枚举？
-    // convert csv pred to csv summary
+    py::module_ sys = py::module_::import("sys");
+    std::cout << "Appending path: " << "/home/kunling/IoTClassifier2025/pythonDraw/" << std::endl;
+    sys.attr("path").attr("append")("/home/kunling/IoTClassifier2025/pythonDraw/");
 
-    // draw confusion matrix
+    // 提取分类指标
+    {
+        std::string datasetName, methodName, baseFolder; 
+        py::module_ extractScript = py::module_::import("extractMetric"); 
+        datasetName = std::string(magic_enum::enum_name(setting.datasetName));
+        methodName = std::string(magic_enum::enum_name(setting.methodName));
+        baseFolder = setting.baseFolder;
+        extractScript.attr("ExtractMetricsWrapper")(baseFolder, methodName, datasetName, setting.GetPredictionCsvPath());
+    }
+
+    // 绘制混淆矩阵
+    {
+        std::string resultCsvPath, CmOutputPath;
+        int CmWidth, CmLen;
+        resultCsvPath = setting.GetPredictionCsvPath();
+        CmOutputPath = setting.GetConfusionMatrixPath();
+        CmWidth = setting.GetCmWidth();
+        CmLen = setting.GetCmLength();
+
+        py::module_ cmScript = py::module_::import("plotCm");
+        cmScript.attr("PlotCmWrapper")(resultCsvPath, CmOutputPath, CmWidth, CmLen);
+    }
+
 }

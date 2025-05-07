@@ -104,6 +104,9 @@ struct LabSetting
     std::string GetPredictionCsvPath();
     std::string GetReviewPath();
 
+    int GetCmWidth();
+    int GetCmLength();
+
     size_t CountCsvFiles(const std::filesystem::path& directory);
     size_t CountPcapFiles(const std::filesystem::path& directory);
 

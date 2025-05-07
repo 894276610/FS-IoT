@@ -1,5 +1,40 @@
 #include "labSetting.h"
 
+int LabSetting::GetCmWidth()
+{
+    if(datasetName == groundnut::DatasetEnum::UNSW201620)
+    {
+        return 12;
+    }
+    else if(datasetName == groundnut::DatasetEnum::BehavIoT2021)
+    {
+        return 23;
+    }
+    else
+    {
+        std::cout << "error: datasetName is not UNSW201620 or BehavIoT2021" << std::endl;
+        return 0;
+    }
+}
+
+int LabSetting::GetCmLength()
+{
+    if(datasetName == groundnut::DatasetEnum::UNSW201620)
+    {
+        return 8;
+    }
+    else if(datasetName == groundnut::DatasetEnum::BehavIoT2021)
+    {
+        return 12;
+    }
+    else
+    {
+        std::cout << "error: datasetName is not UNSW201620 or BehavIoT2021" << std::endl;
+        return 0;
+    }
+}
+
+
 bool LabSetting::IsAhmedDataCSVFolderEmpty()
 {
     if(!std::filesystem::exists(GetAhmedDataCSVFolder()))
@@ -185,7 +220,7 @@ std::string LabSetting::GetTimeOverheadPath()
 LabSetting GetFewShotSettingTemplate()
 {
     LabSetting settings;
-    settings.baseFolder = "/media/kunling/BigE/IoT/";
+    settings.baseFolder = "/media/kunling/dpan/IoT/";
 
     settings.methodName = MethodEnum::FSIOT;
     settings.datasetName = groundnut::DatasetEnum::UNSW201620; // "NEUKI2019"; //"UNSW201620"; //"NEUKI2019" //IOTBEHAV2021
@@ -202,7 +237,7 @@ LabSetting GetFewShotSettingTemplate()
 LabSetting GetDivisionSettingTemplate()
 {
     LabSetting settings;
-    settings.baseFolder = "/media/kunling/BigE/IoT/";
+    settings.baseFolder = "/media/kunling/dpan/IoT/";
     settings.methodName = MethodEnum::FSIOT;
     settings.datasetName = groundnut::DatasetEnum::UNSW201620; 
     settings.scenario = ExperimentEnum::DIVISION;

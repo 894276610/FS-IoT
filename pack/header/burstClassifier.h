@@ -17,7 +17,7 @@ struct FsClfConfig
     int maxPktIndex = 500; 
     int maxTrainItem = 1000;
     float distanceTrh = 0.45;
-    float penalty = 0.01;
+    float penalty = 0.05;
     bool review = false;
 
     std::string ToString() const

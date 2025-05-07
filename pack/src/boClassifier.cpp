@@ -44,11 +44,11 @@ float Aggregator::AddBurstPrediction(std::shared_ptr<KBurst> pBurst, SearchResul
     }
 
     // calculate score
-    float score =  log(pBurst->GetUniPktNum() + 1) / (devNameSet.size() * (sqrt(prediction.minDistance) + 1));
+    float score =  sqrt(pBurst->GetUniPktNum() + 1) / (devNameSet.size() * (sqrt(prediction.minDistance) + 1));
 
-    if(prediction.minDistance > distance_threshold || pBurst->GetPktNum() < 2)
+    if(prediction.minDistance > distance_threshold)
     {
-        score*= penalty;
+        score *= penalty;
     }
 
     // add to scoreBoard

@@ -81,7 +81,7 @@ private:
     std::unordered_map<std::string, float> scoreBoard;
     std::set<std::string> devNameSet;
     float distance_threshold =0.45;
-    float penalty = 0.01;
+    float penalty = 0.05;
 };
 
 class BoClassifier

@@ -28,7 +28,7 @@ def GetFewShotSettingTemplate():
 
     settings.independentArg = IndependentArgEnum.TRAINING_SIZE.name
     settings.start = 30;
-    settings.end = 90;
+    settings.end = 300;
     settings.step = 30;
  
     return settings;

@@ -45,7 +45,7 @@ class ConfigDataset:
     testRate = 0.5;
 
     def ToString(self):
-        return f"(slot={self.slotDuration})(trainR={self.trainRate}%)(trainB={self.trainBudget}minute)(testR={self.testRate}%)"
+        return f"(slot={self.slotDuration})(trainR={self.trainRate})(trainB={self.trainBudget}min)(testR={self.testRate})"
 
 class ConfigBurstDataset(ConfigDataset):
     burstTrh = BurstTrh()
@@ -61,7 +61,7 @@ class ConfigBurstClf:
         self.maxPktIndex = 500
         self.maxTrainItem = 1000
         self.distanceTrh = 0.5
-        self.penalty = 0.01
+        self.penalty = 0.05
     
     def __str__(self):
         return (f"(Tuni={self.uniPktTolr})"
@@ -77,7 +77,7 @@ class ConfigBurstClf:
         return str(self)
     
 class LabSetting:
-    baseFolder = "/media/kunling/BigE/";
+    baseFolder = "/media/kunling/BigE/IoT/";
     datasetName = DatasetEnum.UNSW201620.name;
     methodName = MethodName.BYTEIOT.name;
     scenario = ExperimentEnum.FEW_SHOTS.name;
@@ -130,6 +130,8 @@ class LabSetting:
         return self.GetDatasetPath() + self.ToString() + ".csv";
 
 
+
+
 ##################### New Naming RUles #####################
     def GetResultFolder(self):
         return self.baseFolder + "Result/" + self.datasetName + "/";
@@ -140,9 +142,12 @@ class LabSetting:
     def GetPredictionCsvPath(self):
         return self.GetResultFolder() + "PredictionCSV/" + self.ToString() + ".csv";
 
+
     def GetConfusionMatrixPath(self):
         return self.GetResultFolder() + "ConfusionMatrix/" + self.ToString() + ".pdf";
 
+    def GetComparisonGraphPath(self):
+        return self.GetResultFolder() + "Comparison/" + self.datasetName + ".pdf";
 
     def ToString(self):
         basicString = f"{self.methodName}-{self.scenario}-{self.independentArg}-{self.datasetName}-";
@@ -156,6 +161,7 @@ class LabSetting:
             basicString += f"{self.configDataset.ToString()}";
         
         return basicString;
+
 
 #    ss << methodName << "-" << scenario << "-" ;
 #     ss << independentArg << "-" << datasetName << "-";

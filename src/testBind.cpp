@@ -5,7 +5,7 @@ namespace py = pybind11;
 void Wrapper()
 {
     //py::initialize_interpreter();
-
+    std::cout << ("deprecated.") << std::endl;
     // 获取 sys.path 并添加你的模块路径
     py::module_ sys = py::module_::import("sys");
     sys.attr("path").attr("append")("/home/kunling/iot-device-fingerprinting-main/src/scripts");
