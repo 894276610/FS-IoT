@@ -21,7 +21,9 @@ protected:
     virtual void DoDivision();
     virtual void Preprocessing();
     virtual void RunFewShotOnce(LabSetting setting) = 0;
+    virtual void RunDivisionOnce(LabSetting setting) = 0;
     virtual void Postprocessing();
+    virtual void DrawDivisionGraph();
 
 protected:
     LabSetting setting;
@@ -54,32 +56,32 @@ class ByteIoTExperiment : public Experiment, public FewShotsInterface {
 public:
     ByteIoTExperiment(LabSetting setting): Experiment(setting) {}
     void RunFewShot() override { DoFewShot(); }
-    void RunDivision(){} // Not implemented
 private:
     void RunFewShotOnce(LabSetting setting);
+    void RunDivisionOnce(LabSetting setting){};
 };
 
 class ShahidExperiment  : public Experiment, public FewShotsInterface {
 public:
     ShahidExperiment(LabSetting setting) : Experiment(setting) {}
     void RunFewShot() override { DoFewShot(); }
-    void RunDivision(){} // Not implemented
 
 private:
     void RunFewShotOnce(LabSetting setting);
+    void RunDivisionOnce(LabSetting setting){};
 };
 
 class AhmedExperiment : public Experiment, public FewShotsInterface {
 public:
     AhmedExperiment(LabSetting setting) : Experiment(setting) { }
     void RunFewShot() override { DoFewShot(); }
-    void RunDivision(){}// Not implemented
 
 private:
     void PcapToCsv();
     void CsvToFeatureData();
     void Preprocessing() override;
     void RunFewShotOnce(LabSetting setting);
+    void RunDivisionOnce(LabSetting setting){};
 };
 
 class ExperimentFactory {

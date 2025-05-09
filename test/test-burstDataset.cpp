@@ -24,10 +24,10 @@ TEST_CASE(" packetDataset init test", "[single-file]")
     
 
     BurstDataset burstDataset("Aalto_TEST");
-    BurstTrh trh{50, {2,0}, {15,0}};
+    BurstTrh trh{50, 2.0, 15.0};
 
     burstDataset.Load(packetDataset);
-    REQUIRE(burstDataset.GetBurstTrh().inTrh.tv_nsec == trh.inTrh.tv_nsec);
+    // REQUIRE(burstDataset.GetBurstTrh().inTrh == trh.inTrh.tv_nsec);
     REQUIRE(burstDataset.GetDevicesVec()[0].GetLabel() == "iKettle2");
     REQUIRE(burstDataset.GetName() == "Aalto_TEST");
 

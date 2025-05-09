@@ -1,5 +1,38 @@
 #include "labSetting.h"
 
+int LabSetting::GetBGraphWidth()
+{
+    if(datasetName == groundnut::DatasetEnum::UNSW201620)
+    {
+        return 10;
+    }
+    else if(datasetName == groundnut::DatasetEnum::BehavIoT2021)
+    {
+        return 10;
+    }
+    else
+    {
+        std::cout << "error: datasetName is not UNSW201620 or BehavIoT2021" << std::endl;
+        return 0;
+    }
+}
+
+int LabSetting::GetBGraphLength()
+{
+    if(datasetName == groundnut::DatasetEnum::UNSW201620)
+    {
+        return 8;
+    }
+    else if(datasetName == groundnut::DatasetEnum::BehavIoT2021)
+    {
+        return 12;
+    }
+    else
+    {
+        std::cout << "error: datasetName is not UNSW201620 or BehavIoT2021" << std::endl;
+        return 0;
+    }
+}
 int LabSetting::GetCmWidth()
 {
     if(datasetName == groundnut::DatasetEnum::UNSW201620)
@@ -96,6 +129,24 @@ size_t LabSetting::CountCsvFiles(const std::filesystem::path& directory)
     return count;
 }
 
+void* LabSetting::GetIndependentRef()
+{
+    return GetIndependentRef(independentArg);
+}
+
+void* LabSetting::GetIndependentRef(IndependentArgEnum indpArg)
+{
+    switch(indpArg)
+    {
+        case IndependentArgEnum::TRAINING_SIZE:
+            return (void*)&trainBudget;
+        case IndependentArgEnum::WINDOW_SIZE:
+            return (void*)&slotDuration;
+        default:
+            return nullptr;
+    }
+}
+
 // 获取场景信息
 std::string LabSetting::GetScenarioInfo()
 {
@@ -124,7 +175,6 @@ std::string LabSetting::GetResultFolder()
     ss << baseFolder << "Result/" <<  magic_enum::enum_name(datasetName) << "/";
     return ss.str();
 }
-
 
 std::string LabSetting::GetFeatureFolder()
 {
@@ -204,6 +254,14 @@ std::string LabSetting::GetDivisionCSVPath()
     return ss.str();
 }
 
+std::string LabSetting::GetDivisionGraphPath()
+{
+    std::stringstream ss;
+    ss << GetResultFolder() << "Division/" << "division-" << ToString() << ".pdf";
+    return ss.str();
+}
+
+
 std::string LabSetting::GetConfusionMatrixPath()
 {
     std::stringstream ss;
@@ -234,7 +292,7 @@ LabSetting GetFewShotSettingTemplate()
     settings.datasetName = groundnut::DatasetEnum::UNSW201620; // "NEUKI2019"; //"UNSW201620"; //"NEUKI2019" //IOTBEHAV2021
     settings.independentArg = IndependentArgEnum::TRAINING_SIZE;
     settings.scenario = ExperimentEnum::FEW_SHOTS;
-    settings.burstTrh.inTrh = {2,0};
+    settings.burstTrh.inTrhF = 2.0;
     settings.start = 30; // sec slotduration
     settings.end = 30;
     settings.step = 30;
@@ -250,12 +308,12 @@ LabSetting GetDivisionSettingTemplate()
     settings.datasetName = groundnut::DatasetEnum::UNSW201620; 
     settings.scenario = ExperimentEnum::DIVISION;
 
-    settings.independentArg = IndependentArgEnum::IN_TRH;
+    settings.independentArg = IndependentArgEnum::TRAINING_SIZE;
     //settings.config;
-    settings.burstTrh.inTrh = {2,0};
-    settings.start = 0.1; // sec slotduration
-    settings.end = 0.5;
-    settings.step = 0.1;
+    settings.burstTrh.inTrhF = 2.0;
+    settings.start = 30; // sec slotduration
+    settings.end = 30;
+    settings.step = 30;
     settings.clfConfig.review = false;
     return settings;
 }

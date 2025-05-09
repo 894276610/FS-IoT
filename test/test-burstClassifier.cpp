@@ -25,7 +25,8 @@ TEST_CASE("burstClassifier init", "[single-file]")
     packetDataset.LoadPcap(pcapPath);
 
     BurstDataset burstDataset("Aalto_TEST");
-    BurstTrh trh{50, {2,0}, {15,0}};
+    BurstTrh trh{50, 2.0, 15.0};
+
 
     burstDataset.Load(packetDataset);
     burstDataset.TrainTestSplit();

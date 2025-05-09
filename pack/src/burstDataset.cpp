@@ -87,9 +87,9 @@ float BurstDataset::AvgBurstRate(const BPCountMap& uniBPCountMap) const
         totalDuration = totalDuration + bpCount.first->GetLastPktStamp() - bpCount.first->GetFirstPktStamp();
         totalDuration > timespec{0,0} ? nonSinglePkt += bpCount.first->GetPktNum() : nonSinglePkt;
     }
-    std::cout << "totalDuration:" << totalDuration.tv_sec;
-    std::cout << " nonSinglePkt:" << nonSinglePkt << std::endl;
-    std::cout <<"nonSinpkt/totalDuration:" << nonSinglePkt/totalDuration << std::endl;
+    // std::cout << "totalDuration:" << totalDuration.tv_sec;
+    // std::cout << " nonSinglePkt:" << nonSinglePkt << std::endl;
+    // std::cout <<"nonSinpkt/totalDuration:" << nonSinglePkt/totalDuration << std::endl;
     return nonSinglePkt/totalDuration;
 }
 

@@ -46,6 +46,7 @@ LabSetting GetFewShotSettingTemplate()
     settings.independentArg = IndependentArgEnum::TRAINING_SIZE;
     settings.scenario = ExperimentEnum::FEW_SHOTS;
     settings.burstTrh.inTrh = {2,0};
+    settings.burstTrh.inTrhF = 2.0f;
     settings.trainRate = 0.5f;
     settings.start = 4200; // sec slotduration
     settings.end = 4800;

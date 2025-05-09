@@ -3,6 +3,8 @@
 
 #include <string>
 #include <sstream>
+#include <variant>
+#include <functional>
 #include "burstDataset.h"
 #include "burstClassifier.h"
 #include "shahidDataset.h"
@@ -78,6 +80,8 @@ struct LabSetting
     groundnut::FsClfConfig clfConfig;     // FS-IoT classifier setting
     groundnut::ShahidConfig shahidConfig; // Shahid setting
 
+    void* GetIndependentRef();
+    void* GetIndependentRef(IndependentArgEnum independentArg);
     std::string GetScenarioInfo();
     std::string GetTrainTestSplitInfo();
 
@@ -95,12 +99,15 @@ struct LabSetting
 
     std::string GetConfusionMatrixPath();
     std::string GetDivisionCSVPath();
+    std::string GetDivisionGraphPath();
 
     std::string ToString();
 
     std::string GetPredictionCsvPath();
     std::string GetReviewPath();
 
+    int GetBGraphWidth();
+    int GetBGraphLength();
     int GetCmWidth();
     int GetCmLength();
 

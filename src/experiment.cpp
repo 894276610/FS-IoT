@@ -165,31 +165,24 @@ void FSIoTExperiment::RunDivisionOnce(LabSetting setting)
     
     groundnut::BurstDataset burstDataset(this->pktDataset.GetName(), config);
     groundnut::BurstGroups totalTrainSamples;
-    burstDataset.Load(pktDataset);
+    groundnut::DivResult divResult;
 
+    burstDataset.Load(pktDataset);
     burstDataset.TrainTestSplitByTime(budget);
     auto& trainset = burstDataset.GetTrainset();
- 
-    std::ofstream outDivMetric(setting.GetDivisionCSVPath());
-    outDivMetric << metric.ToCsvHeader();
-
+    
     for(auto& [devid, burstGroups]: trainset)
     {
         std::string deviceName = burstDataset.GetDevicesVec()[devid].GetLabel();
         metric = burstDataset.GenDivMetric(deviceName, burstGroups);
-        outDivMetric << metric.ToCsvString();
+        divResult.AddDivMetric(metric);
         totalTrainSamples.insert(totalTrainSamples.end(), burstGroups.begin(), burstGroups.end());
     }
 
     metric = burstDataset.GenDivMetric("total", totalTrainSamples);
-    outDivMetric << metric.ToCsvString();        
-    outDivMetric.close();
-}
+    divResult.AddDivMetric(metric);
 
-void FSIoTExperiment::RunDivision()
-{
-    
-
+    divResult.SaveCsv(setting.GetDivisionCSVPath());
 }
 
 void Experiment::Preprocessing()
@@ -265,13 +258,13 @@ void AhmedExperiment::CsvToFeatureData()
 
 void Experiment::DoFewShot()
 {
-    int& budget = this->setting.trainBudget;
+    int* pBudget = static_cast<int*>(setting.GetIndependentRef(IndependentArgEnum::TRAINING_SIZE));
          
-    Instrumentor::Get().BeginCsvSession("Preprocessing", setting.GetTimeOverheadPath());
+    Instrumentor::Get().BeginCsvSession("DoFewShot", setting.GetTimeOverheadPath());
 
     Preprocessing();
     
-    for(budget = setting.start; budget <= setting.end; budget += setting.step)
+    for(*pBudget = setting.start; *pBudget <= setting.end; *pBudget += setting.step)
     {
         RunFewShotOnce(setting);
         Postprocessing();
@@ -282,7 +275,30 @@ void Experiment::DoFewShot()
 
 void Experiment::DoDivision()
 {
+    int* pBudget = static_cast<int*>(setting.GetIndependentRef(IndependentArgEnum::TRAINING_SIZE));
+    
+    Instrumentor::Get().BeginCsvSession("DoDivision", setting.GetTimeOverheadPath());
 
+    Preprocessing();
+
+    for(*pBudget = setting.start; *pBudget <= setting.end; *pBudget += setting.step)
+    {
+        RunDivisionOnce(setting);
+        DrawDivisionGraph();
+    }
+
+    Instrumentor::Get().EndCsvSession();
+}
+
+// TODO 应该不用依赖具体路径，而是依赖设置中的路径
+void Experiment::DrawDivisionGraph()
+{
+    py::module_ sys = py::module_::import("sys");
+    sys.attr("path").attr("append")("/home/kunling/IoTClassifier2025/pythonDraw/");
+
+    py::module_ drawScript = py::module_::import("plotBurst"); 
+    drawScript.attr("plotBurstWrapper")(setting.GetDivisionCSVPath(), setting.GetDivisionGraphPath(),\
+    setting.GetBGraphWidth(), setting.GetBGraphLength());
 }
 
 // TODO 应该不用依赖具体路径，而是依赖设置中的路径

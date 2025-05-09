@@ -29,7 +29,7 @@ TEST_CASE(" packetDataset init test", "[single-file]")
 	config.trainBudget = 10000; // by minute
 	config.testRate = 0.5;
 
-    BurstTrh trh{50, {2,0}, {15,0}};
+    BurstTrh trh{50, 2.0, 15.0};
     config.burstTrh = trh;
     ByteIoTDataset byteIoTDataset("Aalto_TEST", config);
 

@@ -10,6 +10,10 @@ void BurstMaker::LongShortSplit()
     PacketVector rawBurst;
     std::set<int> uniPktSet;
 
+    timespec inTrh, ouTrh;
+    inTrh = Double2time(m_trh.inTrhF);
+    ouTrh = Double2time(m_trh.ouTrhF);
+
     for (auto* packet : *m_pktVec) {
         if (!packet) continue;
 
@@ -19,10 +23,10 @@ void BurstMaker::LongShortSplit()
             const timespec outerDelta = packet->timestamp - rawBurst.front()->timestamp;
              
             // Handle time interval condition
-            if (m_trh.inTrh < innerDelta) {
+            if (inTrh < innerDelta) {
                 HandleRawBurst(rawBurst, uniPktSet, false);
             }
-            else if (m_trh.ouTrh < outerDelta) {
+            else if (ouTrh < outerDelta) {
                 HandleRawBurst(rawBurst, uniPktSet, (true && m_trh.longShortEnable));
             }
             else if((uniPktSet.size() == m_trh.uniTrh) && uniPktSet.find(packet->signedLen) == uniPktSet.end()){
@@ -87,6 +91,10 @@ BurstVec BurstMaker::CutoBursts(PacketVector packetVec) const
     BurstVec burstVec;
     auto burst = std::make_shared<KBurst>(m_device);
 
+    timespec inTrh, ouTrh;
+    inTrh = Double2time(m_trh.inTrhF);
+    ouTrh = Double2time(m_trh.ouTrhF);
+
     for (const auto* packet : packetVec) {
         if (!packet) continue;
 
@@ -100,8 +108,8 @@ BurstVec BurstMaker::CutoBursts(PacketVector packetVec) const
             return (burst->GetUniPktNum() > m_trh.uniTrh ) ||
                    ((burst->GetUniPktNum() == m_trh.uniTrh) && 
                      burst->GetCountMap().find(packet->signedLen) == burst->GetCountMap().end()) ||
-                   (m_trh.inTrh < innerDelta) || 
-                   (m_trh.ouTrh < outerDelta);
+                   (inTrh < innerDelta) || 
+                   (ouTrh < outerDelta);
         }();
 
         if (shouldFinalize) {

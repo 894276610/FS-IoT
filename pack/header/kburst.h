@@ -6,11 +6,13 @@
 #include "boost-serialize.h"
 #include "time-utils.h"
 
+#include <fstream>
 #include <iostream>
 #include <vector>
 #include <memory>
-
+#include <filesystem>
 #include <shared_mutex>
+#include <iomanip>
 #include <mutex>
 
 #include <optional>
@@ -22,15 +24,15 @@ class KPacket;
 
 struct BurstTrh{
 	int uniTrh = 1000;
-	timespec inTrh{2,0};
-	timespec ouTrh{15,0};
+	double inTrhF = 2.0;
+	double ouTrhF = 15.0;
 	bool longShortEnable = true;
 
 	template<class Archive>
 	void serialize(Archive& ar, const unsigned int version) {
 		ar& uniTrh;
-		ar& inTrh;
-		ar& ouTrh;
+		ar& inTrhF;
+		ar& ouTrhF;
 		ar& longShortEnable;
 	}
 
@@ -38,8 +40,8 @@ struct BurstTrh{
 	{
 		std::stringstream ss;
 		ss << "(uniTrh=" << uniTrh << ")";
-		ss << "(inTrh=" << ::ToString(inTrh) << "s)";
-		ss << "(ouTrh=" << ::ToString(ouTrh) << "s)";
+		ss << "(inTrh=" <<  std::fixed << std::setprecision(1)  << inTrhF << "s)";
+		ss << "(ouTrh=" <<  std::fixed << std::setprecision(1)  << ouTrhF << "s)";
 		ss << "(lsenable=" << longShortEnable << ")";
 		return ss.str();
 	}
@@ -135,7 +137,6 @@ struct std::hash<groundnut::KBurst>
 
 namespace groundnut{
 
-
 struct DivMetric
 {
 	std::string name = "";
@@ -151,13 +152,6 @@ struct DivMetric
 
 	int uniBurstNum = 0;	  // totalBurstNumber
 	int burstNum = 0;	 	  // totalBurstNumber
-
-	std::string ToCsvHeader()
-	{
-		std::stringstream ss;
-		ss << "name,repeatRate,entropy,burstRate,diversity,normEntropy,uniBurstNum,burstNum";
-		return ss.str();
-	}
 
 	std::string ToCsvString()
 	{
@@ -179,6 +173,45 @@ struct DivMetric
 		return ss.str();
 	}
 };
+
+struct DivResult
+{
+	std::vector<DivMetric> results;
+
+	void AddDivMetric(const DivMetric& metric)
+	{
+		results.push_back(metric);
+	}
+
+	void SaveCsv(const std::filesystem::path& outPath)
+	{
+		if(!std::filesystem::exists(outPath.parent_path()))
+        {
+            std::filesystem::create_directories(outPath.parent_path());
+        }
+
+		std::ofstream ofs(outPath);
+
+		ofs << ToCsvHeader() << std::endl;
+
+		for(auto& result: results)
+		{
+			ofs << result.ToCsvString() << std::endl;
+		}
+
+		ofs.close();
+
+        std::cout << "Output to " << outPath << std::endl;
+	}
+
+	std::string ToCsvHeader()
+	{
+		std::stringstream ss;
+		ss << "name,repeatRate,entropy,burstRate,diversity,normEntropy,uniBurstNum,burstNum";
+		return ss.str();
+	}
+};
+
 
 struct SearchResult
 {

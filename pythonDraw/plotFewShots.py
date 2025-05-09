@@ -56,6 +56,11 @@ def PlotFewShot(labSettings:LabSetting):
 
     PlotSeriesLineChart(trainingBudgetListHour, config, labSettings.xLabel, labSettings.yLabel, labSettings.GetComparisonGraphPath() , showText=False)
 
+def GetMetricFormSummary(csv_path):
+
+    # methodName, datasetName, Params, Accuracy
+    return GetMetric(csv_path)
+
 def GetMetric(csv_path):
 
     # 1. 读取CSV文件

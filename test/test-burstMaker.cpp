@@ -22,7 +22,7 @@ TEST_CASE("burst maker innerdelta and outerdelta test", "[single-file]")
     
     const PacketVector packetVector{&pkt1, &pkt2, &pkt3, &pkt4, &pkt5, &pkt6};
 
-    BurstTrh trh{10, {2,0}, {15,0}};
+    BurstTrh trh{10, 2.0, 15.0};
 
     BurstMaker maker(&packetVector, device, trh);
     BurstVec bvec = maker.MakeBursts();
@@ -38,7 +38,7 @@ TEST_CASE("burst maker innerdelta and outerdelta test", "[single-file]")
     REQUIRE(bvec[0]->GetCountMap().size() == 2);
     REQUIRE(bvec[0]->GetCountUmap().size() == 2);
 
-    BurstTrh trh1{10, {6,0}, {4,0}};
+    BurstTrh trh1{10, 6.0, 4.0};
 
     BurstMaker maker1(&packetVector, device, trh1);
     bvec = maker1.MakeBursts();
@@ -74,7 +74,7 @@ TEST_CASE("burst maker max unique packet number test", "[single-file]")
     packetVector.push_back(&pkt5);
     packetVector.push_back(&pkt6);
 
-    BurstTrh trh{2, {12,0}, {15,0}};
+    BurstTrh trh{2, 12.0, 15.0};
 
     BurstMaker maker(&packetVector, device, trh);
     BurstVec bvec = maker.MakeBursts();
@@ -107,7 +107,7 @@ TEST_CASE("burst maker long burst flow test", "[single-file]")
     packetVector.push_back(&pkt5);
     packetVector.push_back(&pkt6);
 
-    BurstTrh trh{10, {12,0}, {4,0}};
+    BurstTrh trh{10, 12.0, 4.0};
 
     BurstMaker maker(&packetVector, device, trh);
     BurstVec bvec = maker.MakeBursts();

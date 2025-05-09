@@ -142,7 +142,6 @@ class LabSetting:
     def GetPredictionCsvPath(self):
         return self.GetResultFolder() + "PredictionCSV/" + self.ToString() + ".csv";
 
-
     def GetConfusionMatrixPath(self):
         return self.GetResultFolder() + "ConfusionMatrix/" + self.ToString() + ".pdf";
 
