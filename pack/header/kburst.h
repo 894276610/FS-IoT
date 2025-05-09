@@ -152,6 +152,19 @@ struct DivMetric
 	int uniBurstNum = 0;	  // totalBurstNumber
 	int burstNum = 0;	 	  // totalBurstNumber
 
+	std::string ToCsvHeader()
+	{
+		std::stringstream ss;
+		ss << "name,repeatRate,entropy,burstRate,diversity,normEntropy,uniBurstNum,burstNum";
+		return ss.str();
+	}
+
+	std::string ToCsvString()
+	{
+		std::stringstream ss;
+		ss << name << "," << repeatRate << "," << entropy << "," << burstRate << "," << diversity << "," << normEntropy << "," << uniBurstNum << "," << burstNum;
+		return ss.str();
+	}
 	std::string ToString()
 	{
 		std::stringstream ss;

@@ -125,6 +125,7 @@ std::string LabSetting::GetResultFolder()
     return ss.str();
 }
 
+
 std::string LabSetting::GetFeatureFolder()
 {
     std::stringstream ss;
@@ -193,6 +194,13 @@ std::string LabSetting::GetPktDatasetFilePath()
 {
     std::stringstream ss;
     ss << GetFeatureFolder() <<  datasetName << ".pktDataset";
+    return ss.str();
+}
+
+std::string LabSetting::GetDivisionCSVPath()
+{
+    std::stringstream ss;
+    ss << GetResultFolder() << "Division/" << "division-" << ToString() << ".csv";
     return ss.str();
 }
 

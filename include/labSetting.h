@@ -88,18 +88,15 @@ struct LabSetting
     std::string GetAhmedDataCSVFolder();
 
     bool IsAhmedDataCSVFolderEmpty();
-    bool IsRawTrafficFolderEmpty(); //TODO TO IMPLEMENT
+    bool IsRawTrafficFolderEmpty();
 
     std::string GetDeviceMappingFilePath();
     std::string GetTimeOverheadPath();
 
     std::string GetConfusionMatrixPath();
+    std::string GetDivisionCSVPath();
 
     std::string ToString();
-    std::string GetMetricPath();
-
-    std::string GetDivisionStem();
-    std::string GetDivisionPath();
 
     std::string GetPredictionCsvPath();
     std::string GetReviewPath();

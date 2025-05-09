@@ -149,8 +149,48 @@ void FSIoTExperiment::RunFewShotOnce(LabSetting setting)
     rbook.Tofile(setting.GetReviewPath());
 }
 
+void FSIoTExperiment::RunDivisionOnce(LabSetting setting)
+{
+    int budget = setting.trainBudget;
+    std::cout << "RunDivisionOnce" << std::endl;
+    std::cout << "Training budget: " << budget << " minute." << std::endl;
+    groundnut::ConfigBurstDataset config;
+    groundnut::DivMetric metric;
+
+    config.slotDuration = setting.slotDuration;
+    config.trainRate = setting.trainRate;
+    config.trainBudget = setting.trainBudget;
+    config.testRate = setting.testRate;
+    config.burstTrh = setting.burstTrh;
+    
+    groundnut::BurstDataset burstDataset(this->pktDataset.GetName(), config);
+    groundnut::BurstGroups totalTrainSamples;
+    burstDataset.Load(pktDataset);
+
+    burstDataset.TrainTestSplitByTime(budget);
+    auto& trainset = burstDataset.GetTrainset();
+ 
+    std::ofstream outDivMetric(setting.GetDivisionCSVPath());
+    outDivMetric << metric.ToCsvHeader();
+
+    for(auto& [devid, burstGroups]: trainset)
+    {
+        std::string deviceName = burstDataset.GetDevicesVec()[devid].GetLabel();
+        metric = burstDataset.GenDivMetric(deviceName, burstGroups);
+        outDivMetric << metric.ToCsvString();
+        totalTrainSamples.insert(totalTrainSamples.end(), burstGroups.begin(), burstGroups.end());
+    }
+
+    metric = burstDataset.GenDivMetric("total", totalTrainSamples);
+    outDivMetric << metric.ToCsvString();        
+    outDivMetric.close();
+}
+
 void FSIoTExperiment::RunDivision()
-{}
+{
+    
+
+}
 
 void Experiment::Preprocessing()
 {
@@ -240,6 +280,10 @@ void Experiment::DoFewShot()
     Instrumentor::Get().EndCsvSession();
 }
 
+void Experiment::DoDivision()
+{
+
+}
 
 // TODO 应该不用依赖具体路径，而是依赖设置中的路径
 void Experiment::Postprocessing()
