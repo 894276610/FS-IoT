@@ -129,9 +129,6 @@ class LabSetting:
     def GetResultCsvPath(self):
         return self.GetDatasetPath() + self.ToString() + ".csv";
 
-
-
-
 ##################### New Naming RUles #####################
     def GetResultFolder(self):
         return self.baseFolder + "Result/" + self.datasetName + "/";
