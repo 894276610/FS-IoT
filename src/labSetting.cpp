@@ -195,9 +195,21 @@ std::string LabSetting::GetReviewPath()
     return GetResultFolder() + "ReviewBook/" + ToString() + ".review";
 }
 
+std::string LabSetting::GetComparisonPath()
+{
+    std::stringstream ss;
+    ss << GetResultFolder() << "ComparisionGraph.pdf";
+    return ss.str();
+}
 
+std::string LabSetting::GetSummaryMetricCsvPath()
+{
+    return GetResultFolder() + "summaryMetric.csv";
+} 
+// 获取预测CSV文件路径
 std::string LabSetting::GetPredictionCsvPath()
 {
+    // 返回结果文件夹路径 + "PredictionCSV/" + 当前设置转换为字符串 + ".csv"
     return GetResultFolder() + "PredictionCSV/" + ToString() + ".csv";
 }
 

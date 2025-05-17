@@ -50,7 +50,6 @@ add_executable(MainExe ${CMAKE_SOURCE_DIR}/src/main.cpp ${CMAKE_SOURCE_DIR}/src/
 
 target_link_libraries(MainExe pack Boost::serialization Packet++ Pcap++ Common++ range-v3::range-v3  pybind11::embed)
 
-
 pybind11_add_module(labSetting_module ${CMAKE_SOURCE_DIR}/src/labSetting.cpp ${CMAKE_SOURCE_DIR}/src/labSetting_bindings.cpp)
 add_dependencies(labSetting_module pack Boost::serialization Packet++ Pcap++ Common++ range-v3::range-v3 pybind11::embed)
 

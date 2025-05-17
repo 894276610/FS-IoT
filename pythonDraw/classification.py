@@ -1,10 +1,10 @@
 from pathlib import Path
-from utils import *
+from pythonDraw.commonUtils import *
 from utils_plot import *
 from file_reader import *
 import numpy as np
 
-def GetAhmedMetric(labSettings:LabSetting):
+def GetAhmedMetric(labSettings:LabSet):
     trainBudgetList = np.arange(labSettings.start, labSettings.end, labSettings.step);
     
     for trainBudget in trainBudgetList:
@@ -14,7 +14,7 @@ def GetAhmedMetric(labSettings:LabSetting):
         print(GetMetric(resultPath)[0]);
 
 
-def PlotFewShot(labSettings:LabSetting):
+def PlotFewShot(labSettings:LabSet):
 
     trainBudgetList = np.arange(labSettings.start, labSettings.end, labSettings.step);
     

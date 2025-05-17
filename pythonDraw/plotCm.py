@@ -1,5 +1,5 @@
 import os;
-from utils import LabSetting
+from pythonDraw.commonUtils import LabSet
 import pandas as pd
 import numpy as np
 from sklearn.metrics import confusion_matrix

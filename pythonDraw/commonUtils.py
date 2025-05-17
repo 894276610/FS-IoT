@@ -75,8 +75,9 @@ class ConfigBurstClf:
     # Alternative ToString() method if you prefer the original name
     def ToString(self):
         return str(self)
-    
-class LabSetting:
+
+  
+class LabSet:
     baseFolder = "/media/kunling/BigE/IoT/";
     datasetName = DatasetEnum.UNSW201620.name;
     methodName = MethodName.BYTEIOT.name;
@@ -95,7 +96,7 @@ class LabSetting:
     graphName = "LineChart"
     xLabel = "Slot Duration"
     yLabel = "Accuracy"
-
+    
     def GetCmWidth(self):
         if(self.datasetName == DatasetEnum.UNSW201620.name):
             return 12;
@@ -159,33 +160,6 @@ class LabSetting:
         return basicString;
 
 
-#    ss << methodName << "-" << scenario << "-" ;
-#     ss << independentArg << "-" << datasetName << "-";
-    # std::stringstream ss;
-    # ss << "(slot=" << slotDuration << ")";
-    # ss << "(trainR=" << trainRate << ")";
-    # ss << "(trainB=" << trainBudget << "min)";
-    # ss << "(testR="<< testRate << ")";
-    # return ss.str();
-# std::string LabSetting::ToString()
-# {
-#     std::stringstream ss;
-#     ss << GetScenarioInfo() << GetTrainTestSplitInfo();
-#     switch(methodName)
-#     {
-#         case MethodEnum::BYTEIOT:
-#             break;
-#         case MethodEnum::FSIOT:
-#             ss << burstTrh.ToString() << clfConfig.ToString();
-#             break;
-#         case MethodEnum::AHMED:
-#             ss << shahidConfig.ToString();
-#             break;
-#     }
-#     return ss.str();
-# }
-
-# 6条线的配置
 default_series_config = [
     {   # 系列1
         'data': None,

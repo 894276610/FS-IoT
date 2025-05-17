@@ -103,7 +103,9 @@ struct LabSetting
 
     std::string ToString();
 
+    std::string GetComparisonPath();
     std::string GetPredictionCsvPath();
+    std::string GetSummaryMetricCsvPath();
     std::string GetReviewPath();
 
     int GetBGraphWidth();

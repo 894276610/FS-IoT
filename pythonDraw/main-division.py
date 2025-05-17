@@ -1,8 +1,8 @@
-from utils import *
+from pythonDraw.commonUtils import *
 from division import PlotCombined
 
 def GetLsEnableSettings():
-    settings = LabSetting();
+    settings = LabSet();
     settings.datasetList = ["UNSW201620"]
     settings.methodName = "burst";
     settings.yLabel = "combined"
@@ -24,7 +24,7 @@ def GetLsEnableSettings():
     return settings
 
 def GetInTrhSettings():
-    settings = LabSetting();
+    settings = LabSet();
     settings.datasetList = ["UNSW201620"]
     settings.methodName = "burst";
     settings.yLabel = "combined"

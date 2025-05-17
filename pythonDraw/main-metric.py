@@ -1,5 +1,5 @@
 from classification import *
-from utils import *
+from pythonDraw.commonUtils import *
 from settingTemplates import *
 import os
 

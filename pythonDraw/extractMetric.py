@@ -1,6 +1,10 @@
 # Extract metrics from csv y_true, y_pred file to a csv file with acc, recall, precision, f1, etc.
 
-from utils import *; 
+import sys
+sys.path.append("/home/kunling/IoTClassifier2025/")  # 替换为 LabSet 所在目录
+print(sys.path)  
+
+from commonUtils import LabSet; 
 import os;
 from pathlib import Path
 import pandas as pd
@@ -8,8 +12,10 @@ from settingTemplates import *
 import time
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
+print("utils 模块内容：", dir(LabSet))
+
 # DatasetName, MethodName, Setting, Accuracy, Precision, Recall, F1, Timestamp
-def ExtractMetrics(setting:LabSetting, predictionCsvPath=None):
+def ExtractMetrics(setting:LabSet, predictionCsvPath=None):
     
     # output folder init
     outPath = setting.GetSummaryMetricCsvPath();

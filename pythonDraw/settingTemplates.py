@@ -1,6 +1,6 @@
-from utils import *
+from pythonDraw.commonUtils import *
 def GetFewShotSettingTemplate():
-    settings = LabSetting();
+    settings = LabSet();
     settings.datasetName = DatasetEnum.BehavIoT2021.name; #"NEUKI2019"#"IOTBEHAV2021" # #"UNSW201620"
     settings.methodName = MethodName.BYTEIOT.name # byteiot
     settings.scenario = ExperimentEnum.FEW_SHOTS.name

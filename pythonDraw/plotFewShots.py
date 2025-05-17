@@ -1,9 +1,10 @@
-from utils import *
+from commonUtils import *
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 import numpy as np
 import pandas as pd
+import labSetting_module
 
-def PlotFewShot(labSettings:LabSetting):
+def PlotFewShot(labSettings:labSetting_module.LabSetting):
 
     trainBudgetList = np.arange(labSettings.start, labSettings.end, labSettings.step);
     
@@ -13,22 +14,22 @@ def PlotFewShot(labSettings:LabSetting):
     ahmedAccList = [];
 
     for trainBudget in trainBudgetList:
-        labSettings.configDataset.trainBudget = trainBudget;
+        labSettings.trainBudget = int(trainBudget);
 
-        labSettings.methodName = MethodName.FSIOT.name
+        labSettings.methodName = labSetting_module.MethodEnum.FSIOT
         resultPath = labSettings.GetPredictionCsvPath();
         print(resultPath)
         burstIoTAccList.append(GetMetric(resultPath)[0]);
 
-        labSettings.methodName = MethodName.BYTEIOT.name
+        labSettings.methodName = labSetting_module.MethodEnum.BYTEIOT
         resultPath = labSettings.GetPredictionCsvPath();
         byteIoTAccList.append(GetMetric(resultPath)[0]);
     
-        labSettings.methodName = MethodName.SHAHID.name
+        labSettings.methodName = labSetting_module.MethodEnum.SHAHID
         resultPath = labSettings.GetPredictionCsvPath();
         shahidAccList.append(GetMetric(resultPath)[0]);
     
-        labSettings.methodName = MethodName.AHMED.name;
+        labSettings.methodName = labSetting_module.MethodEnum.AHMED
         resultPath = labSettings.GetPredictionCsvPath();
         ahmedAccList.append(GetMetric(resultPath)[0]);
 
@@ -38,7 +39,6 @@ def PlotFewShot(labSettings:LabSetting):
     print("byteIoT", byteIoTAccList)
     print("shahid:", shahidAccList)
     print("ahmed:", ahmedAccList)
-    
 
     default_series_config[0]['data'] = [num * 100 for num in burstIoTAccList];
     default_series_config[0]['label'] = "FS-IoT";
@@ -52,13 +52,14 @@ def PlotFewShot(labSettings:LabSetting):
     default_series_config[3]['data'] = [num * 100 for num in ahmedAccList];
     default_series_config[3]['label'] = "Ahmed";
 
-    config = default_series_config[:4] 
+    config = default_series_config[:4]
+    xLabel = "Traffic length for training (hour)"
+    yLabel = "Accuracy (%)"
 
-    PlotSeriesLineChart(trainingBudgetListHour, config, labSettings.xLabel, labSettings.yLabel, labSettings.GetComparisonGraphPath() , showText=False)
+    PlotSeriesLineChart(trainingBudgetListHour, config, xLabel, yLabel, labSettings.GetComparisonPath() , showText=False)
 
 def GetMetricFormSummary(csv_path):
 
-    # methodName, datasetName, Params, Accuracy
     return GetMetric(csv_path)
 
 def GetMetric(csv_path):

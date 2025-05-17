@@ -1,4 +1,4 @@
-from utils import LabSetting
+from pythonDraw.commonUtils import LabSet
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 
@@ -25,7 +25,7 @@ def GetMetric(csv_path):
 
     return accuracy, precision, recall, f1
 
-def postProcessing(labSetting: LabSetting):
+def postProcessing(labSetting: LabSet):
 
     # metric path
     pass
