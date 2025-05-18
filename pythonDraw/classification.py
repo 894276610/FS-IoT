@@ -1,5 +1,5 @@
 from pathlib import Path
-from pythonDraw.commonUtils import *
+from commonUtils import *
 from utils_plot import *
 from file_reader import *
 import numpy as np

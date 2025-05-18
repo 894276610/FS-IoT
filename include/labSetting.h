@@ -84,7 +84,8 @@ struct LabSetting
     void* GetIndependentRef(IndependentArgEnum independentArg);
     std::string GetScenarioInfo();
     std::string GetTrainTestSplitInfo();
-
+    
+    std::string GetPythonDrawFolder() const;
     std::string GetRawTrafficFolder();
     std::string GetPktDatasetFilePath();
     std::string GetAhmedFeatureDataPklPath();

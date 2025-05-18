@@ -1,4 +1,4 @@
-from pythonDraw.commonUtils import *
+from commonUtils import *
 from division import PlotCombined
 
 def GetLsEnableSettings():

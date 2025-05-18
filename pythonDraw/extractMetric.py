@@ -1,8 +1,6 @@
-# Extract metrics from csv y_true, y_pred file to a csv file with acc, recall, precision, f1, etc.
-
 import sys
-sys.path.append("/home/kunling/IoTClassifier2025/")  # 替换为 LabSet 所在目录
-print(sys.path)  
+# sys.path.append("/home/kunling/IoTClassifier2025/")  # TODO
+# print(sys.path)  
 
 from commonUtils import LabSet; 
 import os;
@@ -14,10 +12,8 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 
 print("utils 模块内容：", dir(LabSet))
 
-# DatasetName, MethodName, Setting, Accuracy, Precision, Recall, F1, Timestamp
 def ExtractMetrics(setting:LabSet, predictionCsvPath=None):
     
-    # output folder init
     outPath = setting.GetSummaryMetricCsvPath();
     if not Path.is_dir(Path(outPath).parent):
         Path(outPath).parent.mkdir(parents=True, exist_ok=True)
@@ -27,9 +23,9 @@ def ExtractMetrics(setting:LabSet, predictionCsvPath=None):
     y_pred = data['y_pred']
     
     accuracy = accuracy_score(y_true, y_pred)
-    precision = precision_score(y_true, y_pred, average='macro')  # 宏平均
-    recall = recall_score(y_true, y_pred, average='macro')        # 宏平均
-    f1 = f1_score(y_true, y_pred, average='macro')               # 宏平均
+    precision = precision_score(y_true, y_pred, average='macro')  
+    recall = recall_score(y_true, y_pred, average='macro')        
+    f1 = f1_score(y_true, y_pred, average='macro')              
 
     newEntry = pd.DataFrame({
         "MethodName": [setting.methodName],

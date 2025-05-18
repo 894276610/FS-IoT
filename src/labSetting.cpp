@@ -247,6 +247,11 @@ std::string LabSetting::GetAhmedDataCSVFolder()
     return GetDataFolder() + "CSV/";
 }
 
+std::string LabSetting::GetPythonDrawFolder() const
+{
+    return baseFolder + "pythonDraw/";
+}
+
 std::string LabSetting::GetRawTrafficFolder()
 {
     return GetDataFolder() + "Pcap/";

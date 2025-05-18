@@ -1,10 +1,10 @@
 from pathlib import Path
-from pythonDraw.commonUtils import  PlotLineChart
+from commonUtils import  PlotLineChart
 from utils_plot import PlotSeriesLineChart
 from file_reader import GetDevList, GetDivAttribute
 import pandas as pd
 import re
-from pythonDraw.commonUtils import *
+from commonUtils import *
 import os
 import numpy as np
 
